@@ -1,0 +1,4 @@
+docker run --name postgresdb -e POSTGRES_PASSWORD=adming -d -p 5432:5432 postgres
+sudo docker cp expensetracker_db.sql postgresdb:/
+sudo docker container exec -it postgresdb bash
+psql -U postgres --file expensetracker_db.sql
