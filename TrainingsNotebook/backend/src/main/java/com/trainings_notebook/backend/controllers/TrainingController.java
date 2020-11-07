@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.Set;
 
 
-@RestController()
+@RestController
 @RequestMapping(TrainingController.BASE_URL)
 public class TrainingController {
 
