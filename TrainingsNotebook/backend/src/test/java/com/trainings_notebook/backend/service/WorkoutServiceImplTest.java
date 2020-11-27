@@ -10,7 +10,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -56,10 +55,8 @@ class WorkoutServiceImplTest {
         workout.setName("test workout");
 
         when(workoutRepository.findById(1L)).thenReturn(java.util.Optional.of(workout));
-
         //when
         Workout tempWorkout = workoutService.findById(1L);
-
         //then
         assertEquals("test workout", tempWorkout.getName());
     }
@@ -71,7 +68,6 @@ class WorkoutServiceImplTest {
         savedWorkout.setName("pull ups");
 
         when(workoutRepository.save(any(Workout.class))).thenReturn(savedWorkout);
-
         //when
         Workout testWorkout = workoutService.save(savedWorkout);
         //then

@@ -13,7 +13,13 @@ public class ApiExceptionHandlers {
 
     @ExceptionHandler(value = {ApiRequestException.class})
     public ResponseEntity<Object> handleApiRequestException(ApiRequestException e) {
-        HttpStatus httpStatus = e.getHttpStatus();
+        HttpStatus httpStatus;
+        if(e.getHttpStatus() != null) {
+            httpStatus = e.getHttpStatus();
+        } else {
+            httpStatus = HttpStatus.BAD_REQUEST;
+        }
+
         ApiException apiException = new ApiException(
                 e.getMessage(),
                 httpStatus,
