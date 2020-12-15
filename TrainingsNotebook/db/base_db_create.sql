@@ -1,6 +1,6 @@
 DROP DATABASE IF EXISTS Trainings_notebooks_v2;
 CREATE DATABASE Trainings_notebooks_v2;
-
+use Trainings_notebooks_v2;
 CREATE TABLE Workouts (
  workout_id INT Primary Key NOT NULL AUTO_INCREMENT,
  name VARCHAR(30) NOT NULL,
