@@ -1,0 +1,83 @@
+package com.grzesiek.RedditClone.service;
+
+import com.grzesiek.RedditClone.dto.LoginRequest;
+import com.grzesiek.RedditClone.dto.RegisterRequest;
+import com.grzesiek.RedditClone.exceptions.SpringRedditException;
+import com.grzesiek.RedditClone.model.NotificationEmail;
+import com.grzesiek.RedditClone.model.User;
+import com.grzesiek.RedditClone.model.VerificationToken;
+import com.grzesiek.RedditClone.repository.UserRepo;
+import com.grzesiek.RedditClone.repository.VerificationTokenRepo;
+import com.grzesiek.RedditClone.util.Constants;
+import lombok.AllArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.time.Instant;
+import java.util.Optional;
+import java.util.UUID;
+
+@Service
+@AllArgsConstructor
+public class AuthService {
+
+//    Inside the AuthService class, we are mapping the RegisterRequest object to the User object and when setting the password, we are calling the encodePassword() method. This method is using the BCryptPasswordEncoder to encode our password. After that, we save the user into the database. Note that we are setting the enabled flag as false, as we want to disable the user after registration, and we only enable the user after verifying the user’s email address.
+
+    private final PasswordEncoder passwordEncoder;
+    private final UserRepo userRepo;
+    private final VerificationTokenRepo verificationTokenRepo;
+    private final MailService mailService;
+    private final AuthenticationManager authenticationManager;
+
+
+    @Transactional
+    public void signup(RegisterRequest registerRequest) {
+        User user = new User();
+        user.setUsername(registerRequest.getUserName());
+        user.setEmail(registerRequest.getEmail());
+        user.setPassword(registerRequest.getPassword());
+        user.setCreated(Instant.now());
+        user.setEnabled(false);
+        userRepo.save(user);
+
+        String token = generateVerificationToken(user);
+//        We added the generateVerificationToken() method and calling that method right after we saved the user into UserRepository. Note that, we are creating a random UUID as our token, creating an object for VerificationToken, fill in the data for that object and save it into the VerificationTokenRepository. As we have the token, now its time to send an email that contains this verification token.
+        mailService.sendMail(new NotificationEmail("Please Activate your Account",
+                user.getEmail(), "Thank you for signing up to Spring Reddit, " +
+                "please click on the below url to activate your account : " +
+                Constants.ACTIVATION_EMAIL + token));
+    }
+
+    private String generateVerificationToken(User user) {
+        String token = UUID.randomUUID().toString();
+        VerificationToken verificationToken = new VerificationToken();
+        verificationToken.setToken(token);
+        verificationToken.setUser(user);
+        verificationTokenRepo.save(verificationToken);
+        return token;
+    }
+    private String encodePassword(String password) {
+        return passwordEncoder.encode(password);
+    }
+
+    public void verifyAccount(String token) {
+        Optional<VerificationToken> verificationToken = verificationTokenRepo.findByToken(token);
+        verificationToken.orElseThrow(() -> new SpringRedditException("Invalid token"));
+        fetchUserAndEnable(verificationToken.get());
+    }
+
+    @Transactional
+    void fetchUserAndEnable(VerificationToken verificationToken) {
+        String username = verificationToken.getUser().getUsername();
+        User user = userRepo.findByUsername(username).orElseThrow(() -> new SpringRedditException("User not found with name :" + username));
+        user.setEnabled(true);
+        userRepo.save(user);
+    }
+
+    public void login(LoginRequest loginRequest) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),loginRequest.getPassword()));
+    }
+}
