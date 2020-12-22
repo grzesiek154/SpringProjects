@@ -1,5 +1,6 @@
 package com.grzesiek.RedditClone.controller;
 
+import com.grzesiek.RedditClone.dto.AuthenticationResponse;
 import com.grzesiek.RedditClone.dto.LoginRequest;
 import com.grzesiek.RedditClone.dto.RegisterRequest;
 import com.grzesiek.RedditClone.service.AuthService;
@@ -26,8 +27,8 @@ public class AuthController {
         authService.verifyAccount(token);
         return new ResponseEntity<>("Account activated successfully", HttpStatus.OK);
     }
-
-    public void login(@RequestBody LoginRequest loginRequest) {
-        authService.login(loginRequest);
+    @PostMapping("/login")
+    public AuthenticationResponse login(@RequestBody LoginRequest loginRequest) {
+        return authService.login(loginRequest);
     }
 }

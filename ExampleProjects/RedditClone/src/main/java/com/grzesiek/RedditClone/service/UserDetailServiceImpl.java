@@ -37,4 +37,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
     private Collection<? extends GrantedAuthority> getAuthorities(String role) {
         return singletonList(new SimpleGrantedAuthority(role));
     }
+
+//    The class overrides the method loadUserByUsername() which is used by Spring Security to fetch the user details. Inside the method, we are querying the UserRepository and fetching those details and wrapping them in another User object which implements the UserDetails interface.
 }

@@ -40,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             e.printStackTrace();
         }
     }
+    //As UserDetailsService is an interface, we have to provide an implementation where it fetches the user information from our MySQL Databas
 
     @Bean
     PasswordEncoder passwordEncoder() {
