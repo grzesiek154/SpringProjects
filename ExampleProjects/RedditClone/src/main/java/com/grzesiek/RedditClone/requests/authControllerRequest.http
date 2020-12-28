@@ -1,0 +1,19 @@
+###
+###
+
+GET http://localhost:8080/api/auth/accountVerification/150de2b4-eb95-4fe5-88b9-2c52df55759a
+
+###
+POST http://localhost:8080/api/auth/signup/
+Content-Type: application/json
+Connection: keep-alive
+Vary: Accept, Cookie, Origin
+Allow: GET, POST, HEAD, OOPTINS
+Accept: */*
+
+
+{
+    "username": "stas123",
+    "email": "staszel@test.com",
+    "password": "strongpassword2"
+}

@@ -31,10 +31,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
+       // Inside the doFilterInternal method, we are calling the getJwtFromRequest method which retrieves the Bearer Token (ie. JWT) from the HttpServletRequest object we are passing as input.
         String jwt = getJwtFromRequest(httpServletRequest);
 
         if (StringUtils.hasText(jwt) && jwtProvider.validateToken(jwt)) {
+            //Once we retrieve the token, we pass it to the validateToken() method of the JwtProvider class.
             String username = jwtProvider.getUserNameFromJWT(jwt);
+            //Once the JWT is validated, we retrieve the username from the token by calling the getUsernameFromJWT() method.
 
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails,
@@ -42,6 +45,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
 
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            //Once we get the username, we retrieve the user using the UserDetailsService class and store the user inside the SecurityContext
         }
         filterChain.doFilter(httpServletRequest,httpServletResponse);
     }

@@ -1,0 +1,9 @@
+POST http://localhost:8080/api/subreddit/
+Content-Type: application/json
+Authorization: eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb2huMTIzIn0.ZMxUGhuyrwccCAeTh138hY-L3XuqKOevKSwRguFKRFLjvPYYXnX5o8YSzIKka5VaiC5ATCktzUrpx45pIbUHFH1p88QQoB6GZ8zFhazg0YVwcxoHM3Upo88roHWuF-8Sd2YgcuefwTczdFthbYlIh67W_lBQHyJVh04Jazm-8mINNdy6x5OoNF-RupDayLDhN80zxj6y0sWPpHyZoFp5HEsGU8i2og7jACcf3-MUtUCt-Z2DoPg1aTLev0qrshWyT2fVVcQs6lf5dzcH1zI9fR75FsNQNEGu8Eo1FSHeZ_6Tfn2MisJ2vCSybK_NmIFApFVM2Nl-M9WehCzjVPlvoA
+
+{
+	"name":"First Subreddit",
+	"description":"This is description of First Subreddit",
+    "postCount": null
+}
