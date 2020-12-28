@@ -27,6 +27,7 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
+@Transactional
 @Slf4j
 public class AuthService {
 
@@ -42,9 +43,9 @@ public class AuthService {
     @Transactional
     public void signup(RegisterRequest registerRequest) {
         User user = new User();
-        user.setUsername(registerRequest.getUserName());
+        user.setUsername(registerRequest.getUsername());
         user.setEmail(registerRequest.getEmail());
-        user.setPassword(registerRequest.getPassword());
+        user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setCreated(Instant.now());
         user.setEnabled(false);
         userRepo.save(user);
@@ -67,9 +68,7 @@ public class AuthService {
         return token;
     }
 
-    private String encodePassword(String password) {
-        return passwordEncoder.encode(password);
-    }
+
 
     public AuthenticationResponse login(LoginRequest loginRequest) {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
@@ -85,7 +84,7 @@ public class AuthService {
         fetchUserAndEnable(verificationToken.get());
     }
 
-    @Transactional
+
     void fetchUserAndEnable(VerificationToken verificationToken) {
         String username = verificationToken.getUser().getUsername();
         User user = userRepo.findByUsername(username).orElseThrow(() -> new SpringRedditException("User not found with name :" + username));

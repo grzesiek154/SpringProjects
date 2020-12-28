@@ -21,6 +21,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
+    @Bean(BeanIds.AUTHENTICATION_MANAGER)
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
@@ -48,10 +54,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 //    Now before storing the user in the database, we ideally want to encode the passwords. One of the best hashing algorithms for passwords is the Bcrypt Algorithm. We are using the BCryptPasswordEncoder class provided by Spring Security.
 
-    @Bean(BeanIds.AUTHENTICATION_MANAGER)
-    @Override
-    public AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManagerBean();
-    }
+
 
 }
