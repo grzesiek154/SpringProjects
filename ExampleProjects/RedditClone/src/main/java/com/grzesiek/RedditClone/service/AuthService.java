@@ -2,6 +2,7 @@ package com.grzesiek.RedditClone.service;
 
 import com.grzesiek.RedditClone.dto.AuthenticationResponse;
 import com.grzesiek.RedditClone.dto.LoginRequest;
+import com.grzesiek.RedditClone.dto.RefreshTokenRequest;
 import com.grzesiek.RedditClone.dto.RegisterRequest;
 import com.grzesiek.RedditClone.exceptions.SpringRedditException;
 import com.grzesiek.RedditClone.model.NotificationEmail;
@@ -40,6 +41,7 @@ public class AuthService {
     private final MailService mailService;
     private final AuthenticationManager authenticationManager;
     private final JwtProvider jwtProvider;
+    private final RefreshTokenService refreshTokenService;
 
     @Transactional
     public void signup(RegisterRequest registerRequest) {
@@ -68,23 +70,17 @@ public class AuthService {
                 .orElseThrow(()-> new UsernameNotFoundException("User name not found - " + principal.getUsername()));
     }
 
-    private String generateVerificationToken(User user) {
-        String token = UUID.randomUUID().toString();
-        VerificationToken verificationToken = new VerificationToken();
-        verificationToken.setToken(token);
-        verificationToken.setUser(user);
-        verificationTokenRepo.save(verificationToken);
-        return token;
-    }
-
-
-
     public AuthenticationResponse login(LoginRequest loginRequest) {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
                 loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authenticate);
         String token = jwtProvider.generateToken(authenticate);
-        return new AuthenticationResponse(token, loginRequest.getUsername());
+        return AuthenticationResponse.builder()
+                .authenticationToken(token)
+                .refreshToken(refreshTokenService.generateRefreshToken().getToken())
+                .expiresAt(Instant.now().plusMillis(jwtProvider.getJwtExpirationInMillis()))
+                .username(loginRequest.getUsername())
+                .build();
     }
 
     public void verifyAccount(String token) {
@@ -99,6 +95,25 @@ public class AuthService {
         User user = userRepo.findByUsername(username).orElseThrow(() -> new SpringRedditException("User not found with name :" + username));
         user.setEnabled(true);
         userRepo.save(user);
+    }
+    public AuthenticationResponse refreshToken(RefreshTokenRequest refreshTokenRequest) {
+        refreshTokenService.validateRefreshToken(refreshTokenRequest.getRefreshToken());
+        String token = jwtProvider.generateTokenWithUsername(refreshTokenRequest.getUsername());
+        return AuthenticationResponse.builder()
+                .authenticationToken(token)
+                .refreshToken(refreshTokenRequest.getRefreshToken())
+                .expiresAt(Instant.now().plusMillis(jwtProvider.getJwtExpirationInMillis()))
+                .username(refreshTokenRequest.getUsername())
+                .build();
+    }
+
+    private String generateVerificationToken(User user) {
+        String token = UUID.randomUUID().toString();
+        VerificationToken verificationToken = new VerificationToken();
+        verificationToken.setToken(token);
+        verificationToken.setUser(user);
+        verificationTokenRepo.save(verificationToken);
+        return token;
     }
 
 
