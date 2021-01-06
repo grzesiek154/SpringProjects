@@ -1,0 +1,403 @@
+POST http://localhost:8080/api/auth/login/
+Content-Type: application/json
+Connection: keep-alive
+Vary: Accept, Cookie, Origin
+Allow: GET, POST, HEAD, OOPTINS
+Accept: */*
+
+{
+    "username": "stas123",
+    "password": "strongpassword2"
+}
+
+<> 2020-12-29T145618.403.json
+
+###
+
+POST http://localhost:8080/api/auth/login/
+Content-Type: application/json
+Connection: keep-alive
+Vary: Accept, Cookie, Origin
+Allow: GET, POST, HEAD, OOPTINS
+Accept: */*
+
+{
+    "username": "stas123",
+    "password": "strongpassword2"
+}
+
+<> 2020-12-29T145507.403.json
+
+###
+
+POST http://localhost:8080/api/subreddit/
+Content-Type: application/json
+Authorization: eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb2huMTIzIn0.ZMxUGhuyrwccCAeTh138hY-L3XuqKOevKSwRguFKRFLjvPYYXnX5o8YSzIKka5VaiC5ATCktzUrpx45pIbUHFH1p88QQoB6GZ8zFhazg0YVwcxoHM3Upo88roHWuF-8Sd2YgcuefwTczdFthbYlIh67W_lBQHyJVh04Jazm-8mINNdy6x5OoNF-RupDayLDhN80zxj6y0sWPpHyZoFp5HEsGU8i2og7jACcf3-MUtUCt-Z2DoPg1aTLev0qrshWyT2fVVcQs6lf5dzcH1zI9fR75FsNQNEGu8Eo1FSHeZ_6Tfn2MisJ2vCSybK_NmIFApFVM2Nl-M9WehCzjVPlvoA
+
+{
+	"name":"First Subreddit",
+	"description":"This is description of First Subreddit",
+    "postCount": null
+}
+
+<> 2020-12-28T160754.403.json
+
+###
+
+POST http://localhost:8080/api/subreddit/
+Content-Type: application/json
+Authorization: Bearer:eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb2huMTIzIn0.ZMxUGhuyrwccCAeTh138hY-L3XuqKOevKSwRguFKRFLjvPYYXnX5o8YSzIKka5VaiC5ATCktzUrpx45pIbUHFH1p88QQoB6GZ8zFhazg0YVwcxoHM3Upo88roHWuF-8Sd2YgcuefwTczdFthbYlIh67W_lBQHyJVh04Jazm-8mINNdy6x5OoNF-RupDayLDhN80zxj6y0sWPpHyZoFp5HEsGU8i2og7jACcf3-MUtUCt-Z2DoPg1aTLev0qrshWyT2fVVcQs6lf5dzcH1zI9fR75FsNQNEGu8Eo1FSHeZ_6Tfn2MisJ2vCSybK_NmIFApFVM2Nl-M9WehCzjVPlvoA
+
+{
+	"name":"First Subreddit",
+	"description":"This is description of First Subreddit",
+    "postCount": null
+}
+
+<> 2020-12-28T160743.403.json
+
+###
+
+POST http://localhost:8080/api/subreddit/
+Content-Type: application/json
+Authorization: Bearer perm:eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb2huMTIzIn0.ZMxUGhuyrwccCAeTh138hY-L3XuqKOevKSwRguFKRFLjvPYYXnX5o8YSzIKka5VaiC5ATCktzUrpx45pIbUHFH1p88QQoB6GZ8zFhazg0YVwcxoHM3Upo88roHWuF-8Sd2YgcuefwTczdFthbYlIh67W_lBQHyJVh04Jazm-8mINNdy6x5OoNF-RupDayLDhN80zxj6y0sWPpHyZoFp5HEsGU8i2og7jACcf3-MUtUCt-Z2DoPg1aTLev0qrshWyT2fVVcQs6lf5dzcH1zI9fR75FsNQNEGu8Eo1FSHeZ_6Tfn2MisJ2vCSybK_NmIFApFVM2Nl-M9WehCzjVPlvoA
+
+{
+	"name":"First Subreddit",
+	"description":"This is description of First Subreddit",
+    "postCount": null
+}
+
+<> 2020-12-28T160653.403.json
+
+###
+
+POST http://localhost:8080/api/subreddit
+Content-Type: application/json
+Authorization: Bearer perm:eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb2huMTIzIn0.ZMxUGhuyrwccCAeTh138hY-L3XuqKOevKSwRguFKRFLjvPYYXnX5o8YSzIKka5VaiC5ATCktzUrpx45pIbUHFH1p88QQoB6GZ8zFhazg0YVwcxoHM3Upo88roHWuF-8Sd2YgcuefwTczdFthbYlIh67W_lBQHyJVh04Jazm-8mINNdy6x5OoNF-RupDayLDhN80zxj6y0sWPpHyZoFp5HEsGU8i2og7jACcf3-MUtUCt-Z2DoPg1aTLev0qrshWyT2fVVcQs6lf5dzcH1zI9fR75FsNQNEGu8Eo1FSHeZ_6Tfn2MisJ2vCSybK_NmIFApFVM2Nl-M9WehCzjVPlvoA
+
+{
+	"name":"First Subreddit",
+	"description":"This is description of First Subreddit",
+    "postCount": null
+}
+
+<> 2020-12-28T160638.403.json
+
+###
+
+POST http://localhost:8080/api/subreddit
+Content-Type: application/json
+Authorization: Bearer perm:eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb2huMTIzIn0.ZMxUGhuyrwccCAeTh138hY-L3XuqKOevKSwRguFKRFLjvPYYXnX5o8YSzIKka5VaiC5ATCktzUrpx45pIbUHFH1p88QQoB6GZ8zFhazg0YVwcxoHM3Upo88roHWuF-8Sd2YgcuefwTczdFthbYlIh67W_lBQHyJVh04Jazm-8mINNdy6x5OoNF-RupDayLDhN80zxj6y0sWPpHyZoFp5HEsGU8i2og7jACcf3-MUtUCt-Z2DoPg1aTLev0qrshWyT2fVVcQs6lf5dzcH1zI9fR75FsNQNEGu8Eo1FSHeZ_6Tfn2MisJ2vCSybK_NmIFApFVM2Nl-M9WehCzjVPlvoA
+
+{
+	"name":"First Subreddit",
+	"description":"This is description of First Subreddit",
+    "postCount": null
+}
+
+<> 2020-12-28T160528.403.json
+
+###
+
+POST http://localhost:8080/api/subreddit
+Content-Type: application/json
+Authorization: Bearer perm:eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb2huMTIzIn0.ZMxUGhuyrwccCAeTh138hY-L3XuqKOevKSwRguFKRFLjvPYYXnX5o8YSzIKka5VaiC5ATCktzUrpx45pIbUHFH1p88QQoB6GZ8zFhazg0YVwcxoHM3Upo88roHWuF-8Sd2YgcuefwTczdFthbYlIh67W_lBQHyJVh04Jazm-8mINNdy6x5OoNF-RupDayLDhN80zxj6y0sWPpHyZoFp5HEsGU8i2og7jACcf3-MUtUCt-Z2DoPg1aTLev0qrshWyT2fVVcQs6lf5dzcH1zI9fR75FsNQNEGu8Eo1FSHeZ_6Tfn2MisJ2vCSybK_NmIFApFVM2Nl-M9WehCzjVPlvoA
+
+{
+	"name":"First Subreddit",
+	"description":"This is description of First Subreddit",
+    "postCount": null
+}
+
+<> 2020-12-28T160518.403.json
+
+###
+
+POST http://localhost:8080/api/subreddit
+Content-Type: application/json
+Authorization: Bearer token:eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb2huMTIzIn0.ZMxUGhuyrwccCAeTh138hY-L3XuqKOevKSwRguFKRFLjvPYYXnX5o8YSzIKka5VaiC5ATCktzUrpx45pIbUHFH1p88QQoB6GZ8zFhazg0YVwcxoHM3Upo88roHWuF-8Sd2YgcuefwTczdFthbYlIh67W_lBQHyJVh04Jazm-8mINNdy6x5OoNF-RupDayLDhN80zxj6y0sWPpHyZoFp5HEsGU8i2og7jACcf3-MUtUCt-Z2DoPg1aTLev0qrshWyT2fVVcQs6lf5dzcH1zI9fR75FsNQNEGu8Eo1FSHeZ_6Tfn2MisJ2vCSybK_NmIFApFVM2Nl-M9WehCzjVPlvoA
+
+{
+	"name":"First Subreddit",
+	"description":"This is description of First Subreddit",
+    "postCount": null
+}
+
+<> 2020-12-28T160343.403.json
+
+###
+
+POST http://localhost:8080/api/subreddit
+Content-Type: application/json
+Authorization: Bearer token:150de2b4-eb95-4fe5-88b9-2c52df55759a
+
+{
+	"name":"First Subreddit",
+	"description":"This is description of First Subreddit",
+    "postCount": null
+}
+
+<> 2020-12-28T154707.403.json
+
+###
+
+POST http://localhost:8080/api/subreddit
+Content-Type: application/json
+Authorization: Bearer token:150de2b4-eb95-4fe5-88b9-2c52df55759a
+
+{
+	"name":"First Subreddit",
+	"description":"This is description of First Subreddit",
+    "postCount": null
+}
+
+<> 2020-12-28T154700.403.json
+
+###
+
+POST http://localhost:8080/api/subreddit
+Content-Type: application/json
+Authorization: Bearer perm:150de2b4-eb95-4fe5-88b9-2c52df55759a
+
+{
+	"name":"First Subreddit",
+	"description":"This is description of First Subreddit",
+    "postCount": null
+}
+
+<> 2020-12-28T154640.403.json
+
+###
+
+POST http://localhost:8080/api/subreddit
+Content-Type: application/json
+Authorization: Bearer perm:value
+
+{
+	"name":"First Subreddit",
+	"description":"This is description of First Subreddit",
+    "postCount": null
+}
+
+<> 2020-12-28T154554.403.json
+
+###
+
+POST http://localhost:8080/api/subreddit
+Content-Type: application/json
+Authorization: value
+
+{
+	"name":"First Subreddit",
+	"description":"This is description of First Subreddit",
+    "postCount": null
+}
+
+<> 2020-12-28T154430.403.json
+
+###
+
+POST http://localhost:8080/api/subreddit
+Content-Type: application/json
+
+{
+	"name":"First Subreddit",
+	"description":"This is description of First Subreddit"
+}
+
+<> 2020-12-28T153249.403.json
+
+###
+
+GET http://localhost:8080/api/subreddit
+Content-Type: application/json
+
+{
+	"name":"First Subreddit",
+	"description":"This is description of First Subreddit"
+}
+
+<> 2020-12-28T153056.403.json
+
+###
+
+POST http://localhost:8080/api/auth/signup/
+Content-Type: application/json
+Connection: keep-alive
+Vary: Accept, Cookie, Origin
+Allow: GET, POST, HEAD, OOPTINS
+Accept: */*
+
+{
+    "username": "stas123",
+    "email": "staszel@test.com",
+    "password": "strongpassword2"
+}
+
+<> 2020-12-28T152253.200.txt
+
+###
+
+POST http://localhost:8080/api/auth/signup/
+Content-Type: application/json
+Connection: keep-alive
+Vary: Accept, Cookie, Origin
+Allow: GET, POST, HEAD, OOPTINS
+Accept: */*
+{:
+    "username": "stas123",
+    "email": "staszel@test.com",
+    "password": "strongpassword2"
+}:
+
+<> 2020-12-28T152146.400.html
+
+###
+
+GET http://localhost:8080/api/auth/accountVerification/150de2b4-eb95-4fe5-88b9-2c52df55759a
+
+<> 2020-12-28T152059.200.txt
+
+###
+
+GET http://localhost:8080/api/auth/accountVerification/{{150de2b4-eb95-4fe5-88b9-2c52df55759a}}
+
+###
+
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+Connection: keep-alive
+Vary: Accept, Cookie, Origin
+Allow: GET, POST, HEAD, OOPTINS
+Accept: */*
+{:
+    "username": "stas123",
+    "email": "staszel@test.com",
+    "password": "strongpassword2"
+}:
+
+<> 2020-12-28T151757.400.html
+
+###
+
+POST http://localhost:8080/api/auth/signup
+Content-Type: text/html;charset=utf-8
+Connection: keep-alive
+Vary: Accept, Cookie, Origin
+Allow: GET, POST, HEAD, OOPTINS
+{:
+    "username": "stas123",
+    "email": "staszel@test.com",
+    "password": "strongpassword2"
+}:
+
+<> 2020-12-28T151643.400.html
+
+###
+
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+Connection: keep-alive
+Vary: Accept, Cookie, Origin
+Allow: GET, POST, HEAD, OOPTINS
+{:
+    "username": "stas123",
+    "email": "staszel@test.com",
+    "password": "strongpassword2"
+}:
+
+<> 2020-12-28T151511.400.html
+
+###
+
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+Connection: keep-alive
+Vary: Accept, Cookie, Origin
+Allow: GET, POST, HEAD, OOPTINS
+{:
+    "username": "stas123",
+    "email": "staszel@test.com",
+    "password": "strongpassword2"
+}:
+
+<> 2020-12-28T151444.400.html
+
+###
+
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+Connection: keep-alive
+{:
+    "username": "stas123",
+    "email": "staszel@test.com",
+    "password": "strongpassword2"
+}:
+
+<> 2020-12-28T151334.400.html
+
+###
+
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+Connection: keep-alive
+{:
+    "username": "stas123",
+    "email": "staszel@test.com",
+    "password": "strongpassword2"
+}:
+
+<> 2020-12-28T150948.400.html
+
+###
+
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+{:
+    "username": "stas123",
+    "email": "staszel@test.com",
+    "password": "strongpassword2"
+}:
+
+<> 2020-12-28T150918.400.html
+
+###
+
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+{:
+    "username": "stas123",
+    "email": "staszel@test.com",
+    "password": "strongpassword2"
+}:
+
+<> 2020-12-28T142546.400.html
+
+###
+
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+{{:
+    "username": "stas123",
+    "email": "staszel@test.com",
+    "password": "strongpassword2"
+}}:
+
+<> 2020-12-28T142523.400.html
+
+###
+
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+
+{{
+    "username": "stas123",
+    "email": "staszel@test.com",
+    "password": "strongpassword2"
+}}
+
+<> 2020-12-28T142504.400.json
+
+###
+

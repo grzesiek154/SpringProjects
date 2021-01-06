@@ -39,6 +39,7 @@ export class SignUpComponent implements OnInit {
 
     this.autService.signup(this.signupRequestPayload).subscribe(data =>{
       this.router.navigate(['/login'], { queryParams: { registered: 'true'}});
+      // Inside the signup method, if we received success response, we are using the injected router object to navigate to the Login page and notice that we are adding a query param registered:true to communicate with the LoginComponent that registration is successful
     }, error => {
       this.toastr.error('Registration failed! Please try again' + error);
     }); 
