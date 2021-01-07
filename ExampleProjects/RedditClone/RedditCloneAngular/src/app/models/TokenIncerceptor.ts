@@ -23,12 +23,12 @@ export class TokenInterceptor implements HttpInterceptor {
 
         // Inside the intercept method, we receive the JWT through authService.getJwtToken(), if the Token is valid, we add the token to the Authorization Header which contains a value according to the Bearer scheme.
 
-        if (req.url.indexOf('refresh') !== -1 || req.url.indexOf('login') !== -1) {
-            return next.handle(req);
-        }
+     
         const jwtToken = this.authService.getJwtToken();
 
         if (jwtToken) {
+            this.addToken(req, jwtToken);
+        }
             return next.handle(this.addToken(req, jwtToken)).pipe(catchError(error => {
                 if (error instanceof HttpErrorResponse
                     && error.status === 403) {
@@ -37,12 +37,7 @@ export class TokenInterceptor implements HttpInterceptor {
                 } else {
                     return throwError(error);
                 }
-            }));
-        }
-        return next.handle(req);
-    
-
-
+            }));   
 }
 
     private handleAuthErrors(req: HttpRequest<any>, next: HttpHandler) {

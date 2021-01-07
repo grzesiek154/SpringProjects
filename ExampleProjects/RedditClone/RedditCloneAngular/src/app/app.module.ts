@@ -12,6 +12,12 @@ import {NgxWebstorageModule} from 'ngx-webstorage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { TokenInterceptor } from './models/TokenIncerceptor';
+import { CommonModule } from '@angular/common';
+import { HomeComponent } from './components/home/home.component';
+import { PostTitleComponent } from './components/post-title/post-title.component';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { SubredditSideBarComponent } from './components/subreddit-side-bar/subreddit-side-bar.component';
+import { VoteButtonComponent } from './components/vote-button/vote-button.component';
 
 
 @NgModule({
@@ -19,10 +25,16 @@ import { TokenInterceptor } from './models/TokenIncerceptor';
     AppComponent,
     HeaderComponent,
     SignUpComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent,
+    PostTitleComponent,
+    SideBarComponent,
+    SubredditSideBarComponent,
+    VoteButtonComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
