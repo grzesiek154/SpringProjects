@@ -33,16 +33,27 @@ export class SignUpComponent implements OnInit {
 
 
   signup() {
-    this.signupRequestPayload.username = this.signupForm.get('username').value;
     this.signupRequestPayload.email = this.signupForm.get('email').value;
+    this.signupRequestPayload.username = this.signupForm.get('username').value;
     this.signupRequestPayload.password = this.signupForm.get('password').value;
 
+<<<<<<< HEAD
     this.autService.signup(this.signupRequestPayload).subscribe(data =>{
       this.router.navigate(['/login'], { queryParams: { registered: 'true'}});
       // Inside the signup method, if we received success response, we are using the injected router object to navigate to the Login page and notice that we are adding a query param registered:true to communicate with the LoginComponent that registration is successful
     }, error => {
       this.toastr.error('Registration failed! Please try again' + error);
     }); 
+=======
+    this.autService.signup(this.signupRequestPayload)
+      .subscribe(data => {
+        this.router.navigate(['/login'],
+          { queryParams: { registered: 'true' } });
+      }, error => {
+        console.log(error);
+        this.toastr.error('Registration Failed! Please try again');
+      });
+>>>>>>> 23246d402559f2cdd6165ead0f051aea5c0bf4d4
   }
 
 }

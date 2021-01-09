@@ -29,6 +29,7 @@ export class AuthService {
     }));
   }
 
+<<<<<<< HEAD
   refreshToken() {
     const refreshTokenPayload = {
       refreshToken: this.getRefreshToken(),
@@ -40,6 +41,21 @@ export class AuthService {
         this.localStorage.store('authenticationToken', response.authenticationToken);
         this.localStorage.store('expiresAt', response.expiresAt);
       }));
+=======
+  refreshToken()  {
+    const refreshTokenPayload = {
+      refreshToken: this.getRefreshToken(),
+      username: this.getUserName
+    }
+
+    return this.http.post<LoginResponse>('http://localhost:8080/api/auth/refresh/token',
+    refreshTokenPayload)
+    .pipe(tap(response => {
+      this.localStorage.store('authenticationToken', response.authenticationToken);
+      this.localStorage.store('expiresAt', response.expiresAt);
+    }));
+
+>>>>>>> 23246d402559f2cdd6165ead0f051aea5c0bf4d4
   }
 
   getJwtToken() {
