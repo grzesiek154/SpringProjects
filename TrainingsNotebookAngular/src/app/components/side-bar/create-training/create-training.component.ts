@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { randomInt } from 'crypto';
 import { Training } from 'src/app/models/Training';
 import { TrainingsService } from 'src/app/services/trainings.service';
 
@@ -11,23 +10,26 @@ import { TrainingsService } from 'src/app/services/trainings.service';
   styleUrls: ['./create-training.component.css']
 })
 export class CreateTrainingComponent implements OnInit {
-  createTrainingFromGroup: FormGroup;
+  createTrainingFormGroup: FormGroup;
   currentTraining: Training;
   name = new FormControl('');
   type = new FormControl('');
   date = new FormControl('');
 
   constructor(private router: Router, private trainingsService: TrainingsService) { 
-    this.createTrainingFromGroup = new FormGroup({
+    this.createTrainingFormGroup = new FormGroup({
       name: new FormControl('', Validators.required),
       type: new FormControl('', Validators.required),
-      date: new FormControl('', Validators.required)
+      date: new FormControl('', Validators.required),
+      description: new FormControl('')
     });
     let dateNow = new Date();
     this.currentTraining = {
+      id: Math.random(),
       name: '',
       type: '',
-      createDate: dateNow.getDate()
+      createDate: dateNow.getDate(),
+      description: ''
     }
   }
 
@@ -41,9 +43,10 @@ export class CreateTrainingComponent implements OnInit {
   }
 
   createTraining() {
-    this.currentTraining.name = this.createTrainingFromGroup.get('name').value;
-    this.currentTraining.type = this.createTrainingFromGroup.get('type').value;
-    this.currentTraining.createDate = this.createTrainingFromGroup.get('date').value;
+    this.currentTraining.name = this.createTrainingFormGroup.get('name').value;
+    this.currentTraining.type = this.createTrainingFormGroup.get('type').value;
+    this.currentTraining.createDate = this.createTrainingFormGroup.get('date').value;
+    this.currentTraining.description = this.createTrainingFormGroup.get('description').value;
     this.trainingsService.createTraining(this.currentTraining);
   }
 

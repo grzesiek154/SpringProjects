@@ -1,9 +1,14 @@
 <div class="container">
     <div class="row">
         <div class="create-training-container">
-            <form class="post-form" [formGroup]="createTrainingForm" (ngSubmit)= "createTraining()">
+            <form class="post-form" [formGroup]="createTrainingFormGroup" (ngSubmit)= "createTraining()">
                 <div class="form-group">
-                    
+                    <div class="create-training-heading">Create Training</div>
+                    <hr/>
+                    <input type="text" [formControlName]="'name'" class="form-control" style="margin-top: 5px" placeholder="Training Name">
+                    <input type="text" [formControlName]="'type'" class="form-control" style="margin-top: 5px" placeholder="Type">
+                    <textarea type="text" [formControlName]="'description'" style="width: 100%; margin-top: 5px"
+                    placeholder="Description"></textarea>
                 </div>
             </form>
         </div>
