@@ -7,6 +7,7 @@ import { TrainingsComponent } from './components/trainings/trainings.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { CreateTrainingComponent } from './components/side-bar/create-training/create-training.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CreateExerciseComponent } from './components/exercise/create-exercise/create-exercise.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     TrainingsComponent,
     SideBarComponent,
-    CreateTrainingComponent
+    CreateTrainingComponent,
+    CreateExerciseComponent
   ],
   imports: [
     ReactiveFormsModule,

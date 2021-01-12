@@ -12,9 +12,9 @@ import { TrainingsService } from 'src/app/services/trainings.service';
 export class CreateTrainingComponent implements OnInit {
   createTrainingFormGroup: FormGroup;
   currentTraining: Training;
-  name = new FormControl('');
-  type = new FormControl('');
-  date = new FormControl('');
+  // name = new FormControl('');
+  // type = new FormControl('');
+  // date = new FormControl('');
 
   constructor(private router: Router, private trainingsService: TrainingsService) { 
     this.createTrainingFormGroup = new FormGroup({

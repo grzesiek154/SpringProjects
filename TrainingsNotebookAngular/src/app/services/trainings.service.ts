@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Exercise } from '../models/Exercise';
 import { Training } from '../models/Training';
 
 @Injectable({
@@ -7,6 +8,7 @@ import { Training } from '../models/Training';
 export class TrainingsService {
 
   trainings: Training[];
+  
 
   constructor() { }
 
