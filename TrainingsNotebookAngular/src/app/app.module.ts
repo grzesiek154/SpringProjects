@@ -8,6 +8,8 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { CreateTrainingComponent } from './components/side-bar/create-training/create-training.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateExerciseComponent } from './components/exercise/create-exercise/create-exercise.component';
+import { CreateWorkoutComponent } from './components/workout/create-workout/create-workout.component';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { CreateExerciseComponent } from './components/exercise/create-exercise/c
     TrainingsComponent,
     SideBarComponent,
     CreateTrainingComponent,
-    CreateExerciseComponent
+    CreateExerciseComponent,
+    CreateWorkoutComponent,
+
   ],
   imports: [
     ReactiveFormsModule,

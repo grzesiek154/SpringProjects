@@ -6,6 +6,7 @@ import { Exercise } from '../models/Exercise';
 })
 export class ExerciseService {
   exercises: Exercise[];
+  
 
   constructor() { }
 

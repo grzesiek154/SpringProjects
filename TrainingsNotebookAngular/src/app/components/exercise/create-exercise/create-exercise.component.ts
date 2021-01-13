@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Exercise } from 'src/app/models/Exercise';
 import { Workout } from 'src/app/models/Workout';
 import { ExerciseService } from 'src/app/services/exercise.service';
+import { WorkoutService } from 'src/app/services/workout.service';
 
 @Component({
   selector: 'app-create-exercise',
@@ -14,14 +15,15 @@ export class CreateExerciseComponent implements OnInit {
   createExerciseFormGroup: FormGroup;
   currentExercise: Exercise;
   selectedWorkout: Workout;
-  name = new FormControl('');
-  type = new FormControl('');
-  description = new FormControl('');
-  reps? = new FormControl('');
-  duration? = new FormControl('');
-  workout = new FormControl('');
+  availableWorkouts: Workout[];
+  // name = new FormControl('');
+  // type = new FormControl('');
+  // description = new FormControl('');
+  // reps? = new FormControl('');
+  // duration? = new FormControl('');
+  // workout = new FormControl('');
 
-  constructor(private router: Router, private exerciseService: ExerciseService) {
+  constructor(private router: Router, private exerciseService: ExerciseService, private workoutService: WorkoutService) {
     this.createExerciseFormGroup = new FormGroup({
       name: new FormControl('', Validators.required),
       type: new FormControl('', Validators.required),
@@ -42,6 +44,10 @@ export class CreateExerciseComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.availableWorkouts = this.workoutService.getAll();
+    this.availableWorkouts.forEach(workout => {
+      console.log("workout: " + workout);
+    })
   }
 
   createExercise() {
@@ -52,4 +58,6 @@ export class CreateExerciseComponent implements OnInit {
     this.currentExercise.description = this.createExerciseFormGroup.get('description').value;
     this.currentExercise.workout = this.selectedWorkout;
   }
+
+  
 }
