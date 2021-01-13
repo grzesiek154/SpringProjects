@@ -13,11 +13,7 @@
               <select type="number" [formControlName]="'duration'" class="form-control" style="margin-left: 5px"
               placeholder="Duration is seconds">
               <ul></ul>
-              <li *ngFor="let workout of Workouts" [class.selected]="workout === selectedWorkout"></li>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option></select>
+              <li *ngFor="let workout of Workouts" [class.selected]="workout === selectedWorkout"><option>{{workout}}</option></li></select>
               <input type="text" [formControlName]="'workout'" class="form-control dropdown-menu" style="margin-left: 5px"
               placeholder="Workouts">
       </div>
