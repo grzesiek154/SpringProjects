@@ -9,6 +9,8 @@ import { CreateTrainingComponent } from './components/side-bar/create-training/c
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateExerciseComponent } from './components/exercise/create-exercise/create-exercise.component';
 import { CreateWorkoutComponent } from './components/workout/create-workout/create-workout.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider';
 
 
 @NgModule({
@@ -23,9 +25,11 @@ import { CreateWorkoutComponent } from './components/workout/create-workout/crea
 
   ],
   imports: [
+    MatSliderModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

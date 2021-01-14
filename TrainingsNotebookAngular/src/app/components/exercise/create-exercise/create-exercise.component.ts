@@ -57,7 +57,15 @@ export class CreateExerciseComponent implements OnInit {
     this.currentExercise.duration = this.createExerciseFormGroup.get('duration').value;
     this.currentExercise.description = this.createExerciseFormGroup.get('description').value;
     this.currentExercise.workout = this.selectedWorkout;
+    this.exerciseService.createExercise(this.currentExercise);
+    this.exerciseService.printAllExercises();
   }
 
-  
+  printAll() {
+    this.exerciseService.printAllExercises();
+  }
+
+  onSelectWorkout(workout) {
+    this.selectedWorkout = workout;
+  }
 }
