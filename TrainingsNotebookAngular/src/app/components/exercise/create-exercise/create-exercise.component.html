@@ -16,7 +16,7 @@
           <select type="text" [formControlName]="'workout'" class="form-control" style="margin-left: 5px"
             placeholder="Workouts">
             <option *ngFor="let workout of availableWorkouts" [ngValue]="workout"
-              [class.selected]="workout === selectedWorkout">{{workout.name}}</option>
+             [class.selected]="workout === selectedWorkout">{{workout.name}}</option>
           </select>
         </div>
       </div>
@@ -24,9 +24,8 @@
           <button class="btn btn-default" (click)="createExercise()">Add Exercise</button>
           <button class="btn btn-default">Add Exercise2</button>
         </div>
-
-      
     </form>
+    <button class="btn btn-warning" (click)="addNewExerciseForm()">Add Another Exercise</button>
     <button class="btn btn-info" (click)="printAll()">Print All Exercises</button>
 
 </div>
