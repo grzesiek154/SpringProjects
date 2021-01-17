@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Workout } from 'src/app/models/Workout';
 import { WorkoutService } from 'src/app/services/workout.service';
 
@@ -9,7 +10,23 @@ import { WorkoutService } from 'src/app/services/workout.service';
 })
 export class CreateWorkoutComponent implements OnInit {
 
-  constructor(private workoutService: WorkoutService) { }
+  createWorkoutFormGroup: FormGroup;
+  currentWorkout: Workout;
+  
+
+  constructor(private workoutService: WorkoutService, private fb: FormBuilder) { 
+
+    this.createWorkoutFormGroup = this.fb.group({
+      workoutForms: this.fb.array([])
+    });
+
+    this.currentWorkout = {
+      id: Math.random(),
+      name: '',
+      type: '',
+      description: ''
+    }
+  }
 
   ngOnInit(): void {
     let workout1 = new Workout("Przysiady","test workout 1");

@@ -13,8 +13,16 @@ export class SideBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  gotToCreateTraining() {
+  goToCreateTraining() {
     this.router.navigateByUrl('/create-training');
+  }
+
+  goToCreateExercise() {
+    this.router.navigateByUrl('/create-exercise');
+  }
+
+  goToCreateWorkout() {
+    this.router.navigateByUrl('/create-worout');
   }
  
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Exercise } from 'src/app/models/Exercise';
 import { Workout } from 'src/app/models/Workout';
@@ -12,28 +12,17 @@ import { WorkoutService } from 'src/app/services/workout.service';
   styleUrls: ['./create-exercise.component.css']
 })
 export class CreateExerciseComponent implements OnInit {
+
   createExerciseFormGroup: FormGroup;
   currentExercise: Exercise;
   selectedWorkout: Workout;
   availableWorkouts: Workout[];
-  exercisesData = new FormArray([]);
 
-  // name = new FormControl('');
-  // type = new FormControl('');
-  // description = new FormControl('');
-  // reps? = new FormControl('');
-  // duration? = new FormControl('');
-  // workout = new FormControl('');
-
-  constructor(private router: Router, private exerciseService: ExerciseService, private workoutService: WorkoutService) {
-    this.createExerciseFormGroup = new FormGroup({
-          name: new FormControl('', Validators.required),
-          type: new FormControl('', Validators.required),
-          description: new FormControl('', Validators.required),
-          reps: new FormControl(''),
-          duration: new FormControl(''),
-          workout: new FormControl('')
-  });
+  constructor(private router: Router, private exerciseService: ExerciseService, private workoutService: WorkoutService, private fb: FormBuilder) {
+    
+    this.createExerciseFormGroup = this.fb.group({
+      exercisesForms: this.fb.array([])
+    });
     this.currentExercise = {
       id: Math.random(),
       name: '',
@@ -52,34 +41,53 @@ export class CreateExerciseComponent implements OnInit {
     })
   }
 
-  createExercise() {
-    this.currentExercise.name = this.createExerciseFormGroup.get('name').value;
-    this.currentExercise.type = this.createExerciseFormGroup.get('type').value;
-    this.currentExercise.reps = this.createExerciseFormGroup.get('reps').value;
-    this.currentExercise.duration = this.createExerciseFormGroup.get('duration').value;
-    this.currentExercise.description = this.createExerciseFormGroup.get('description').value;
-    this.currentExercise.workout = this.createExerciseFormGroup.get('workout').value;
+  // createExercise() {
+  //   this.currentExercise.name = this.createExerciseFormGroup.get('exercisesForms').get('name').value;
+  //   this.currentExercise.type = this.createExerciseFormGroup.get('exercisesForms').get('type').value;
+  //   this.currentExercise.reps = this.createExerciseFormGroup.get('exercisesForms').get('reps').value;
+  //   this.currentExercise.duration = this.createExerciseFormGroup.get('exercisesForms').get('duration').value;
+  //   this.currentExercise.description = this.createExerciseFormGroup.get('exercisesForms').get('description').value;
+  //   this.currentExercise.workout = this.createExerciseFormGroup.get('exercisesForms').get('workout').value;
+  //   this.exerciseService.createExercise(this.currentExercise);
+  //   this.exerciseService.printAllExercises();
+  // }
+  addExerciseForm() {
+    this.exercisesForms.push(this.newExerciseForm())
+  }
+
+  private newExerciseForm(): FormGroup {
+    return this.fb.group({
+      name: ['', Validators.required],
+      type: ['', Validators.required],
+      description: ['', Validators.required],
+      reps: 0,
+      duration: 0,
+      workout: [new Workout(), Validators.required]
+    })
+  }
+
+  get exercisesForms(): FormArray {
+    return this.createExerciseFormGroup.controls.exercisesForms as FormArray;
+  }
+
+  saveExercise(index: number) {
+    let exerciseToSave = this.exercisesForms.at(index);
+    this.currentExercise.name = exerciseToSave.get('name').value;
+    this.currentExercise.type = exerciseToSave.get('type').value;
+    this.currentExercise.reps = exerciseToSave.get('reps').value;
+    this.currentExercise.duration = exerciseToSave.get('duration').value;
+    this.currentExercise.description = exerciseToSave.get('description').value;
+    this.currentExercise.workout = exerciseToSave.get('workout').value;
     this.exerciseService.createExercise(this.currentExercise);
     this.exerciseService.printAllExercises();
   }
 
-  addNewExerciseForm() {
-    const exerciseForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      type: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required),
-      reps: new FormControl(''),
-      duration: new FormControl(''),
-      workout: new FormControl('')
-    });
-    this.exercisesData.push(exerciseForm);
+  removeExercise(index: number) {
+    this.exercisesForms.removeAt(index);
   }
 
   printAll() {
     this.exerciseService.printAllExercises();
   }
 
-  onSelectWorkout(workout) {
-    this.selectedWorkout = workout;
-  }
 }
