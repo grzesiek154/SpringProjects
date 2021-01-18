@@ -22,7 +22,7 @@ export class ExerciseService {
     return this.exercises;
   }
 
-  createExercise(exercise) {
+  saveExercise(exercise) {
     this.exercises.push(exercise);
   }
   printAllExercises(){

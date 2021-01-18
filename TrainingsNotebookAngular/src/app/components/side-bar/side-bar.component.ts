@@ -22,7 +22,7 @@ export class SideBarComponent implements OnInit {
   }
 
   goToCreateWorkout() {
-    this.router.navigateByUrl('/create-worout');
+    this.router.navigateByUrl('/create-workout');
   }
  
 }

@@ -11,6 +11,7 @@ import { CreateExerciseComponent } from './components/exercise/create-exercise/c
 import { CreateWorkoutComponent } from './components/workout/create-workout/create-workout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
+import { TopMenuComponent } from './components/top-menu/top-menu.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { MatSliderModule } from '@angular/material/slider';
     CreateTrainingComponent,
     CreateExerciseComponent,
     CreateWorkoutComponent,
+    TopMenuComponent,
 
   ],
   imports: [

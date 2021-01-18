@@ -23,15 +23,6 @@ export class CreateExerciseComponent implements OnInit {
     this.createExerciseFormGroup = this.fb.group({
       exercisesForms: this.fb.array([])
     });
-    this.currentExercise = {
-      id: Math.random(),
-      name: '',
-      type: '',
-      description: '',
-      reps: 0,
-      duration: 0,
-      workout: new Workout()
-    }
    }
 
   ngOnInit(): void {
@@ -41,16 +32,6 @@ export class CreateExerciseComponent implements OnInit {
     })
   }
 
-  // createExercise() {
-  //   this.currentExercise.name = this.createExerciseFormGroup.get('exercisesForms').get('name').value;
-  //   this.currentExercise.type = this.createExerciseFormGroup.get('exercisesForms').get('type').value;
-  //   this.currentExercise.reps = this.createExerciseFormGroup.get('exercisesForms').get('reps').value;
-  //   this.currentExercise.duration = this.createExerciseFormGroup.get('exercisesForms').get('duration').value;
-  //   this.currentExercise.description = this.createExerciseFormGroup.get('exercisesForms').get('description').value;
-  //   this.currentExercise.workout = this.createExerciseFormGroup.get('exercisesForms').get('workout').value;
-  //   this.exerciseService.createExercise(this.currentExercise);
-  //   this.exerciseService.printAllExercises();
-  // }
   addExerciseForm() {
     this.exercisesForms.push(this.newExerciseForm())
   }
@@ -78,8 +59,21 @@ export class CreateExerciseComponent implements OnInit {
     this.currentExercise.duration = exerciseToSave.get('duration').value;
     this.currentExercise.description = exerciseToSave.get('description').value;
     this.currentExercise.workout = exerciseToSave.get('workout').value;
-    this.exerciseService.createExercise(this.currentExercise);
-    this.exerciseService.printAllExercises();
+    this.exerciseService.saveExercise(this.currentExercise);
+    this.removeExercise(index);
+    this.clearExercise();
+  }
+
+  private clearExercise() {
+    this.currentExercise = {
+      id: Math.random(),
+      name: '',
+      type: '',
+      description: '',
+      reps: 0,
+      duration: 0,
+      workout: new Workout()
+    }
   }
 
   removeExercise(index: number) {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Workout } from 'src/app/models/Workout';
 import { WorkoutService } from 'src/app/services/workout.service';
 
@@ -11,15 +11,54 @@ import { WorkoutService } from 'src/app/services/workout.service';
 export class CreateWorkoutComponent implements OnInit {
 
   createWorkoutFormGroup: FormGroup;
-  currentWorkout: Workout;
+  currentWorkout: Workout = new Workout();
   
 
   constructor(private workoutService: WorkoutService, private fb: FormBuilder) { 
 
     this.createWorkoutFormGroup = this.fb.group({
-      workoutForms: this.fb.array([])
+      workoutsForms: this.fb.array([])
     });
 
+    this.clearWorkout();
+  }
+
+  ngOnInit(): void {
+    let workout1 = new Workout("Przysiady","test workout 1");
+    let workout2 = new Workout("Wyciskanie sztanki","test workout 2");
+    let workout3 = new Workout("Bieg","test workout 3");
+    this.workoutService.saveWorkout(workout1);
+    this.workoutService.saveWorkout(workout2);
+    this.workoutService.saveWorkout(workout3);
+
+  }
+  addWorkoutForm() {
+    this.workoutsForms.push(this.newWorkoutForm());
+  }
+  private newWorkoutForm(): FormGroup {
+    return this.fb.group({
+      name: ['', Validators.required],
+      type: ['', Validators.required],
+      description: ''
+    });
+  }
+
+  get workoutsForms(): FormArray {
+    return this.createWorkoutFormGroup.controls.workoutsForms as FormArray;
+  }
+
+  saveWorkout(index: number) {
+    console.log("index: " + index);
+    let workoutToSave = this.workoutsForms.at(index);
+    this.currentWorkout.name = workoutToSave.get('name').value;
+    this.currentWorkout.type = workoutToSave.get('type').value;
+    this.currentWorkout.description = workoutToSave.get('description').value;
+    this.workoutService.saveWorkout(this.currentWorkout);
+    this.removeWorkout(index);
+    this.clearWorkout();
+  }
+
+  private clearWorkout() {
     this.currentWorkout = {
       id: Math.random(),
       name: '',
@@ -28,14 +67,11 @@ export class CreateWorkoutComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    let workout1 = new Workout("Przysiady","test workout 1");
-    let workout2 = new Workout("Wyciskanie sztanki","test workout 2");
-    let workout3 = new Workout("Bieg","test workout 3");
-    this.workoutService.createWorkout(workout1);
-    this.workoutService.createWorkout(workout2);
-    this.workoutService.createWorkout(workout3);
-
+  removeWorkout(index: number) {
+    this.workoutsForms.removeAt(index);
+  }
+  printAll() {
+    this.workoutService.printAllWorkouts();
   }
 
 }

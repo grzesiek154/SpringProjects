@@ -11,7 +11,7 @@ export class WorkoutService {
 
    }
 
-  createWorkout(workout) {
+  saveWorkout(workout) {
     this.workouts.push(workout);
   }
   printAllWorkouts(){
