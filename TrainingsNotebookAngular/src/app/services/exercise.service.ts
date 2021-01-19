@@ -14,7 +14,9 @@ export class ExerciseService {
     exercise1.name = "10 pull ups"
     exercise1.type = "strength exercise";
     exercise1.reps = 10
-    exercise1.workout = new Workout("test workout", "Test");
+    let exerciseWorkout = new Workout();
+    exercise1.name = "Exercise Workout";
+    exercise1.workout = exerciseWorkout;
     this.exercises.push(exercise1);
    }
 

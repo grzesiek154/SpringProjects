@@ -24,12 +24,15 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let workout1 = new Workout("Przysiady","test workout 1");
-    let workout2 = new Workout("Wyciskanie sztanki","test workout 2");
-    let workout3 = new Workout("Bieg","test workout 3");
+    let workout1 = new Workout();
+    workout1.name = "Przysiady";
+    workout1.type = "test workout 1";
+    let workout2 = new Workout();
+    workout2.name = "Wyciskanie sztanki";
+    workout2.description = "test workout 2";
     this.workoutService.saveWorkout(workout1);
     this.workoutService.saveWorkout(workout2);
-    this.workoutService.saveWorkout(workout3);
+  
 
   }
   addWorkoutForm() {
@@ -49,22 +52,14 @@ export class CreateWorkoutComponent implements OnInit {
 
   saveWorkout(index: number) {
     console.log("index: " + index);
-    let workoutToSave = this.workoutsForms.at(index);
-    this.currentWorkout.name = workoutToSave.get('name').value;
-    this.currentWorkout.type = workoutToSave.get('type').value;
-    this.currentWorkout.description = workoutToSave.get('description').value;
+    this.currentWorkout = Workout.mapFormGroupObjectToWorkot(this.workoutsForms.at(index) as FormGroup);
     this.workoutService.saveWorkout(this.currentWorkout);
     this.removeWorkout(index);
     this.clearWorkout();
   }
 
   private clearWorkout() {
-    this.currentWorkout = {
-      id: Math.random(),
-      name: '',
-      type: '',
-      description: ''
-    }
+    this.currentWorkout = new Workout();
   }
 
   removeWorkout(index: number) {
