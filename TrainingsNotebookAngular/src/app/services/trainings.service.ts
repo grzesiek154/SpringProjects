@@ -10,7 +10,9 @@ export class TrainingsService {
   trainings: Training[];
   
 
-  constructor() { }
+  constructor() { 
+
+  }
 
   createTraining(training: Training) {
     console.log("Training " + training.name + " created.")
@@ -26,10 +28,10 @@ export class TrainingsService {
     this.trainings.splice(index);
   }
 
-  private getTrainingById(id: number){
-    const trainingFounded = this.trainings.filter(training =>  training.id = id);
-    return trainingFounded;
-  }
+  // private getTrainingById(id: number){
+  //   const trainingFounded = this.trainings.filter(training =>  training.id = id);
+  //   return trainingFounded;
+  // }
 
   private getAllTrainings(){
     this.trainings.forEach(training => {

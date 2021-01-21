@@ -15,24 +15,13 @@ export class CreateWorkoutComponent implements OnInit {
   
 
   constructor(private workoutService: WorkoutService, private fb: FormBuilder) { 
-
     this.createWorkoutFormGroup = this.fb.group({
       workoutsForms: this.fb.array([])
     });
-
     this.clearWorkout();
   }
 
   ngOnInit(): void {
-    let workout1 = new Workout();
-    workout1.name = "Przysiady";
-    workout1.type = "test workout 1";
-    let workout2 = new Workout();
-    workout2.name = "Wyciskanie sztanki";
-    workout2.description = "test workout 2";
-    this.workoutService.saveWorkout(workout1);
-    this.workoutService.saveWorkout(workout2);
-  
 
   }
   addWorkoutForm() {

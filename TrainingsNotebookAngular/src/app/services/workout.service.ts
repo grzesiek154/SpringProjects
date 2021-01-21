@@ -8,7 +8,14 @@ export class WorkoutService {
   workouts: Workout[] = [];
 
   constructor() {
-
+    let workout1 = new Workout();
+    workout1.name = "Przysiady";
+    workout1.type = "test workout 1";
+    let workout2 = new Workout();
+    workout2.name = "Wyciskanie sztanki";
+    workout2.description = "test workout 2";
+    this.saveWorkout(workout1);
+    this.saveWorkout(workout2);
    }
 
   saveWorkout(workout) {

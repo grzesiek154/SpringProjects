@@ -43,7 +43,7 @@ export class CreateExerciseComponent implements OnInit {
       description: ['', Validators.required],
       reps: 0,
       duration: 0,
-      workout: [new Workout(), Validators.required]
+      workout: [Workout, Validators.required]
     })
   }
 
@@ -52,28 +52,15 @@ export class CreateExerciseComponent implements OnInit {
   }
 
   saveExercise(index: number) {
-    let exerciseToSave = this.exercisesForms.at(index);
-    this.currentExercise.name = exerciseToSave.get('name').value;
-    this.currentExercise.type = exerciseToSave.get('type').value;
-    this.currentExercise.reps = exerciseToSave.get('reps').value;
-    this.currentExercise.duration = exerciseToSave.get('duration').value;
-    this.currentExercise.description = exerciseToSave.get('description').value;
-    this.currentExercise.workout = exerciseToSave.get('workout').value;
+    let exerciseForm = this.exercisesForms.at(index) as FormGroup;
+    this.currentExercise = Exercise.mapFormGroupObjectToExercise(exerciseForm);
     this.exerciseService.saveExercise(this.currentExercise);
     this.removeExercise(index);
     this.clearExercise();
   }
 
   private clearExercise() {
-    this.currentExercise = {
-      id: Math.random(),
-      name: '',
-      type: '',
-      description: '',
-      reps: 0,
-      duration: 0,
-      workout: new Workout()
-    }
+    this.currentExercise = new Exercise();
   }
 
   removeExercise(index: number) {

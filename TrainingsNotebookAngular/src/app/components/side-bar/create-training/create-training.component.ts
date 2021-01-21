@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Exercise } from 'src/app/models/Exercise';
 import { Training } from 'src/app/models/Training';
+import { ExerciseService } from 'src/app/services/exercise.service';
 import { TrainingsService } from 'src/app/services/trainings.service';
 
 @Component({
@@ -12,42 +14,44 @@ import { TrainingsService } from 'src/app/services/trainings.service';
 export class CreateTrainingComponent implements OnInit {
   createTrainingFormGroup: FormGroup;
   currentTraining: Training;
-  // name = new FormControl('');
-  // type = new FormControl('');
-  // date = new FormControl('');
+  trainingExercises: Exercise[];
+  availableExercises: Exercise[] = [];
 
-  constructor(private router: Router, private trainingsService: TrainingsService) { 
-    this.createTrainingFormGroup = new FormGroup({
+
+  constructor(private router: Router, private trainingsService: TrainingsService,private fb: FormBuilder, private exerciseService: ExerciseService) { 
+    this.createTrainingFormGroup =  this.fb.group({
       name: new FormControl('', Validators.required),
-      type: new FormControl('', Validators.required),
-      date: new FormControl('', Validators.required),
-      description: new FormControl('')
+      type: ['', Validators.required],
+      description: ['', Validators.required],
+      exercisesFormArray: this.fb.array([
+        this.fb.control('')
+      ])
     });
-    let dateNow = new Date();
-    this.currentTraining = {
-      id: Math.random(),
-      name: '',
-      type: '',
-      createDate: dateNow.getDate(),
-      description: ''
-    }
-  }
+    this.clearTraining();
+    this.availableExercises = exerciseService.getAll();
+  } 
 
   ngOnInit(): void {
-    let training1: Training = new Training();
-    training1.name = "Push ups";
-    let training2: Training = new Training();
-    training2.name = "Pull ups";
-    this.trainingsService.createTraining(training1);
-    this.trainingsService.createTraining(training2);
+
   }
 
-  createTraining() {
-    this.currentTraining.name = this.createTrainingFormGroup.get('name').value;
-    this.currentTraining.type = this.createTrainingFormGroup.get('type').value;
-    this.currentTraining.createDate = this.createTrainingFormGroup.get('date').value;
-    this.currentTraining.description = this.createTrainingFormGroup.get('description').value;
+  saveTraining() {
+    this.currentTraining = Training.mapFormGroupObjectToTraining(this.createTrainingFormGroup as FormGroup);
     this.trainingsService.createTraining(this.currentTraining);
   }
 
+  clearTraining() {
+    this.currentTraining = new Training();
+  }
+
+  discard() {
+    this.router.navigateByUrl("/");
+  }
+
+  addExercise() {
+    this.exercisesFormArray.push(this.fb.control(''));
+  }
+  get exercisesFormArray() {
+    return this.createTrainingFormGroup.get('exercisesFormArray') as FormArray;
+  }
 }

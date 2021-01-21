@@ -3,10 +3,12 @@ import { CreateTrainingComponent } from './components/side-bar/create-training/c
 import { RouterModule, Routes } from '@angular/router';
 import { CreateExerciseComponent } from './components/exercise/create-exercise/create-exercise.component';
 import { CreateWorkoutComponent } from './components/workout/create-workout/create-workout.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 
 const routes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'create-training', component: CreateTrainingComponent },
   { path: 'create-exercise', component: CreateExerciseComponent },
   { path: 'create-workout', component: CreateWorkoutComponent }
