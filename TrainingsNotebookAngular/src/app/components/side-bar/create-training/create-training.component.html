@@ -7,10 +7,10 @@
                     <div class="col-sm-2"></div>
                     <div class="col-sm-8">
                         <div class="form-row">
-                            <input type="text" formControlName="name" class="form-control" style="margin-top: 5px"
-                                placeholder="Training Name">
-                            <input type="text" formControlName="type" class="form-control" style="margin-top: 5px"
-                                placeholder="Type">
+                            <input type="text" formControlName="name" class="training-name form-control"
+                                style="margin-top: 5px" placeholder="Training Name">
+                            <input type="text" formControlName="type" class="training-type form-control"
+                                style="margin-top: 5px" placeholder="Type">
                         </div>
                         <div class="form-row">
                             <textarea type="text" formControlName="description" style="width: 60%; margin-top: 5px"
@@ -18,24 +18,32 @@
                         </div>
                         <div class="form-row">
                             <div formArrayName="exercisesFormArray">
-                                <div *ngFor="let exercise of exercisesFormArray.controls">
-                                    <select type="text" formControlName="exercise" class="form-control"
-                                        style="width: 60%; margin-left: 5px" placeholder="Exercises">
+                                <div *ngFor="let exerciseForm of exercisesFormArray.controls; let i = index;">
+                                    <select type="text" [formControlName]="i" class="exercise-select form-control"
+                                        style="margin-left: 5px" placeholder="Exercises">
                                         <option *ngFor="let exercise of availableExercises" [ngValue]="exercise">
                                             {{exercise.name}}
                                         </option>
                                     </select>
                                 </div>
-                                <button class="btn btn-info" (click)="addExercise()">Add Exercise</button>
                             </div>
                         </div>
                     </div>
-
                     <div class="col col-sm-2">
-                        <button class="btn btn-success" [disabled]="createTrainingFormGroup.invalid">Save
-                            Training</button>
-                        <button class="btn btn-warning" (click)="discard()">Discard</button>
+                        <div class="container">
+                            <div class="row">
+                                <button class="btn btn-success" [disabled]="createTrainingFormGroup.invalid">Save
+                                    Training</button>
+                                <button class="btn btn-warning" (click)="discard()">Discard</button>
+                            </div>
+                            <div class="row">
+                                <button class="btn btn-info" (click)="addExercise()">Add Exercise</button>
+                            </div>
+
+                        </div>
+
                     </div>
+
                 </div>
             </div>
         </form>

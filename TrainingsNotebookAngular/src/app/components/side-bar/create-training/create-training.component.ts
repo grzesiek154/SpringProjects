@@ -24,7 +24,7 @@ export class CreateTrainingComponent implements OnInit {
       type: ['', Validators.required],
       description: ['', Validators.required],
       exercisesFormArray: this.fb.array([
-        this.fb.control('')
+         this.fb.control('')
       ])
     });
     this.clearTraining();
