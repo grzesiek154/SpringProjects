@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { TrainingsComponent } from './components/trainings/trainings.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { CreateTrainingComponent } from './components/side-bar/create-training/create-training.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -12,18 +11,25 @@ import { CreateWorkoutComponent } from './components/workout/create-workout/crea
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
+import { ListWorkoutsComponent } from './components/workout/list-workouts/list-workouts.component';
+import { WorkoutSidebarComponent } from './components/workout/workout-sidebar/workout-sidebar.component';
+import { ListTrainingsComponent } from './components/training/list-trainings/list-trainings.component';
+import { ListExercisesComponent } from './components/exercise/list-exercises/list-exercises.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    TrainingsComponent,
     SideBarComponent,
     CreateTrainingComponent,
     CreateExerciseComponent,
     CreateWorkoutComponent,
     TopMenuComponent,
+    ListWorkoutsComponent,
+    WorkoutSidebarComponent,
+    ListTrainingsComponent,
+    ListExercisesComponent,
 
   ],
   imports: [

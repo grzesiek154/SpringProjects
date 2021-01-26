@@ -1,3 +1,7 @@
+/* * {
+  border: 1px solid red !important;
+} */
+
 .training-name {
   width: 30%;
 }
@@ -8,4 +12,8 @@
 
 .exercise-select {
   width: 60%;
+}
+
+.form-array {
+  width: 100%;
 }

@@ -1,0 +1,28 @@
+<div class="contaner">
+  <div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <table class="table table-bordered" *ngFor="let exercise of exercises">
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th *ngIf="exercise.reps != null && exercise.reps > 0">Reps</th>
+            <th *ngIf="exercise.duration != null && exercise.duration > 0">Duration</th>
+            <th>Description</th>
+            <th>Workout</th>
+          </tr>
+            <tr>
+              <td>{{exercise.name}}</td>
+              <td>{{exercise.type}}</td>
+              <td *ngIf="exercise.reps != null && exercise.reps > 0">{{exercise.reps}}</td>
+              <td *ngIf="exercise.duration != null && exercise.duration > 0">{{exercise.duration}}</td>
+              <td>{{exercise.description}}</td>
+              <td>{{exercise.workout.name}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-info" (click)="goToCreateExercise()">Add new</button>
+    </div>
+  </div>
+</div>

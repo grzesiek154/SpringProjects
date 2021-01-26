@@ -37,14 +37,16 @@ export class CreateTrainingComponent implements OnInit {
 
   saveTraining() {
     this.currentTraining = Training.mapFormGroupObjectToTraining(this.createTrainingFormGroup as FormGroup);
+    console.log(this.createTrainingFormGroup.value);
     this.trainingsService.createTraining(this.currentTraining);
+    this.backToMainPage();
   }
 
   clearTraining() {
     this.currentTraining = new Training();
   }
 
-  discard() {
+  backToMainPage() {
     this.router.navigateByUrl("/");
   }
 

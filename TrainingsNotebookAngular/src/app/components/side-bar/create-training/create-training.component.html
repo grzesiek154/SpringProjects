@@ -13,11 +13,11 @@
                                 style="margin-top: 5px" placeholder="Type">
                         </div>
                         <div class="form-row">
-                            <textarea type="text" formControlName="description" style="width: 60%; margin-top: 5px"
-                                placeholder="Description"></textarea>
+                            <textarea type="text" formControlName="description" class="form-control"
+                                style="width: 60%; margin-top: 5px" placeholder="Description"></textarea>
                         </div>
                         <div class="form-row">
-                            <div formArrayName="exercisesFormArray">
+                            <div class="form-array" formArrayName="exercisesFormArray">
                                 <div *ngFor="let exerciseForm of exercisesFormArray.controls; let i = index;">
                                     <select type="text" [formControlName]="i" class="exercise-select form-control"
                                         style="margin-left: 5px" placeholder="Exercises">
@@ -32,12 +32,13 @@
                     <div class="col col-sm-2">
                         <div class="container">
                             <div class="row">
-                                <button class="btn btn-success" [disabled]="createTrainingFormGroup.invalid">Save
+                                <button type="submit" class="btn btn-success"
+                                    [disabled]="createTrainingFormGroup.invalid">Save
                                     Training</button>
-                                <button class="btn btn-warning" (click)="discard()">Discard</button>
+                                <button class="btn btn-warning" (click)="backToMainPage()">Discard</button>
                             </div>
                             <div class="row">
-                                <button class="btn btn-info" (click)="addExercise()">Add Exercise</button>
+                                <button type="button" class="btn btn-info" (click)="addExercise()">Add Exercise</button>
                             </div>
 
                         </div>

@@ -7,7 +7,7 @@ import { Training } from '../models/Training';
 })
 export class TrainingsService {
 
-  trainings: Training[];
+  trainings: Training[] = [];
   
 
   constructor() { 
@@ -15,6 +15,7 @@ export class TrainingsService {
   }
 
   createTraining(training: Training) {
+    this.trainings.push(training);
     console.log("Training " + training.name + " created.")
   }
 

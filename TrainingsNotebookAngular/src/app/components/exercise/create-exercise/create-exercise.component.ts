@@ -27,9 +27,8 @@ export class CreateExerciseComponent implements OnInit {
 
   ngOnInit(): void {
     this.availableWorkouts = this.workoutService.getAll();
-    this.availableWorkouts.forEach(workout => {
-      console.log("workout: " + workout);
-    })
+    this.addExerciseForm();
+  
   }
 
   addExerciseForm() {
@@ -68,7 +67,7 @@ export class CreateExerciseComponent implements OnInit {
   }
 
   printAll() {
-    this.exerciseService.printAllExercises();
+    this.router.navigateByUrl('/list-exercises');
   }
 
 }

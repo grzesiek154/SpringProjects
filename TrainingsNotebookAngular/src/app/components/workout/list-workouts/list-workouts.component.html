@@ -1,0 +1,22 @@
+<div class="contaner">
+  <div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <table class="table table-bordered" *ngFor="let workout of workouts">
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+            <tr>
+              <td>{{workout.name}}</td>
+              <td>{{workout.type}}</td>
+              <td>{{workout.description}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-info" (click)="goToCreateWorkout()">Add new</button>
+    </div>
+  </div>
+</div>

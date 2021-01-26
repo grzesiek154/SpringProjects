@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Workout } from 'src/app/models/Workout';
 import { WorkoutService } from 'src/app/services/workout.service';
 
@@ -14,7 +15,7 @@ export class CreateWorkoutComponent implements OnInit {
   currentWorkout: Workout = new Workout();
   
 
-  constructor(private workoutService: WorkoutService, private fb: FormBuilder) { 
+  constructor(private workoutService: WorkoutService, private fb: FormBuilder, private router: Router) { 
     this.createWorkoutFormGroup = this.fb.group({
       workoutsForms: this.fb.array([])
     });
@@ -22,7 +23,7 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.addWorkoutForm();
   }
   addWorkoutForm() {
     this.workoutsForms.push(this.newWorkoutForm());
@@ -55,7 +56,7 @@ export class CreateWorkoutComponent implements OnInit {
     this.workoutsForms.removeAt(index);
   }
   printAll() {
-    this.workoutService.printAllWorkouts();
+    this.router.navigateByUrl('/list-workouts');
   }
-
+  
 }

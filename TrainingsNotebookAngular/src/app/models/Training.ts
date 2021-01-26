@@ -12,6 +12,10 @@ export class Training {
 
     static mapFormGroupObjectToTraining(formGroupObject: FormGroup) {
         let newTraining = new Training();
+        newTraining._name = formGroupObject.get('name').value;
+        newTraining._type = formGroupObject.get('type').value;
+        newTraining._description = formGroupObject.get('description').value;
+        newTraining._exercises = formGroupObject.get('exercisesFormArray').value;
         return newTraining;
     }
 
