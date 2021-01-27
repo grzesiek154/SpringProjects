@@ -1,1 +1,36 @@
-<p>list-trainings works!</p>
+<div class="contaner">
+  <div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <table class="table" *ngFor="let training of trainings">
+          <thead class="thead-dark">
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+            <tr>
+              <td>{{training.name}}</td>
+              <td>{{training.type}}</td>
+              <td>{{training.description}}</td>
+            </tr>
+            <thead class="thead-light">
+              <tr>
+                <th>Exercises:</th>
+              </tr>
+            </thead>
+            <tr>
+              <td *ngFor="let exercise of training.exercises"><span>{{exercise.name}}</span></td>
+            </tr>
+            <!-- <span>Exercises:</span>
+            <ul class="list-group" *ngFor="let exercise of training.exercises">
+              <li class="list-group-item">{{exercise.name}}</li>
+            </ul> -->
+        </table>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-info" (click)="goToCreateTraining()">Add new</button>
+    </div>
+  </div>
+</div>

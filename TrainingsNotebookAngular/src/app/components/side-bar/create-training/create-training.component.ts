@@ -56,4 +56,7 @@ export class CreateTrainingComponent implements OnInit {
   get exercisesFormArray() {
     return this.createTrainingFormGroup.get('exercisesFormArray') as FormArray;
   }
+  printAll() {
+    this.router.navigateByUrl('/list-trainings');
+  }
 }

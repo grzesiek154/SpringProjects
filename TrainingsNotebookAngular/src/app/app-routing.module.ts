@@ -6,6 +6,7 @@ import { CreateWorkoutComponent } from './components/workout/create-workout/crea
 import { HomeComponent } from './components/home/home.component';
 import { ListWorkoutsComponent } from './components/workout/list-workouts/list-workouts.component';
 import { ListExercisesComponent } from './components/exercise/list-exercises/list-exercises.component';
+import { ListTrainingsComponent } from './components/training/list-trainings/list-trainings.component';
 
 
 
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'create-exercise', component: CreateExerciseComponent },
   { path: 'create-workout', component: CreateWorkoutComponent },
   { path: 'list-workouts', component: ListWorkoutsComponent},
-  { path: 'list-exercises', component: ListExercisesComponent}
+  { path: 'list-exercises', component: ListExercisesComponent},
+  { path: 'list-trainings', component: ListTrainingsComponent}
 
 ];
 

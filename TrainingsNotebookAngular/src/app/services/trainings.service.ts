@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Exercise } from '../models/Exercise';
 import { Training } from '../models/Training';
+import { Workout } from '../models/Workout';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,44 @@ import { Training } from '../models/Training';
 export class TrainingsService {
 
   trainings: Training[] = [];
+  trainingExercises: Exercise[] = [];
   
 
   constructor() { 
+    let exercise1 = new Exercise();
+    exercise1.name = "10 pull ups"
+    exercise1.type = "strength exercise";
+    exercise1.reps = 10
 
+    let exercise2 = new Exercise();
+    exercise2.name = "100 push ups"
+    exercise2.type = "strength exercise";
+    exercise2.reps = 100
+    
+    let exerciseWorkout = new Workout();
+    exerciseWorkout.name = "Exercise Workout";
+    exerciseWorkout.type = "test";
+    exerciseWorkout.description = "some test decription";
+    exercise1.workout = exerciseWorkout;
+
+    this.trainingExercises.push(exercise1);
+
+    let exerciseWorkout2 = new Workout();
+    exerciseWorkout.name = "Push Ups";
+    exerciseWorkout.type = "chest";
+    exerciseWorkout.description = "some test decription";
+    exercise2.workout = exerciseWorkout2;
+    
+    this.trainingExercises.push(exercise2);
+
+    let training1 = new Training()
+    training1.name = "cardio training";
+    training1.type = "cardio"
+    training1.description = "test cardio training";
+    training1.exercises = this.trainingExercises;
+    this.createTraining(training1);
+
+    this.getAllExercises();
   }
 
   createTraining(training: Training) {
@@ -37,6 +72,14 @@ export class TrainingsService {
   private getAllTrainings(){
     this.trainings.forEach(training => {
       console.log("Training: " + training.name);
+    })
+  }
+  getAll() {
+    return this.trainings;
+  }
+  getAllExercises() {
+    this.trainingExercises.forEach(exercise => {
+      console.log("exercise: " + exercise.name);
     })
   }
 }
