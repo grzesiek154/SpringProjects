@@ -9,9 +9,11 @@ export class WorkoutService {
 
   constructor() {
     let workout1 = new Workout();
+    workout1.id = 1;
     workout1.name = "Przysiady";
     workout1.type = "test workout 1";
     let workout2 = new Workout();
+    workout2.id = 2;
     workout2.name = "Wyciskanie sztanki";
     workout2.description = "test workout 2";
     this.saveWorkout(workout1);
@@ -29,5 +31,10 @@ export class WorkoutService {
 
   getAll() {
     return this.workouts;
+  }
+
+   getWorkoutById(id: number){
+    const workoutFounded = this.workouts.filter(workout =>  workout.id = id);
+    return workoutFounded;
   }
 }

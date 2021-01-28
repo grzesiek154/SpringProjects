@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-6">
+      <form class="form-inline" [formGroup]="createWorkoutFormGroup">
+        <div formArrayName="workoutsForms">
+          <div *ngFor="let workout of workoutsForms.controls;
+       let i = index" class="form-group">
+            <div [formGroupName]="i">
+              <div class="form-row">
+              <input type="text" formControlName="name" class="form-control" style="margin-left: 5px"
+                placeholder="Workout Name">
+              <input type="text" formControlName="type" class="form-control" style="margin-left: 5px"
+                placeholder="Workout Type">
+              <input type="text" formControlName="description" class="form-control" style="margin-left: 5px"
+                placeholder="Description">
+            </div>
+            <div class="form-row">
+              <button class="btn btn-warning" (click)="removeWorkout(i)">Remove Workout</button>
+              <button class="btn btn-success" [disabled]="workout.invalid" (click)="saveWorkout(i)">Save Workout</button>
+            </div>
+            </div>
+          </div>
+          <!-- <div class="row">
+        <button class="btn btn-info">Add Workout</button>
+      </div> -->
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-2">
+      <button class="btn btn-warning" (click)="addWorkoutForm()">Add Workout</button>
+      <button class="btn btn-info" (click)="printAll()">Print All Workouts</button>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Workout } from 'src/app/models/Workout';
 import { WorkoutService } from 'src/app/services/workout.service';
 
@@ -15,7 +15,7 @@ export class CreateWorkoutComponent implements OnInit {
   currentWorkout: Workout = new Workout();
   
 
-  constructor(private workoutService: WorkoutService, private fb: FormBuilder, private router: Router) { 
+  constructor(private workoutService: WorkoutService, private fb: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute) { 
     this.createWorkoutFormGroup = this.fb.group({
       workoutsForms: this.fb.array([])
     });
@@ -24,6 +24,18 @@ export class CreateWorkoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.addWorkoutForm();
+    this.activatedRoute.paramMap.subscribe(params => {
+      const workoutId = +params.get('id'); // + means casting to number
+      if(workoutId) {
+        this.getWorkout(workoutId);
+      }
+    })
+  }
+  getWorkout(workoutId: number) {
+    let workout = this.workoutService.getWorkoutById(workoutId);
+    if(workout != null) {
+      this.editWorkout(workout);
+    }
   }
   addWorkoutForm() {
     this.workoutsForms.push(this.newWorkoutForm());
@@ -59,4 +71,7 @@ export class CreateWorkoutComponent implements OnInit {
     this.router.navigateByUrl('/list-workouts');
   }
   
+  editWorkout(worout: Workout) {
+    this.createWorkoutFormGroup
+  }
 }

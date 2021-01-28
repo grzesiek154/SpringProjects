@@ -4,15 +4,18 @@
     <div class="col-sm-4">
         <table class="table table-bordered" *ngFor="let workout of workouts">
           <tr>
+            <th>id</th>
             <th>Name</th>
             <th>Type</th>
             <th>Description</th>
           </tr>
             <tr>
+              <td>{{workout.id}}</td>
               <td>{{workout.name}}</td>
               <td>{{workout.type}}</td>
               <td>{{workout.description}}</td>
             </tr>
+            <button class="btn btn-dark" (click)="editButton(workout.id)">Edit Workout</button>
         </table>
     </div>
     <div class="col-sm-4">

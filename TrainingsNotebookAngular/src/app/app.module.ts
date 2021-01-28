@@ -15,6 +15,7 @@ import { ListWorkoutsComponent } from './components/workout/list-workouts/list-w
 import { WorkoutSidebarComponent } from './components/workout/workout-sidebar/workout-sidebar.component';
 import { ListTrainingsComponent } from './components/training/list-trainings/list-trainings.component';
 import { ListExercisesComponent } from './components/exercise/list-exercises/list-exercises.component';
+import { EditWorkoutComponent } from './components/workout/edit-workout/edit-workout.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { ListExercisesComponent } from './components/exercise/list-exercises/lis
     WorkoutSidebarComponent,
     ListTrainingsComponent,
     ListExercisesComponent,
+    EditWorkoutComponent,
 
   ],
   imports: [

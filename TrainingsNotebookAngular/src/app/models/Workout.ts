@@ -2,7 +2,7 @@ import { FormGroup } from "@angular/forms";
 
 export class Workout {
 
-  private _id: number = Math.random();
+  private _id: number;
   private _name: string;
   private _description: string;
   private _type: string;
@@ -26,6 +26,12 @@ export class Workout {
 
   get description() {
     return this._description;
+  }
+
+  set id(id: number) {
+    if(id != null && id > 0) {
+      this._id = id;
+    }
   }
 
   set name(name: string) {

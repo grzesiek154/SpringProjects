@@ -22,4 +22,7 @@ export class ListWorkoutsComponent implements OnInit {
     this.router.navigateByUrl('/create-workout');
   }
 
+  editButton(workoutId: number) {
+    this.router.navigate(['/edit',workoutId]);
+  }
 }
