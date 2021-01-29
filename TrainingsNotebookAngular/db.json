@@ -1,0 +1,16 @@
+{
+  "workouts": [
+    {
+      "id": 1,
+      "name": "przysiady",
+      "type": "trening siłowy",
+      "description": "ćwiczenie na nogi"
+    },
+    {
+      "id": 2,
+      "name": "pull ups",
+      "type": "strength treining",
+      "description": "back workout"
+    }
+  ]
+}

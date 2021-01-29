@@ -16,6 +16,10 @@ export class Workout {
     return newWorkout;
   } 
 
+  get id(): number {
+    return this._id;
+  }
+
   get name(): string {
     return this._name;
   }

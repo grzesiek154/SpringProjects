@@ -6,7 +6,7 @@
           <div formArrayName="workoutsForms">
             <div *ngFor="let workout of workoutsForms.controls;
          let i = index" class="form-group">
-              <div [formGroupName]="i">
+              <div [formGroupName]="i" [tempForm] = "workout">
                 <div class="form-row">
                 <input type="text" formControlName="name" class="form-control" style="margin-left: 5px"
                   placeholder="Workout Name">

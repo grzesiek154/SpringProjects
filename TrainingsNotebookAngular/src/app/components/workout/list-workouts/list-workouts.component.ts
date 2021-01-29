@@ -15,7 +15,9 @@ export class ListWorkoutsComponent implements OnInit {
   constructor(private workoutService: WorkoutService, private router: Router) { }
 
   ngOnInit(): void {
-    this.workouts = this.workoutService.getAll();
+    this.workoutService.getAll().subscribe(data =>{
+      this.workouts = data;
+    })
   }
 
   goToCreateWorkout() {
@@ -23,6 +25,7 @@ export class ListWorkoutsComponent implements OnInit {
   }
 
   editButton(workoutId: number) {
+    console.log(workoutId);
     this.router.navigate(['/edit',workoutId]);
   }
 }

@@ -26,7 +26,9 @@ export class CreateExerciseComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.availableWorkouts = this.workoutService.getAll();
+    this.workoutService.getAll().subscribe(data=>{
+      this.availableWorkouts = data;
+    });
     this.addExerciseForm();
   
   }

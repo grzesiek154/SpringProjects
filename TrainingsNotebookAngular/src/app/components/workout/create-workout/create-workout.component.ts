@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Workout } from 'src/app/models/Workout';
@@ -13,6 +13,7 @@ export class CreateWorkoutComponent implements OnInit {
 
   createWorkoutFormGroup: FormGroup;
   currentWorkout: Workout = new Workout();
+  currentWorkoutForm: FormGroup;
   
 
   constructor(private workoutService: WorkoutService, private fb: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute) { 
@@ -20,6 +21,7 @@ export class CreateWorkoutComponent implements OnInit {
       workoutsForms: this.fb.array([])
     });
     this.clearWorkout();
+    this.currentWorkoutForm = this.newWorkoutForm();
   }
 
   ngOnInit(): void {
@@ -30,16 +32,47 @@ export class CreateWorkoutComponent implements OnInit {
         this.getWorkout(workoutId);
       }
     })
+  
   }
   getWorkout(workoutId: number) {
-    let workout = this.workoutService.getWorkoutById(workoutId);
-    if(workout != null) {
+    let workoutById;
+    this.workoutService.getWorkoutById(workoutId).subscribe((workout: Workout) => {
       this.editWorkout(workout);
-    }
+    });
+
+      console.log("edut workout run")
+      this.editWorkout(workoutById);
+    
+    console.log("workoutById " + workoutId);
   }
+
+  editWorkout(worout: Workout) {
+    // this.workoutsForms
+    this.currentWorkoutForm.patchValue({
+      name: worout.name,
+      type: worout.type,
+      description: worout.description
+    })
+    console.log("current form" + this.currentWorkoutForm);
+    this.addEditedWorkoutForm(this.currentWorkoutForm);
+  }
+
+ 
+  addEditedWorkoutForm(workoutForm: FormGroup) {
+    this.workoutsForms.push(workoutForm);
+    //console.log(this.workoutsForms);
+    this.workoutsForms.controls.forEach(value => {
+      console.log(value)
+      console.log(value.value);
+      })
+ 
+    // console.log(workoutForm);
+  }
+
   addWorkoutForm() {
     this.workoutsForms.push(this.newWorkoutForm());
   }
+
   private newWorkoutForm(): FormGroup {
     return this.fb.group({
       name: ['', Validators.required],
@@ -71,7 +104,5 @@ export class CreateWorkoutComponent implements OnInit {
     this.router.navigateByUrl('/list-workouts');
   }
   
-  editWorkout(worout: Workout) {
-    this.createWorkoutFormGroup
-  }
+ 
 }

@@ -15,7 +15,8 @@ import { ListWorkoutsComponent } from './components/workout/list-workouts/list-w
 import { WorkoutSidebarComponent } from './components/workout/workout-sidebar/workout-sidebar.component';
 import { ListTrainingsComponent } from './components/training/list-trainings/list-trainings.component';
 import { ListExercisesComponent } from './components/exercise/list-exercises/list-exercises.component';
-import { EditWorkoutComponent } from './components/workout/edit-workout/edit-workout.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -30,8 +31,7 @@ import { EditWorkoutComponent } from './components/workout/edit-workout/edit-wor
     ListWorkoutsComponent,
     WorkoutSidebarComponent,
     ListTrainingsComponent,
-    ListExercisesComponent,
-    EditWorkoutComponent,
+    ListExercisesComponent
 
   ],
   imports: [
@@ -39,7 +39,8 @@ import { EditWorkoutComponent } from './components/workout/edit-workout/edit-wor
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
