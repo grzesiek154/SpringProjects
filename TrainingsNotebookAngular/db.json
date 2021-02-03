@@ -11,6 +11,30 @@
       "name": "pull ups",
       "type": "strength treining",
       "description": "back workout"
+    },
+    {
+      "id": 4,
+      "name": "przysiady2",
+      "type": "trening siłowy2",
+      "description": "ćwiczenie na nogi2"
+    },
+    {
+      "_name": "new",
+      "_type": "ww",
+      "_description": "aa",
+      "id": 5
+    },
+    {
+      "_name": "12",
+      "_type": "as",
+      "_description": "zx",
+      "id": 6
+    },
+    {
+      "_name": "zaq",
+      "_type": "wsx",
+      "_description": "edc",
+      "id": 7
     }
   ]
 }

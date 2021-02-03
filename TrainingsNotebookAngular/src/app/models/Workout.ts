@@ -10,9 +10,9 @@ export class Workout {
 
   static mapFormGroupObjectToWorkot (formGroupObject: FormGroup) {
     let newWorkout = new Workout();
-    newWorkout._name = formGroupObject.get('name').value;
-    newWorkout._type = formGroupObject.get('type').value;
-    newWorkout._description = formGroupObject.get('description').value;
+    newWorkout.name = formGroupObject.get('name').value;
+    newWorkout.type = formGroupObject.get('type').value;
+    newWorkout.description = formGroupObject.get('description').value;
     return newWorkout;
   } 
 

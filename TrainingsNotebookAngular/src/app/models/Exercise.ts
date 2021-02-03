@@ -63,19 +63,17 @@ export class Exercise {
       this._description = description
     }
   }
-
   set reps(reps: number) {
-    if(reps != null && reps > 0) {
+    if(reps != null) {
       this._reps = reps;
-    } 
+    }
   }
 
   set duration(duration: number) {
-    if(duration != null && duration > 0) {
-      this._duration = duration;
-    } 
+    if(duration != null) {
+      this._reps = duration;
+    }
   }
-
   set workout(workout: Workout) {
     if(workout != null) {
       this._workout = workout;

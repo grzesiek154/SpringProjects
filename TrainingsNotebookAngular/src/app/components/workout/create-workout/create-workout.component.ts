@@ -14,9 +14,9 @@ export class CreateWorkoutComponent implements OnInit {
   createWorkoutFormGroup: FormGroup;
   currentWorkout: Workout = new Workout();
   currentWorkoutForm: FormGroup;
-  
 
-  constructor(private workoutService: WorkoutService, private fb: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute) { 
+
+  constructor(private workoutService: WorkoutService, private fb: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute) {
     this.createWorkoutFormGroup = this.fb.group({
       workoutsForms: this.fb.array([])
     });
@@ -28,45 +28,48 @@ export class CreateWorkoutComponent implements OnInit {
     this.addWorkoutForm();
     this.activatedRoute.paramMap.subscribe(params => {
       const workoutId = +params.get('id'); // + means casting to number
-      if(workoutId) {
+      if (workoutId) {
         this.getWorkout(workoutId);
       }
     })
-  
+
   }
   getWorkout(workoutId: number) {
     let workoutById;
     this.workoutService.getWorkoutById(workoutId).subscribe((workout: Workout) => {
       this.editWorkout(workout);
     });
-
-      console.log("edut workout run")
-      this.editWorkout(workoutById);
-    
-    console.log("workoutById " + workoutId);
+    console.log("edit workout run")
+    //this.editWorkout(workoutById);
   }
 
-  editWorkout(worout: Workout) {
-    // this.workoutsForms
+  editWorkout(editedWorkout: Workout) {
     this.currentWorkoutForm.patchValue({
-      name: worout.name,
-      type: worout.type,
-      description: worout.description
+      name: editedWorkout.name,
+      type: editedWorkout.type,
+      description: editedWorkout.description
     })
     console.log("current form" + this.currentWorkoutForm);
+    this.workoutService.putWorkout(editedWorkout);
     this.addEditedWorkoutForm(this.currentWorkoutForm);
   }
 
- 
+  updateWorkout(index: number){
+    let workoutToUpdate = Workout.mapFormGroupObjectToWorkot(this.workoutsForms.at(index) as FormGroup);
+    this.workoutService.putWorkout(workoutToUpdate).subscribe(() => {
+      this.router.navigateByUrl('/list-workouts');
+    })
+    this.removeWorkout(index);
+    this.clearWorkout();
+  }
+
   addEditedWorkoutForm(workoutForm: FormGroup) {
     this.workoutsForms.push(workoutForm);
-    //console.log(this.workoutsForms);
     this.workoutsForms.controls.forEach(value => {
       console.log(value)
       console.log(value.value);
-      })
- 
-    // console.log(workoutForm);
+    })
+
   }
 
   addWorkoutForm() {
@@ -86,9 +89,10 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   saveWorkout(index: number) {
-    console.log("index: " + index);
     this.currentWorkout = Workout.mapFormGroupObjectToWorkot(this.workoutsForms.at(index) as FormGroup);
-    this.workoutService.saveWorkout(this.currentWorkout);
+    this.workoutService.postWorkout(this.currentWorkout).subscribe(() => {
+      this.router.navigateByUrl('/list-workouts');
+    })
     this.removeWorkout(index);
     this.clearWorkout();
   }
@@ -103,6 +107,6 @@ export class CreateWorkoutComponent implements OnInit {
   printAll() {
     this.router.navigateByUrl('/list-workouts');
   }
-  
- 
+
+
 }
