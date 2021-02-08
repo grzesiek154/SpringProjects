@@ -1,6 +1,6 @@
 # 1. Spring IoC Container and Beans
 
-## @SpringBootApplication annotation clearly signifies that this is a Spring Boot appli-cation. But there’s more to @SpringBootApplication than meets the eye.@SpringBootApplication  is  a  composite  application  that  combines  three  otherannotations:
+@SpringBootApplication annotation clearly signifies that this is a Spring Boot appli-cation. But there’s more to @SpringBootApplication than meets the eye.@SpringBootApplication  is  a  composite  application  that  combines  three  otherannotations:
 
 - @SpringBootConfiguration—Designates  this  class  as  a  configuration  class. Although  there’s  not  much  configuration  in  the  class  yet,  you  can  add  Java-based Spring Framework configuration to this class if you need to. This annota-tion is, in fact, a specialized form of the @Configuration annotation.
 - @EnableAutoConfiguration—Enables  Spring  Boot  automatic  configuration.We’ll talk more about autoconfiguration later. For now, know that this annota-tion tells Spring Boot to automatically configure any components that it thinksyou’ll need.
@@ -224,3 +224,7 @@ public class MyConfiguration {
 	}
 }
 ```
+
+# 4.Database initialization
+
+https://docs.spring.io/spring-boot/docs/2.1.0.M1/reference/html/howto-database-initialization.html

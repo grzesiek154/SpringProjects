@@ -26,7 +26,10 @@ public class Workout {
     @NotEmpty
     private String name;
 
-    @Column(name = "description")
+    @Column
+    private String type;
+
+    @Column
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "workout")
@@ -62,5 +65,13 @@ public class Workout {
 
     public void setExercises(List<Exercise> exercises) {
         this.exercises = exercises;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

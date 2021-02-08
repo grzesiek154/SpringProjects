@@ -4,6 +4,7 @@ import com.trainings_notebook.backend.domain.Workout;
 import com.trainings_notebook.backend.repositories.WorkoutRepository;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,5 +42,16 @@ public class WorkoutServiceImpl implements WorkoutService {
     @Override
     public void deleteById(Long aLong) {
         workoutRepository.deleteById(aLong);
+    }
+
+    @Override
+    public Workout updateWorkout(Workout workout) {
+        Workout workoutToUpdate = findById(workout.getId());
+        if(workoutToUpdate == null) {
+            throw new EntityNotFoundException();
+        }
+        Workout updatedWorkout = workoutToUpdate;
+
+        return null;
     }
 }

@@ -45,34 +45,32 @@ export class CreateWorkoutComponent implements OnInit {
 
   editWorkout(editedWorkout: Workout) {
     this.currentWorkoutForm.patchValue({
-      name: editedWorkout.name,
-      type: editedWorkout.type,
-      description: editedWorkout.description
+      name: editedWorkout.getName,
+      type: editedWorkout.getType,
+      description: editedWorkout.getDescription
     })
     console.log("current form" + this.currentWorkoutForm);
-    this.workoutService.putWorkout(editedWorkout);
     this.addEditedWorkoutForm(this.currentWorkoutForm);
   }
 
   updateWorkout(index: number){
     let workoutToUpdate = Workout.mapFormGroupObjectToWorkot(this.workoutsForms.at(index) as FormGroup);
-    this.workoutService.putWorkout(workoutToUpdate).subscribe(() => {
+    this.workoutService.updateWorkout(workoutToUpdate).subscribe(() => {
       this.router.navigateByUrl('/list-workouts');
     })
     this.removeWorkout(index);
     this.clearWorkout();
   }
 
-  addEditedWorkoutForm(workoutForm: FormGroup) {
+  private addEditedWorkoutForm(workoutForm: FormGroup) {
     this.workoutsForms.push(workoutForm);
     this.workoutsForms.controls.forEach(value => {
       console.log(value)
       console.log(value.value);
     })
-
   }
 
-  addWorkoutForm() {
+   addWorkoutForm() {
     this.workoutsForms.push(this.newWorkoutForm());
   }
 
@@ -107,6 +105,4 @@ export class CreateWorkoutComponent implements OnInit {
   printAll() {
     this.router.navigateByUrl('/list-workouts');
   }
-
-
 }

@@ -2,57 +2,57 @@ import { FormGroup } from "@angular/forms";
 
 export class Workout {
 
-  private _id: number;
-  private _name: string;
-  private _description: string;
-  private _type: string;
+  private id: number;
+  private name: string;
+  private description: string;
+  private type: string;
 
 
   static mapFormGroupObjectToWorkot (formGroupObject: FormGroup) {
     let newWorkout = new Workout();
-    newWorkout.name = formGroupObject.get('name').value;
-    newWorkout.type = formGroupObject.get('type').value;
-    newWorkout.description = formGroupObject.get('description').value;
+    newWorkout.setName = formGroupObject.get('name').value;
+    newWorkout.setType = formGroupObject.get('type').value;
+    newWorkout.setDescription = formGroupObject.get('description').value;
     return newWorkout;
   } 
 
-  get id(): number {
-    return this._id;
+  get getId(): number {
+    return this.id;
   }
 
-  get name(): string {
-    return this._name;
+  get getName(): string {
+    return this.name;
   }
 
-  get type(): string {
-    return this._type;
+  get getType(): string {
+    return this.type;
   }
 
-  get description() {
-    return this._description;
+  get getDescription() {
+    return this.description;
   }
 
-  set id(id: number) {
+  set setId(id: number) {
     if(id != null && id > 0) {
-      this._id = id;
+      this.id = id;
     }
   }
 
-  set name(name: string) {
+  set setName(name: string) {
     if(name != null) {
-      this._name = name;
+      this.name = name;
     }
   }
 
-  set type(type: string) {
+  set setType(type: string) {
     if(type != null) {
-      this._type = type;
+      this.type = type;
     }
   }
 
-  set description(description: string) {
+  set setDescription(description: string) {
     if(description != null) {
-      this._description = description
+      this.description = description
     }
   }
 

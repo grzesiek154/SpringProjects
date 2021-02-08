@@ -23,20 +23,7 @@ export class TrainingsService {
     exercise2.type = "strength exercise";
     exercise2.reps = 100
     
-    let exerciseWorkout = new Workout();
-    exerciseWorkout.name = "Exercise Workout";
-    exerciseWorkout.type = "test";
-    exerciseWorkout.description = "some test decription";
-    exercise1.workout = exerciseWorkout;
-
     this.trainingExercises.push(exercise1);
-
-    let exerciseWorkout2 = new Workout();
-    exerciseWorkout.name = "Push Ups";
-    exerciseWorkout.type = "chest";
-    exerciseWorkout.description = "some test decription";
-    exercise2.workout = exerciseWorkout2;
-    
     this.trainingExercises.push(exercise2);
 
     let training1 = new Training()

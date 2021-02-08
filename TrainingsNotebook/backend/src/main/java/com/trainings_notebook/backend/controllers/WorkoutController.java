@@ -54,6 +54,15 @@ public class WorkoutController {
         workoutService.save(workout);
         return new ResponseEntity<Workout>(workout, HttpStatus.CREATED);
     }
+
+    @PostMapping("/update")
+    public ResponseEntity<Workout> updateWorkout(@RequestBody @Valid Workout workout, BindingResult bindingResult) {
+        if(bindingResult.hasErrors() || (workout == null)) {
+            throw new ApiRequestException("Cannot add new workout, check your request.");
+        }
+        workoutService.save(workout);
+        return new ResponseEntity<Workout>(workout, HttpStatus.OK);
+    }
     @DeleteMapping("/{workoutId}")
     public ResponseEntity<Void> deleteWorkoutById(@PathVariable Long workoutId) {
         Workout workout = workoutService.findById(workoutId);

@@ -5,7 +5,10 @@ import { Observable } from 'rxjs';
 
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin':  '*'
+})
 }
 
 @Injectable({
@@ -13,19 +16,18 @@ const httpOptions = {
 })
 
 export class WorkoutService {
+  
   workouts: Workout[] = [];
-  private BASE_URL = "http://localhost:3000/workouts";
-
+  private BASE_URL = "http://localhost:8080/api/v1/workouts";
 
   constructor(private http: HttpClient) {
-
   }
-
-  postWorkout(workout): Observable<Workout> {
+  
+  postWorkout(workout: Workout): Observable<Workout> {
     return this.http.post<Workout>(this.BASE_URL, workout, httpOptions);
   }
-  putWorkout(workout): Observable<Workout> {
-    return this.http.put<Workout>(this.BASE_URL, workout);
+  updateWorkout(workout): Observable<Workout> {
+    return this.http.post<Workout>(this.BASE_URL + "/update", workout, httpOptions);
   }
   printAllWorkouts() {
     this.workouts.forEach(workout => {
@@ -34,7 +36,7 @@ export class WorkoutService {
   }
 
   getAll(): Observable<Workout[]> {
-    return this.http.get<Workout[]>(this.BASE_URL);
+    return this.http.get<Workout[]>(this.BASE_URL, httpOptions);
   }
 
   getWorkoutById(id: number): Observable<Workout> {
