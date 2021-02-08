@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Workout } from 'src/app/models/Workout';
 import { WorkoutService } from 'src/app/services/workout.service';
 
@@ -9,8 +10,9 @@ import { WorkoutService } from 'src/app/services/workout.service';
   templateUrl: './create-workout.component.html',
   styleUrls: ['./create-workout.component.css']
 })
-export class CreateWorkoutComponent implements OnInit {
+export class CreateWorkoutComponent implements OnInit{
 
+  subscription: Subscription;
   createWorkoutFormGroup: FormGroup;
   currentWorkout: Workout = new Workout();
   currentWorkoutForm: FormGroup;
@@ -35,12 +37,18 @@ export class CreateWorkoutComponent implements OnInit {
 
   }
   getWorkout(workoutId: number) {
-    let workoutById;
-    this.workoutService.getWorkoutById(workoutId).subscribe((workout: Workout) => {
-      this.editWorkout(workout);
-    });
-    console.log("edit workout run")
-    //this.editWorkout(workoutById);
+    this.workoutService.getWorkoutById(workoutId).subscribe(
+      workout => {
+        console.log("workout to edit: " + workout.getName);
+        console.log("workout to edit id: " + workoutId);
+      },
+      error => {
+        console.error(error);
+      }
+      // this.editWorkout(workout);
+      // console.log("workout to edit: " + workout.getName);
+      // console.log("workout to edit id: " + workoutId);
+    );
   }
 
   editWorkout(editedWorkout: Workout) {
@@ -65,7 +73,6 @@ export class CreateWorkoutComponent implements OnInit {
   private addEditedWorkoutForm(workoutForm: FormGroup) {
     this.workoutsForms.push(workoutForm);
     this.workoutsForms.controls.forEach(value => {
-      console.log(value)
       console.log(value.value);
     })
   }
@@ -105,4 +112,5 @@ export class CreateWorkoutComponent implements OnInit {
   printAll() {
     this.router.navigateByUrl('/list-workouts');
   }
+
 }

@@ -36,6 +36,7 @@ public class WorkoutController {
         return new ResponseEntity<>(workouts, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/{id}")
     public ResponseEntity<Workout> getWorkoutById(@PathVariable Long id) {
         Workout workout = this.workoutService.findById(id);

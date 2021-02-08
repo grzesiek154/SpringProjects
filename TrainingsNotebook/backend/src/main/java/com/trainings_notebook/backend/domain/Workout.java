@@ -9,9 +9,10 @@ import java.util.List;
 @Table
 public class Workout {
 
-    public Workout(String name, String description) {
+    public Workout(String name, String type,String description) {
         this.name = name;
         this.description = description;
+        this.type = type;
     }
 
     public Workout() {

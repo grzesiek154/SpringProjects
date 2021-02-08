@@ -29,17 +29,17 @@ export class WorkoutService {
   updateWorkout(workout): Observable<Workout> {
     return this.http.post<Workout>(this.BASE_URL + "/update", workout, httpOptions);
   }
-  printAllWorkouts() {
-    this.workouts.forEach(workout => {
-      console.log(workout);
-    })
-  }
 
   getAll(): Observable<Workout[]> {
     return this.http.get<Workout[]>(this.BASE_URL, httpOptions);
   }
 
   getWorkoutById(id: number): Observable<Workout> {
+    console.log("get request: " + this.BASE_URL + "/" + id);
+    this.http.get<Workout>(this.BASE_URL + "/" + id, httpOptions).subscribe(data => {
+      console.log("data: " +data.getName);
+    })
+    
     return this.http.get<Workout>(this.BASE_URL + "/" + id);
   }
 }
