@@ -37,7 +37,7 @@ export class WorkoutService {
   getWorkoutById(id: number): Observable<Workout> {
     console.log("get request: " + this.BASE_URL + "/" + id);
     this.http.get<Workout>(this.BASE_URL + "/" + id, httpOptions).subscribe(data => {
-      console.log("data: " +data.getName);
+      console.log("data: " +data.name);
     })
     
     return this.http.get<Workout>(this.BASE_URL + "/" + id);
