@@ -14,6 +14,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -51,10 +52,10 @@ class WorkoutServiceImplTest {
     @Test
     void findById() {
         Workout workout = new Workout();
-        workout.setWorkout_id(1L);
+        workout.setId(1L);
         workout.setName("test workout");
 
-        when(workoutRepository.findById(1L)).thenReturn(java.util.Optional.of(workout));
+        when(workoutRepository.findById(1L)).thenReturn(Optional.of(workout));
         //when
         Workout tempWorkout = workoutService.findById(1L);
         //then
@@ -64,7 +65,7 @@ class WorkoutServiceImplTest {
     @Test
     void save() {
         Workout savedWorkout = new Workout();
-        savedWorkout.setWorkout_id(1L);
+        savedWorkout.setId(1L);
         savedWorkout.setName("pull ups");
 
         when(workoutRepository.save(any(Workout.class))).thenReturn(savedWorkout);
@@ -78,7 +79,7 @@ class WorkoutServiceImplTest {
     @Test
     void delete() {
         Workout deletedWorkout = new Workout();
-        deletedWorkout.setWorkout_id(1L);
+        deletedWorkout.setId(1L);
         deletedWorkout.setName("push ups");
 
         workoutRepository.delete(deletedWorkout);

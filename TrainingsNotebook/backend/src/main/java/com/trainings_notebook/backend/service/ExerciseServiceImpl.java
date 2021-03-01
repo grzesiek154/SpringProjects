@@ -27,6 +27,9 @@ public class ExerciseServiceImpl implements ExerciseService {
     public Set<Exercise> findAll() {
         Set<Exercise> exercises = new HashSet<>();
         exerciseRepository.findAll().forEach(exercises::add);
+        exerciseRepository.findAll().forEach(exercise -> {
+            exercise.getWorkout().getId();
+        });
 
         return exercises;
     }

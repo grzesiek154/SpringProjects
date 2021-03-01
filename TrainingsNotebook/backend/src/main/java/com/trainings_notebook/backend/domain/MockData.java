@@ -5,12 +5,28 @@ import com.trainings_notebook.backend.repositories.WorkoutRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-
+@Component
 public class MockData implements CommandLineRunner {
 
-    Workout workout1 = new Workout("Pull ups", "back", "body weight back workout");
-    Workout workout2 = new Workout("Sit ups", "abs", "abs workout");
-    Workout workout3 = new Workout("Push ups", "chest", "body weight chest workout");
+    Workout workout1 = Workout.builder()
+            .name("Pull ups")
+            .type("back")
+            .description("body weight back workout")
+            .build();
+
+    Workout workout2 = Workout.builder()
+            .name("Sit ups")
+            .type("abs")
+            .description("abs workout")
+            .build();
+
+    Workout workout3 = Workout.builder()
+            .name("Push ups")
+            .type("abs")
+            .description("body weight chest workout")
+            .build();
+
+
 
     Exercise exercise1 = Exercise.builder()
             .name("20 push ups")
@@ -41,9 +57,9 @@ public class MockData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        workoutRepository.save(workout1);
-//        workoutRepository.save(workout2);
-//        workoutRepository.save(workout3);
+        workoutRepository.save(workout1);
+        workoutRepository.save(workout2);
+        workoutRepository.save(workout3);
         exerciseRepository.save(exercise1);
         exerciseRepository.save(exercise2);
     }

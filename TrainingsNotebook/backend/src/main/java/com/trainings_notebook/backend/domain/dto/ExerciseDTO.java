@@ -1,5 +1,6 @@
 package com.trainings_notebook.backend.domain.dto;
 
+import com.trainings_notebook.backend.domain.Exercise;
 import com.trainings_notebook.backend.domain.Training;
 import com.trainings_notebook.backend.domain.Workout;
 import org.springframework.lang.NonNull;
@@ -25,4 +26,6 @@ public class ExerciseDTO {
     private List<Training> trainings;
 
     private Workout workout;
+
+
 }

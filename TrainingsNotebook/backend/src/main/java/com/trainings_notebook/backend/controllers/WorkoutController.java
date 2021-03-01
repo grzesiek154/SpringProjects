@@ -62,8 +62,8 @@ public class WorkoutController {
         if(bindingResult.hasErrors() || (workout == null)) {
             throw new ApiRequestException("Cannot add new workout, check your request.");
         }
-        Workout workoutToUpdate = workoutService.findById(workout.getWorkout_id());
-        workoutToUpdate.setWorkout_id(workout.getWorkout_id());
+        Workout workoutToUpdate = workoutService.findById(workout.getId());
+        workoutToUpdate.setId(workout.getId());
         workoutToUpdate.setName(workout.getName());
         workoutToUpdate.setType(workout.getType());
         workoutToUpdate.setDescription(workout.getDescription());

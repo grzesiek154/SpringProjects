@@ -39,11 +39,11 @@ class WorkoutControllerTest extends AbstractRestControllerTest {
     @BeforeEach
     void setUp() {
         workout1 = new Workout();
-        workout1.setWorkout_id(1L);
+        workout1.setId(1L);
         workout1.setName("pull ups");
 
         workout2 = new Workout();
-        workout2.setWorkout_id(2L);
+        workout2.setId(2L);
         workout2.setName("push ups");
 
         workouts = new HashSet<>();
@@ -100,7 +100,7 @@ class WorkoutControllerTest extends AbstractRestControllerTest {
 
         List<Workout> workoutList = Arrays.asList(workout1,workout2);
         Workout badWorkout = workoutList.get(1);
-        badWorkout.setWorkout_id(null);
+        badWorkout.setId(null);
         badWorkout.setName(null);
 
         mockMvc.perform(post(WorkoutController.BASE_URL)

@@ -1,9 +1,10 @@
 package com.trainings_notebook.backend.controllers;
 
 import com.trainings_notebook.backend.domain.Exercise;
-import com.trainings_notebook.backend.domain.Workout;
+import com.trainings_notebook.backend.domain.dto.ExerciseDTO;
 import com.trainings_notebook.backend.exceptions.ApiRequestException;
 import com.trainings_notebook.backend.service.ExerciseService;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -19,9 +20,11 @@ public class ExerciseController {
     public static final String BASE_URL = "/api/v1/exercises";
 
     private final ExerciseService exerciseService;
+    private final ModelMapper modelMapper;
 
-    public ExerciseController(ExerciseService exerciseService) {
+    public ExerciseController(ExerciseService exerciseService, ModelMapper modelMapper) {
         this.exerciseService = exerciseService;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping
@@ -78,5 +81,10 @@ public class ExerciseController {
         }
         exerciseService.delete(exercise);
         return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+    }
+
+    private ExerciseDTO convertToDTO(Exercise exercise) {
+        ExerciseDTO exerciseDTO = modelMapper.map(exercise, ExerciseDTO.class);
+        
     }
 }
