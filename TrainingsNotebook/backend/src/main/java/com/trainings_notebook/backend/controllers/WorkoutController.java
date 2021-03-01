@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
+@CrossOrigin
 @RestController
 @RequestMapping(WorkoutController.BASE_URL)
 public class WorkoutController {
@@ -53,7 +54,7 @@ public class WorkoutController {
             throw new ApiRequestException("Cannot add new workout, check your request.");
         }
         workoutService.save(workout);
-        return new ResponseEntity<Workout>(workout, HttpStatus.CREATED);
+        return new ResponseEntity<>(workout, HttpStatus.CREATED);
     }
 
     @PostMapping("/update")
@@ -61,8 +62,13 @@ public class WorkoutController {
         if(bindingResult.hasErrors() || (workout == null)) {
             throw new ApiRequestException("Cannot add new workout, check your request.");
         }
-        workoutService.save(workout);
-        return new ResponseEntity<Workout>(workout, HttpStatus.OK);
+        Workout workoutToUpdate = workoutService.findById(workout.getId());
+        workoutToUpdate.setId(workout.getId());
+        workoutToUpdate.setName(workout.getName());
+        workoutToUpdate.setType(workout.getType());
+        workoutToUpdate.setDescription(workout.getDescription());
+        workoutService.save(workoutToUpdate);
+        return new ResponseEntity<>(workout, HttpStatus.OK);
     }
     @DeleteMapping("/{workoutId}")
     public ResponseEntity<Void> deleteWorkoutById(@PathVariable Long workoutId) {
@@ -72,7 +78,7 @@ public class WorkoutController {
             throw new ApiRequestException("Cannot delete workout with id: " + workoutId + ".");
         }
         workoutService.delete(workout);
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 

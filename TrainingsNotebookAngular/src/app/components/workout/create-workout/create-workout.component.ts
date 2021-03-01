@@ -39,23 +39,19 @@ export class CreateWorkoutComponent implements OnInit{
   getWorkout(workoutId: number) {
     this.workoutService.getWorkoutById(workoutId).subscribe(
       workout => {
-        console.log("workout to edit: " + workout.getName);
-        console.log("workout to edit id: " + workoutId);
+       this.editWorkout(workout);
       },
       error => {
         console.error(error);
       }
-      // this.editWorkout(workout);
-      // console.log("workout to edit: " + workout.getName);
-      // console.log("workout to edit id: " + workoutId);
     );
   }
 
   editWorkout(editedWorkout: Workout) {
     this.currentWorkoutForm.patchValue({
-      name: editedWorkout.getName,
-      type: editedWorkout.getType,
-      description: editedWorkout.getDescription
+      name: editedWorkout.name,
+      type: editedWorkout.type,
+      description: editedWorkout.description
     })
     console.log("current form" + this.currentWorkoutForm);
     this.addEditedWorkoutForm(this.currentWorkoutForm);
@@ -66,8 +62,6 @@ export class CreateWorkoutComponent implements OnInit{
     this.workoutService.updateWorkout(workoutToUpdate).subscribe(() => {
       this.router.navigateByUrl('/list-workouts');
     })
-    this.removeWorkout(index);
-    this.clearWorkout();
   }
 
   private addEditedWorkoutForm(workoutForm: FormGroup) {
