@@ -1,6 +1,9 @@
 package com.trainings_notebook.backend.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
@@ -21,7 +24,7 @@ public class Workout {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long workout_id;
 
     @Column(nullable = false)
     @NotEmpty
@@ -33,15 +36,16 @@ public class Workout {
     @Column
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "workout")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workout")
+    @JsonManagedReference
     private List<Exercise> exercises;
 
-    public Long getId() {
-        return id;
+    public Long getWorkout_id() {
+        return workout_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setWorkout_id(Long workout_id) {
+        this.workout_id = workout_id;
     }
 
     public String getName() {

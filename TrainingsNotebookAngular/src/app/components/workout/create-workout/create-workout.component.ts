@@ -10,12 +10,13 @@ import { WorkoutService } from 'src/app/services/workout.service';
   templateUrl: './create-workout.component.html',
   styleUrls: ['./create-workout.component.css']
 })
-export class CreateWorkoutComponent implements OnInit{
+export class CreateWorkoutComponent implements OnInit {
 
   subscription: Subscription;
   createWorkoutFormGroup: FormGroup;
   currentWorkout: Workout = new Workout();
   currentWorkoutForm: FormGroup;
+  updateId: number;
 
 
   constructor(private workoutService: WorkoutService, private fb: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute) {
@@ -39,7 +40,8 @@ export class CreateWorkoutComponent implements OnInit{
   getWorkout(workoutId: number) {
     this.workoutService.getWorkoutById(workoutId).subscribe(
       workout => {
-       this.editWorkout(workout);
+        this.updateId = workout.id;
+        this.editWorkout(workout);
       },
       error => {
         console.error(error);
@@ -47,18 +49,18 @@ export class CreateWorkoutComponent implements OnInit{
     );
   }
 
-  editWorkout(editedWorkout: Workout) {
+  private editWorkout(editedWorkout: Workout) {
     this.currentWorkoutForm.patchValue({
       name: editedWorkout.name,
       type: editedWorkout.type,
       description: editedWorkout.description
     })
-    console.log("current form" + this.currentWorkoutForm);
     this.addEditedWorkoutForm(this.currentWorkoutForm);
   }
 
-  updateWorkout(index: number){
-    let workoutToUpdate = Workout.mapFormGroupObjectToWorkot(this.workoutsForms.at(index) as FormGroup);
+  updateWorkout(index: number) {
+    const workoutToUpdate = Workout.mapFormGroupObjectToWorkot(this.workoutsForms.at(index) as FormGroup);
+    workoutToUpdate.id = this.updateId;
     this.workoutService.updateWorkout(workoutToUpdate).subscribe(() => {
       this.router.navigateByUrl('/list-workouts');
     })
@@ -66,12 +68,9 @@ export class CreateWorkoutComponent implements OnInit{
 
   private addEditedWorkoutForm(workoutForm: FormGroup) {
     this.workoutsForms.push(workoutForm);
-    this.workoutsForms.controls.forEach(value => {
-      console.log(value.value);
-    })
   }
 
-   addWorkoutForm() {
+  addWorkoutForm() {
     this.workoutsForms.push(this.newWorkoutForm());
   }
 

@@ -51,7 +51,7 @@ class WorkoutServiceImplTest {
     @Test
     void findById() {
         Workout workout = new Workout();
-        workout.setId(1L);
+        workout.setWorkout_id(1L);
         workout.setName("test workout");
 
         when(workoutRepository.findById(1L)).thenReturn(java.util.Optional.of(workout));
@@ -64,7 +64,7 @@ class WorkoutServiceImplTest {
     @Test
     void save() {
         Workout savedWorkout = new Workout();
-        savedWorkout.setId(1L);
+        savedWorkout.setWorkout_id(1L);
         savedWorkout.setName("pull ups");
 
         when(workoutRepository.save(any(Workout.class))).thenReturn(savedWorkout);
@@ -78,7 +78,7 @@ class WorkoutServiceImplTest {
     @Test
     void delete() {
         Workout deletedWorkout = new Workout();
-        deletedWorkout.setId(1L);
+        deletedWorkout.setWorkout_id(1L);
         deletedWorkout.setName("push ups");
 
         workoutRepository.delete(deletedWorkout);

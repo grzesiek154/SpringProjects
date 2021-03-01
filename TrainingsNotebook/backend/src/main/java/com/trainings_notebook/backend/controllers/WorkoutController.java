@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping(WorkoutController.BASE_URL)
 public class WorkoutController {
@@ -62,8 +62,8 @@ public class WorkoutController {
         if(bindingResult.hasErrors() || (workout == null)) {
             throw new ApiRequestException("Cannot add new workout, check your request.");
         }
-        Workout workoutToUpdate = workoutService.findById(workout.getId());
-        workoutToUpdate.setId(workout.getId());
+        Workout workoutToUpdate = workoutService.findById(workout.getWorkout_id());
+        workoutToUpdate.setWorkout_id(workout.getWorkout_id());
         workoutToUpdate.setName(workout.getName());
         workoutToUpdate.setType(workout.getType());
         workoutToUpdate.setDescription(workout.getDescription());
