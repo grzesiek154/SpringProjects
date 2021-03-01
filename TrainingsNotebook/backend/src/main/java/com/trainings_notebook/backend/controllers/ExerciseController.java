@@ -1,6 +1,7 @@
 package com.trainings_notebook.backend.controllers;
 
 import com.trainings_notebook.backend.domain.Exercise;
+import com.trainings_notebook.backend.domain.Workout;
 import com.trainings_notebook.backend.exceptions.ApiRequestException;
 import com.trainings_notebook.backend.service.ExerciseService;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class ExerciseController {
         this.exerciseService = exerciseService;
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<Set<Exercise>> getAllExercises() {
         Set<Exercise> exercises = exerciseService.findAll();
 
@@ -50,6 +51,23 @@ public class ExerciseController {
         }
         exerciseService.save(exercise);
         return new ResponseEntity<>(exercise, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<Exercise> updateWorkout(@RequestBody @Valid Exercise exercise, BindingResult bindingResult) {
+        if(bindingResult.hasErrors() || (exercise == null)) {
+            throw new ApiRequestException("Cannot add new workout, check your request.");
+        }
+        Exercise exerciseToUpdate = exerciseService.findById(exercise.getId());
+        exerciseToUpdate.setId(exercise.getId());
+        exerciseToUpdate.setName(exercise.getName());
+        exerciseToUpdate.setType(exercise.getType());
+        exerciseToUpdate.setDescription(exercise.getDescription());
+        exerciseToUpdate.setReps(exercise.getReps());
+        exerciseToUpdate.setDuration(exercise.getDuration());
+        exerciseToUpdate.setWorkout(exercise.getWorkout());
+        exerciseService.save(exerciseToUpdate);
+        return new ResponseEntity<>(exerciseToUpdate, HttpStatus.OK);
     }
     @DeleteMapping("/{exerciseId}")
     public ResponseEntity<Void> deleteExercise(@PathVariable Long exerciseId) {

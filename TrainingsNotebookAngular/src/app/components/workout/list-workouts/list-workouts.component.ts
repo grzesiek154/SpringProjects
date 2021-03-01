@@ -26,6 +26,6 @@ export class ListWorkoutsComponent implements OnInit {
 
   editButton(workoutId: number) {
     console.log(workoutId);
-    this.router.navigate(['/edit',workoutId]);
+    this.router.navigate(['/edit-workout',workoutId]);
   }
 }

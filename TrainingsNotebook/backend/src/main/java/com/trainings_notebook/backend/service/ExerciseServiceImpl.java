@@ -1,7 +1,11 @@
 package com.trainings_notebook.backend.service;
 
 import com.trainings_notebook.backend.domain.Exercise;
+import com.trainings_notebook.backend.domain.dto.ExerciseDTO;
 import com.trainings_notebook.backend.repositories.ExerciseRepository;
+import com.trainings_notebook.backend.repositories.WorkoutRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -12,6 +16,9 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     private final ExerciseRepository exerciseRepository;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     public ExerciseServiceImpl(ExerciseRepository exerciseRepository) {
         this.exerciseRepository = exerciseRepository;
     }
@@ -20,6 +27,7 @@ public class ExerciseServiceImpl implements ExerciseService {
     public Set<Exercise> findAll() {
         Set<Exercise> exercises = new HashSet<>();
         exerciseRepository.findAll().forEach(exercises::add);
+
         return exercises;
     }
 
@@ -42,4 +50,10 @@ public class ExerciseServiceImpl implements ExerciseService {
     public void deleteById(Long aLong) {
         exerciseRepository.deleteById(aLong);
     }
+
+//    private Exercise convertToExerciseEntity(ExerciseDTO exerciseDTO) {
+//        Exercise exercise = modelMapper.map(exerciseDTO, Exercise.class);
+//
+//        if()
+//    }
 }

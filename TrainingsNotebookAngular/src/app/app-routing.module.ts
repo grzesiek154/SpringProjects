@@ -15,9 +15,10 @@ const routes: Routes = [
   { path: 'create-training', component: CreateTrainingComponent },
   { path: 'create-exercise', component: CreateExerciseComponent },
   { path: 'create-workout', component: CreateWorkoutComponent },
-  { path: 'edit/:id', component: CreateWorkoutComponent },
+  { path: 'edit-workout/:id', component: CreateWorkoutComponent },
   { path: 'list-workouts', component: ListWorkoutsComponent},
   { path: 'list-exercises', component: ListExercisesComponent},
+  { path: 'edit-exercise/:id', component: CreateExerciseComponent},
   { path: 'list-trainings', component: ListTrainingsComponent}
 
 ];

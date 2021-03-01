@@ -14,11 +14,17 @@ export class ListExercisesComponent implements OnInit {
   constructor(private exerciseService: ExerciseService, private router: Router) { }
 
   ngOnInit(): void {
-    this.exercises = this.exerciseService.getAll();
+    this.exerciseService.getAllExercises().subscribe(
+      data => {
+         this.exercises = data
+      });
   }
 
   goToCreateExercise() {
     this.router.navigateByUrl('/create-exercise');
   }
 
+  editButton(exerciseId: number) {
+    this.router.navigate(['/edit-exercise',exerciseId]);
+  }
 }

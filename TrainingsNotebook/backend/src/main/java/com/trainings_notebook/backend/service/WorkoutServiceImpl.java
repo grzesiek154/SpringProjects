@@ -46,7 +46,7 @@ public class WorkoutServiceImpl implements WorkoutService {
 
     @Override
     public Workout updateWorkout(Workout workout) {
-        Workout workoutToUpdate = findById(workout.getId());
+        Workout workoutToUpdate = findById(workout.getWorkout_id());
         if(workoutToUpdate == null) {
             throw new EntityNotFoundException();
         }

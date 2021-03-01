@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Workout } from '../models/Workout';
 import { Observable } from 'rxjs';
 
-
 const httpOptions = {
   headers: new HttpHeaders({ 
     'Content-Type': 'application/json',
@@ -34,12 +33,7 @@ export class WorkoutService {
     return this.http.get<Workout[]>(this.BASE_URL, httpOptions);
   }
 
-  getWorkoutById(id: number): Observable<Workout> {
-    console.log("get request: " + this.BASE_URL + "/" + id);
-    this.http.get<Workout>(this.BASE_URL + "/" + id, httpOptions).subscribe(data => {
-      console.log("data: " +data.name);
-    })
-    
+  getWorkoutById(id: number): Observable<Workout> { 
     return this.http.get<Workout>(this.BASE_URL + "/" + id);
   }
 }

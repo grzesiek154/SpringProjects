@@ -28,11 +28,13 @@ export class CreateTrainingComponent implements OnInit {
       ])
     });
     this.clearTraining();
-    this.availableExercises = exerciseService.getAll();
+    
   } 
 
   ngOnInit(): void {
-
+    this.exerciseService.getAllExercises().subscribe(data => {
+      this.availableExercises = data;
+    })
   }
 
   saveTraining() {
