@@ -3,7 +3,6 @@ package com.trainings_notebook.backend.controllers.mappers;
 import com.trainings_notebook.backend.domain.Exercise;
 import com.trainings_notebook.backend.domain.Workout;
 import com.trainings_notebook.backend.domain.dto.ExerciseDTO;
-import com.trainings_notebook.backend.repositories.ExerciseRepository;
 import com.trainings_notebook.backend.repositories.WorkoutRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

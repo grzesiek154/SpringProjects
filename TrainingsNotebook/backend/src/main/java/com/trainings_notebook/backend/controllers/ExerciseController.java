@@ -28,7 +28,7 @@ public class ExerciseController {
     }
 
     @GetMapping
-    public ResponseEntity<Set<Exercise>> getAllExercises() {
+    public ResponseEntity<Set<ExerciseDTO>> getAllExercises() {
         Set<Exercise> exercises = exerciseService.findAll();
 
         if(exercises.isEmpty()) {
