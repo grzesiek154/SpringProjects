@@ -1,11 +1,10 @@
 package com.trainings_notebook.backend.controllers;
 
+import com.trainings_notebook.backend.controllers.mappers.ExerciseMapper;
 import com.trainings_notebook.backend.domain.Exercise;
 import com.trainings_notebook.backend.domain.dto.ExerciseDTO;
 import com.trainings_notebook.backend.exceptions.ApiRequestException;
 import com.trainings_notebook.backend.service.ExerciseService;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(ExerciseController.BASE_URL)
@@ -21,20 +21,24 @@ public class ExerciseController {
     public static final String BASE_URL = "/api/v1/exercises";
 
     private final ExerciseService exerciseService;
+    private final ExerciseMapper exerciseMapper;
 
-
-    public ExerciseController(ExerciseService exerciseService) {
+    public ExerciseController(ExerciseService exerciseService, ExerciseMapper exerciseMapper) {
         this.exerciseService = exerciseService;
+        this.exerciseMapper = exerciseMapper;
     }
 
     @GetMapping
     public ResponseEntity<Set<ExerciseDTO>> getAllExercises() {
         Set<Exercise> exercises = exerciseService.findAll();
+        Set<ExerciseDTO> exerciseDTOSet = exercises.stream()
+                .map(exercise -> exerciseMapper.convertToDTO(exercise))
+                .collect(Collectors.toSet());
 
         if(exercises.isEmpty()) {
             throw new ApiRequestException("Cannot get all exercises");
         }
-        return new ResponseEntity<>(exercises, HttpStatus.OK);
+        return new ResponseEntity<>(exerciseDTOSet, HttpStatus.OK);
     }
 
     @GetMapping("/{exerciseId}")
