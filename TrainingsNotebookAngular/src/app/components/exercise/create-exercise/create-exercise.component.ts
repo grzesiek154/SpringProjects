@@ -71,14 +71,14 @@ export class CreateExerciseComponent implements OnInit {
   }
 
   editExercise(editedExercise: Exercise) {
-    console.log("editedExerciseWorkout: " + editedExercise.workout);
+   
     this.currentExerciseForm.patchValue({
       name: editedExercise.name,
       type: editedExercise.type,
       reps: editedExercise.reps,
       duration: editedExercise.duration,
       description: editedExercise.description,
-      workout: editedExercise.workout
+      workout_id: editedExercise.workout
       
     })
     console.log("workout: " + this.currentExercise.workout);

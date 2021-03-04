@@ -35,56 +35,50 @@ public class ExerciseController {
                 .map(exercise -> exerciseMapper.convertToDTO(exercise))
                 .collect(Collectors.toSet());
 
-        if(exercises.isEmpty()) {
+        if(exercises.isEmpty() || exerciseDTOSet.isEmpty()) {
             throw new ApiRequestException("Cannot get all exercises");
         }
         return new ResponseEntity<>(exerciseDTOSet, HttpStatus.OK);
     }
 
     @GetMapping("/{exerciseId}")
-    public ResponseEntity<Exercise> getExerciseById(@PathVariable Long exerciseId) {
+    public ResponseEntity<ExerciseDTO> getExerciseById(@PathVariable Long exerciseId) {
         Exercise exercise = this.exerciseService.findById(exerciseId);
+        ExerciseDTO exerciseDTO = exerciseMapper.convertToDTO(exercise);
 
-        if(exercise == null) {
+        if(exerciseDTO == null) {
             throw new ApiRequestException("Exercise with id: " + exerciseId +" not found.", HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(exercise, HttpStatus.OK);
+        return new ResponseEntity<>(exerciseDTO, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Exercise> addExercise(@RequestBody @Valid Exercise exercise, BindingResult bindingResult) {
+    public ResponseEntity<ExerciseDTO> addExercise(@RequestBody @Valid ExerciseDTO exerciseDTO, BindingResult bindingResult) {
+        Exercise exercise = exerciseMapper.convertToEntity(exerciseDTO);
         if(bindingResult.hasErrors() && exercise == null) {
             throw new ApiRequestException("Cannot add new exercise, check your request.");
         }
         exerciseService.save(exercise);
-        return new ResponseEntity<>(exercise, HttpStatus.CREATED);
+        return new ResponseEntity<>(exerciseDTO, HttpStatus.CREATED);
     }
 
     @PostMapping("/update")
-    public ResponseEntity<Exercise> updateWorkout(@RequestBody @Valid Exercise exercise, BindingResult bindingResult) {
+    public ResponseEntity<Exercise> updateWorkout(@RequestBody @Valid ExerciseDTO exerciseDTO, BindingResult bindingResult) {
+        Exercise exercise = exerciseMapper.convertToEntity(exerciseDTO);
         if(bindingResult.hasErrors() || (exercise == null)) {
             throw new ApiRequestException("Cannot add new workout, check your request.");
         }
-        Exercise exerciseToUpdate = exerciseService.findById(exercise.getId());
-        exerciseToUpdate.setId(exercise.getId());
-        exerciseToUpdate.setName(exercise.getName());
-        exerciseToUpdate.setType(exercise.getType());
-        exerciseToUpdate.setDescription(exercise.getDescription());
-        exerciseToUpdate.setReps(exercise.getReps());
-        exerciseToUpdate.setDuration(exercise.getDuration());
-        exerciseToUpdate.setWorkout(exercise.getWorkout());
-        exerciseService.save(exerciseToUpdate);
-        return new ResponseEntity<>(exerciseToUpdate, HttpStatus.OK);
+        exerciseService.save(exercise);
+        return new ResponseEntity<>(exercise, HttpStatus.OK);
     }
     @DeleteMapping("/{exerciseId}")
     public ResponseEntity<Void> deleteExercise(@PathVariable Long exerciseId) {
         Exercise exercise = exerciseService.findById(exerciseId);
-
         if(exercise == null) {
             throw new ApiRequestException("Cannot delete workout with id: " + exerciseId + ".");
         }
         exerciseService.delete(exercise);
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

@@ -1,9 +1,7 @@
 package com.trainings_notebook.backend.service;
 
 import com.trainings_notebook.backend.domain.Exercise;
-import com.trainings_notebook.backend.domain.dto.ExerciseDTO;
 import com.trainings_notebook.backend.repositories.ExerciseRepository;
-import com.trainings_notebook.backend.repositories.WorkoutRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
