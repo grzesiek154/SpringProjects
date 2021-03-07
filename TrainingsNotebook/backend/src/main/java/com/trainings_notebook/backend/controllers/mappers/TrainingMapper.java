@@ -25,8 +25,8 @@ public class TrainingMapper {
         return trainingDTO;
     }
 
-    public Training convertToEntity(TrainingDTO trainingDTO) {
-        Training training = modelMapper.map(trainingDTO, Training.class);
-        //training.
-    }
+//    public Training convertToEntity(TrainingDTO trainingDTO) {
+//        Training training = modelMapper.map(trainingDTO, Training.class);
+//        //training.
+//    }
 }

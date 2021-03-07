@@ -24,7 +24,7 @@ public class TrainingController {
         this.trainingService = trainingService;
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<Set<Training>> getAllTrainings() {
         Set<Training> trainings = trainingService.findAll();
 

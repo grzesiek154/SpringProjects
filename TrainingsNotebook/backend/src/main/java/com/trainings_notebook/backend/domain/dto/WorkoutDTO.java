@@ -18,6 +18,5 @@ public class WorkoutDTO {
     private String name;
     private String Type;
     private String Description;
-    private List<Exercise> exerciseDTOList;
 
 }

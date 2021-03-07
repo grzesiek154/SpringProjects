@@ -21,16 +21,11 @@ public class ExerciseMapper {
 
     public ExerciseDTO convertToDTO(Exercise exercise) {
         ExerciseDTO exerciseDTO = modelMapper.map(exercise, ExerciseDTO.class);
-        exerciseDTO.setWorkout_id(exercise.getWorkout().getId());
         return exerciseDTO;
     }
 
     public Exercise convertToEntity(ExerciseDTO exerciseDTO) {
         Exercise exercise = modelMapper.map(exerciseDTO, Exercise.class);
-        Workout workout = workoutRepository.findById(exerciseDTO.getWorkout_id()).orElse(null);
-        if(workout != null) {
-            exercise.setWorkout(workout);
-        }
         return exercise;
     }
 }

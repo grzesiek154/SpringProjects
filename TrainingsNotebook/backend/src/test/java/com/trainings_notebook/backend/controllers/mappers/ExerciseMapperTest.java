@@ -42,15 +42,13 @@ class ExerciseMapperTest {
                 .type("chest")
                 .reps(8)
                 .description("20 push ups for 8 sets")
-                .workout_id(1L)
+                .workout(workout1)
                 .build();
     }
 
     @Test
     void convertToExerciseDTO() {
         ExerciseDTO exerciseDTO = modelMapper.map(exercise1, ExerciseDTO.class);
-        exerciseDTO.setWorkout_id(exercise1.getWorkout().getId());
-        assertEquals(exerciseDTO.getWorkout_id(), workout1.getId());
         assertEquals(exerciseDTO.getName(),exercise1.getName());
     }
 
@@ -59,6 +57,6 @@ class ExerciseMapperTest {
         Exercise exercise = modelMapper.map(exerciseDTO, Exercise.class);
         exercise.setWorkout(workout1);
         assertEquals(exercise.getName(), exerciseDTO.getName());
-        assertEquals(exercise.getWorkout().getId(), exerciseDTO.getWorkout_id());
+        assertEquals(exercise.getWorkout().getId(), exerciseDTO.getWorkout().getId());
     }
 }

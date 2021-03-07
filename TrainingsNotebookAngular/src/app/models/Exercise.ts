@@ -2,14 +2,13 @@ import { FormGroup } from "@angular/forms";
 import { Workout } from "./Workout";
 
 export class Exercise {
-
    id: number;
    name: string;
    type: string;
    description: string;
    reps?: number;
    duration?: number;
-   workot_id: number;
+   workout: Workout;
   
 
   static mapFormGroupObjectToExercise(formGroupObject: FormGroup) {
@@ -19,8 +18,9 @@ export class Exercise {
     newExercise.reps = formGroupObject.get('reps').value;
     newExercise.duration = formGroupObject.get('duration').value;
     newExercise.description = formGroupObject.get('description').value;
-    let exerciseWorkout: Workout = formGroupObject.get('workout').value;
-    newExercise.workot_id = exerciseWorkout.id;
+    console.log("worout: " + formGroupObject.get('workout').value);
+    newExercise.workout = formGroupObject.get('workout').value;
+
 
     return newExercise;
   }

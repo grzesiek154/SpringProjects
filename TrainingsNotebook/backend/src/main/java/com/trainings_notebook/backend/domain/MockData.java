@@ -5,7 +5,7 @@ import com.trainings_notebook.backend.repositories.WorkoutRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-@Component
+
 public class MockData implements CommandLineRunner {
 
     Workout workout1 = Workout.builder()

@@ -78,10 +78,10 @@ export class CreateExerciseComponent implements OnInit {
       reps: editedExercise.reps,
       duration: editedExercise.duration,
       description: editedExercise.description,
-      workout_id: editedExercise.workout
+      workout: editedExercise.workout
       
     })
-    console.log("workout: " + this.currentExercise.workout);
+
     this.addEditedExerciseForm(this.currentExerciseForm);
    // this.removeExercise(0);
   }
@@ -100,7 +100,7 @@ export class CreateExerciseComponent implements OnInit {
       description: ['', Validators.required],
       reps: 0,
       duration: 0,
-      workout: [Workout, Validators.required]
+      workout: ['', Validators.required]
     })
   }
 

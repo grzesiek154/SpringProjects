@@ -1,6 +1,7 @@
 package com.trainings_notebook.backend.domain.dto;
 
 import com.trainings_notebook.backend.domain.Training;
+import com.trainings_notebook.backend.domain.Workout;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,9 +27,7 @@ public class ExerciseDTO {
 
     private int duration;
 
-    private List<Training> trainings;
-
-    private Long workout_id;
+    private Workout workout;
 
 
 }
