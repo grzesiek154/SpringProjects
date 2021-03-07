@@ -10,19 +10,16 @@ public class MockData implements CommandLineRunner {
 
     Workout workout1 = Workout.builder()
             .name("Pull ups")
-            .type("back")
             .description("body weight back workout")
             .build();
 
     Workout workout2 = Workout.builder()
             .name("Sit ups")
-            .type("abs")
             .description("abs workout")
             .build();
 
     Workout workout3 = Workout.builder()
             .name("Push ups")
-            .type("abs")
             .description("body weight chest workout")
             .build();
 
@@ -30,7 +27,7 @@ public class MockData implements CommandLineRunner {
 
     Exercise exercise1 = Exercise.builder()
             .name("20 push ups")
-            .type("chest")
+            .category(ExerciseCategories.CHEST)
             .reps(8)
             .description("20 push ups for 8 sets")
             .workout(workout1)
@@ -38,7 +35,7 @@ public class MockData implements CommandLineRunner {
 
     Exercise exercise2 = Exercise.builder()
             .name("10 pull ups")
-            .type("back")
+            .category(ExerciseCategories.BACK)
             .reps(8)
             .description("10 push ups for 8 sets")
             .workout(workout3)

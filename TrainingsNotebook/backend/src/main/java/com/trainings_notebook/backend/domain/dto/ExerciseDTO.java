@@ -1,5 +1,6 @@
 package com.trainings_notebook.backend.domain.dto;
 
+import com.trainings_notebook.backend.domain.ExerciseCategories;
 import com.trainings_notebook.backend.domain.Training;
 import com.trainings_notebook.backend.domain.Workout;
 import lombok.AllArgsConstructor;
@@ -19,7 +20,7 @@ public class ExerciseDTO {
 
     private String name;
 
-    private String type;
+    private ExerciseCategories category;
 
     private String description;
 

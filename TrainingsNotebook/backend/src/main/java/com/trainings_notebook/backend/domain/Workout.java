@@ -29,9 +29,6 @@ public class Workout {
     private String name;
 
     @Column
-    private String type;
-
-    @Column
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "workout")

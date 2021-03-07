@@ -27,9 +27,9 @@ public class Exercise {
     @NonNull
     private String name;
 
-    @Column(name = "type")
+    @Column(name = "category")
     @NotEmpty
-    private String type;
+    private ExerciseCategories category;
 
     @Column(name = "description")
     private String description;

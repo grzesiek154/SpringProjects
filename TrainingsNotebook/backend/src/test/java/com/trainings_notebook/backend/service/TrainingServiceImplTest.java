@@ -1,6 +1,7 @@
 package com.trainings_notebook.backend.service;
 
 import com.trainings_notebook.backend.domain.Training;
+import com.trainings_notebook.backend.domain.TrainingCategories;
 import com.trainings_notebook.backend.repositories.TrainingRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,7 +36,7 @@ class TrainingServiceImplTest {
         testTraining = new Training();
         testTraining.setId(1L);
         testTraining.setName("cardio training");
-        testTraining.setType("cardio");
+        testTraining.setCategory(TrainingCategories.CARDIO);
 
     }
 
@@ -61,7 +62,7 @@ class TrainingServiceImplTest {
 
         Training savedTraining = trainingService.save(testTraining);
         assertEquals(savedTraining.getName(), testTraining.getName());
-        assertEquals(savedTraining.getType(), testTraining.getType());
+        assertEquals(savedTraining.getCategory(), testTraining.getCategory());
     }
 
     @Test

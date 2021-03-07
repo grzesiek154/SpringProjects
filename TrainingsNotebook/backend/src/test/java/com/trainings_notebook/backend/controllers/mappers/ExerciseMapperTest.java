@@ -1,6 +1,7 @@
 package com.trainings_notebook.backend.controllers.mappers;
 
 import com.trainings_notebook.backend.domain.Exercise;
+import com.trainings_notebook.backend.domain.ExerciseCategories;
 import com.trainings_notebook.backend.domain.Workout;
 import com.trainings_notebook.backend.domain.dto.ExerciseDTO;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,13 +26,12 @@ class ExerciseMapperTest {
         workout1 = Workout.builder()
                 .id(1L)
                 .name("Pull ups")
-                .type("back")
                 .description("body weight back workout")
                 .build();
         exercise1 = Exercise.builder()
                 .id(1L)
                 .name("20 push ups")
-                .type("chest")
+                .category(ExerciseCategories.CHEST)
                 .reps(8)
                 .description("20 push ups for 8 sets")
                 .workout(workout1)
@@ -39,7 +39,7 @@ class ExerciseMapperTest {
         exerciseDTO = ExerciseDTO.builder()
                 .id(1L)
                 .name("20 push ups")
-                .type("chest")
+                .category(ExerciseCategories.CHEST)
                 .reps(8)
                 .description("20 push ups for 8 sets")
                 .workout(workout1)

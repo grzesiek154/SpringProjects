@@ -1,6 +1,7 @@
 package com.trainings_notebook.backend.service;
 
 import com.trainings_notebook.backend.domain.Exercise;
+import com.trainings_notebook.backend.domain.ExerciseCategories;
 import com.trainings_notebook.backend.repositories.ExerciseRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,7 +37,7 @@ class ExerciseServiceImplTest {
         exercise = new Exercise();
         exercise.setId(1L);
         exercise.setName("exercise1");
-        exercise.setType("chest");
+        exercise.setCategory(ExerciseCategories.ABS);
 
         MockitoAnnotations.initMocks(exerciseRepository);
         exerciseService = new ExerciseServiceImpl(exerciseRepository);
@@ -59,7 +60,7 @@ class ExerciseServiceImplTest {
         Exercise testExercise = exerciseService.findById(1L);
         //then
         assertEquals("exercise1", testExercise.getName());
-        assertEquals("chest", testExercise.getType());
+        assertEquals(ExerciseCategories.ABS, testExercise.getCategory());
 
     }
 
@@ -71,7 +72,7 @@ class ExerciseServiceImplTest {
         Exercise testExercise = exerciseService.save(exercise);
         //then
         assertEquals(testExercise.getName(), exercise.getName());
-        assertEquals(testExercise.getType(), exercise.getType());
+        assertEquals(testExercise.getCategory(), exercise.getCategory());
     }
 
     @Test
