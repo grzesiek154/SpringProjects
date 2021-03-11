@@ -31,7 +31,7 @@ public class Workout {
     @Column
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workout")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workout", fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Exercise> exercises;
 

@@ -20,7 +20,7 @@ public class ExerciseDTO {
 
     private String name;
 
-    private ExerciseCategories category;
+    private String category;
 
     private String description;
 
@@ -28,7 +28,7 @@ public class ExerciseDTO {
 
     private int duration;
 
-    private Workout workout;
+    private WorkoutDTO workout;
 
 
 }

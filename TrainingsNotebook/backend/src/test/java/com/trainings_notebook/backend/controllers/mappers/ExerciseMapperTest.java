@@ -4,6 +4,7 @@ import com.trainings_notebook.backend.domain.Exercise;
 import com.trainings_notebook.backend.domain.ExerciseCategories;
 import com.trainings_notebook.backend.domain.Workout;
 import com.trainings_notebook.backend.domain.dto.ExerciseDTO;
+import com.trainings_notebook.backend.domain.dto.WorkoutDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -20,6 +21,7 @@ class ExerciseMapperTest {
     Workout workout1;
     Exercise exercise1;
     ExerciseDTO exerciseDTO;
+    WorkoutDTO workoutDTO;
 
     @BeforeEach
     void setUp() {
@@ -39,10 +41,10 @@ class ExerciseMapperTest {
         exerciseDTO = ExerciseDTO.builder()
                 .id(1L)
                 .name("20 push ups")
-                .category(ExerciseCategories.CHEST)
+                .category("chest")
                 .reps(8)
                 .description("20 push ups for 8 sets")
-                .workout(workout1)
+                .workout(modelMapper.map(workout1, WorkoutDTO.class))
                 .build();
     }
 
@@ -56,7 +58,9 @@ class ExerciseMapperTest {
     void convertToEntity() {
         Exercise exercise = modelMapper.map(exerciseDTO, Exercise.class);
         exercise.setWorkout(workout1);
+        exercise.setCategory(ExerciseCategories.valueOf(exerciseDTO.getCategory().toUpperCase()));
         assertEquals(exercise.getName(), exerciseDTO.getName());
         assertEquals(exercise.getWorkout().getId(), exerciseDTO.getWorkout().getId());
+        assertEquals(exercise.getCategory(), ExerciseCategories.valueOf(exerciseDTO.getCategory().toUpperCase()));
     }
 }

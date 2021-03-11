@@ -1,6 +1,7 @@
 package com.trainings_notebook.backend.service;
 
 import com.trainings_notebook.backend.domain.Exercise;
+import com.trainings_notebook.backend.domain.ExerciseCategories;
 import com.trainings_notebook.backend.repositories.ExerciseRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,11 @@ public class ExerciseServiceImpl implements ExerciseService {
     @Override
     public void deleteById(Long aLong) {
         exerciseRepository.deleteById(aLong);
+    }
+
+    @Override
+    public Set<Exercise> findByCategory(ExerciseCategories category) {
+        return exerciseRepository.findByCategory(category);
     }
 
 //    private Exercise convertToExerciseEntity(ExerciseDTO exerciseDTO) {

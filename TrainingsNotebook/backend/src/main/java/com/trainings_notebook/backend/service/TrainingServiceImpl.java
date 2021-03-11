@@ -42,4 +42,9 @@ public class TrainingServiceImpl implements TrainingService {
     public void deleteById(Long aLong) {
         deleteById(aLong);
     }
+
+    @Override
+    public Set<Training> findByCategory(String category) {
+        return trainingRepository.findByCategory(category);
+    }
 }

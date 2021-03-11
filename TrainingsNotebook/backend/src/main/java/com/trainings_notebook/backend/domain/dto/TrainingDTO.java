@@ -18,7 +18,7 @@ public class TrainingDTO {
 
     private Long id;
     private String name;
-    private TrainingCategories category;
+    private String category;
     private LocalDateTime date;
-    private List<Exercise> trainingExercises;
+    private List<ExerciseDTO> trainingExercises;
 }

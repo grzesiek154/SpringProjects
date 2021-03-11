@@ -19,11 +19,6 @@ export class ExerciseService {
   private BASE_URL = "http://localhost:8080/api/v1/exercises";
 
   constructor(private http: HttpClient) {
-    let exercise1 = new Exercise();
-    exercise1.name = "10 pull ups"
-    exercise1.type = "strength exercise";
-    exercise1.reps = 10
-    this.exercises.push(exercise1);
   }
 
   postExercise(exercise: Exercise): Observable<Exercise> {
@@ -39,5 +34,8 @@ export class ExerciseService {
 
   getExerciseById(id: number): Observable<Exercise> {
     return this.http.get<Exercise>(this.BASE_URL + "/" + id);
+  }
+  getExercisesByCategory(category: string): Observable<Exercise[]> {
+    return this.http.get<Exercise[]>(this.BASE_URL+"/category/"+ category, httpOptions);
   }
 }

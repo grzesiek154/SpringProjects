@@ -74,7 +74,7 @@ export class CreateExerciseComponent implements OnInit {
    
     this.currentExerciseForm.patchValue({
       name: editedExercise.name,
-      type: editedExercise.type,
+      category: editedExercise.category,
       reps: editedExercise.reps,
       duration: editedExercise.duration,
       description: editedExercise.description,
@@ -96,7 +96,7 @@ export class CreateExerciseComponent implements OnInit {
   private newExerciseForm(): FormGroup {
     return this.fb.group({
       name: ['', Validators.required],
-      type: ['', Validators.required],
+      category: ['', Validators.required],
       description: ['', Validators.required],
       reps: 0,
       duration: 0,

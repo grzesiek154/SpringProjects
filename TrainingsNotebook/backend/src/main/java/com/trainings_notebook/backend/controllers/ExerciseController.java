@@ -2,6 +2,7 @@ package com.trainings_notebook.backend.controllers;
 
 import com.trainings_notebook.backend.controllers.mappers.ExerciseMapper;
 import com.trainings_notebook.backend.domain.Exercise;
+import com.trainings_notebook.backend.domain.ExerciseCategories;
 import com.trainings_notebook.backend.domain.dto.ExerciseDTO;
 import com.trainings_notebook.backend.exceptions.ApiRequestException;
 import com.trainings_notebook.backend.service.ExerciseService;
@@ -52,14 +53,28 @@ public class ExerciseController {
         return new ResponseEntity<>(exerciseDTO, HttpStatus.OK);
     }
 
+    @GetMapping("/category/{category}")
+    public ResponseEntity<Set<ExerciseDTO>> getExercisesByCategory(@PathVariable String category) {
+        Set<Exercise> exercisesByCategory = this.exerciseService.findByCategory(ExerciseCategories.valueOf(category.toUpperCase()));
+        Set<ExerciseDTO> exercisesByCategoryDTO = exercisesByCategory.stream()
+                .map(exercise -> exerciseMapper.convertToDTO(exercise))
+                .collect(Collectors.toSet());
+
+        if(exercisesByCategoryDTO == null) {
+            throw new ApiRequestException("Exercises with category: " + category +" not found.", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(exercisesByCategory, HttpStatus.OK);
+    }
+
+
     @PostMapping
-    public ResponseEntity<ExerciseDTO> addExercise(@RequestBody @Valid ExerciseDTO exerciseDTO, BindingResult bindingResult) {
+    public ResponseEntity<Exercise> addExercise(@RequestBody @Valid ExerciseDTO exerciseDTO, BindingResult bindingResult) {
         Exercise exercise = exerciseMapper.convertToEntity(exerciseDTO);
         if(bindingResult.hasErrors() && exercise == null) {
             throw new ApiRequestException("Cannot add new exercise, check your request.");
         }
         exerciseService.save(exercise);
-        return new ResponseEntity<>(exerciseDTO, HttpStatus.CREATED);
+        return new ResponseEntity(exercise, HttpStatus.CREATED);
     }
 
     @PostMapping("/update")
@@ -71,6 +86,7 @@ public class ExerciseController {
         exerciseService.save(exercise);
         return new ResponseEntity<>(exercise, HttpStatus.OK);
     }
+
     @DeleteMapping("/{exerciseId}")
     public ResponseEntity<Void> deleteExercise(@PathVariable Long exerciseId) {
         Exercise exercise = exerciseService.findById(exerciseId);

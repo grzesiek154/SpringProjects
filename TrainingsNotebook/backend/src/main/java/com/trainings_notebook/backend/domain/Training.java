@@ -1,5 +1,7 @@
 package com.trainings_notebook.backend.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,7 +24,6 @@ public class Training {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotEmpty
     private Long id;
 
     @Column(name = "name")
@@ -29,14 +31,16 @@ public class Training {
     private String name;
 
     @Column(name = "category")
-    @NotEmpty
+    @NotNull
+    @Enumerated(EnumType.STRING)
     private TrainingCategories category;
 
     @Column(name = "date")
     private LocalDateTime date;
 
 
-    @ManyToMany(cascade=CascadeType.ALL)
+    @JsonIgnore
+    @ManyToMany
     @JoinTable(
             name = "trainings_exercises",
             joinColumns = @JoinColumn(name = "trainingId"),

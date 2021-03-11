@@ -15,12 +15,12 @@ export class TrainingsService {
   constructor() { 
     let exercise1 = new Exercise();
     exercise1.name = "10 pull ups"
-    exercise1.type = "strength exercise";
+    exercise1.category = "strength exercise";
     exercise1.reps = 10
 
     let exercise2 = new Exercise();
     exercise2.name = "100 push ups"
-    exercise2.type = "strength exercise";
+    exercise2.category = "strength exercise";
     exercise2.reps = 100
     
     this.trainingExercises.push(exercise1);
@@ -28,7 +28,7 @@ export class TrainingsService {
 
     let training1 = new Training()
     training1.name = "cardio training";
-    training1.type = "cardio"
+    training1.category = "cardio"
     training1.description = "test cardio training";
     training1.exercises = this.trainingExercises;
     this.createTraining(training1);

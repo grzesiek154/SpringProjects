@@ -28,7 +28,8 @@ public class Exercise {
     private String name;
 
     @Column(name = "category")
-    @NotEmpty
+    @Enumerated(EnumType.STRING)
+    @NonNull
     private ExerciseCategories category;
 
     @Column(name = "description")
@@ -43,7 +44,7 @@ public class Exercise {
     @ManyToMany(mappedBy = "trainingExercises")
     private List<Training> trainings;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "workout_id")
     @JsonBackReference
     private Workout workout;

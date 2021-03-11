@@ -52,7 +52,6 @@ export class CreateWorkoutComponent implements OnInit {
   private editWorkout(editedWorkout: Workout) {
     this.currentWorkoutForm.patchValue({
       name: editedWorkout.name,
-      type: editedWorkout.type,
       description: editedWorkout.description
     })
     this.addEditedWorkoutForm(this.currentWorkoutForm);
@@ -77,7 +76,6 @@ export class CreateWorkoutComponent implements OnInit {
   private newWorkoutForm(): FormGroup {
     return this.fb.group({
       name: ['', Validators.required],
-      type: ['', Validators.required],
       description: ''
     });
   }

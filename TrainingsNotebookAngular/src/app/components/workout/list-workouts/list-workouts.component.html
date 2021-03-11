@@ -6,13 +6,11 @@
           <tr>
             <th>id</th>
             <th>Name</th>
-            <th>Type</th>
             <th>Description</th>
           </tr>
             <tr>
               <td>{{workout.id}}</td>
               <td>{{workout.name}}{{workout._name}}</td>
-              <td>{{workout.type}} {{workout._type}}</td>
               <td>{{workout.description}} {{workout._description}}</td>
             </tr>
             <button class="btn btn-dark" (click)="editButton(workout.id)">Edit Workout</button>

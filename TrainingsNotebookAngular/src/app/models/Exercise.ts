@@ -4,7 +4,7 @@ import { Workout } from "./Workout";
 export class Exercise {
    id: number;
    name: string;
-   type: string;
+   category: string;
    description: string;
    reps?: number;
    duration?: number;
@@ -14,7 +14,7 @@ export class Exercise {
   static mapFormGroupObjectToExercise(formGroupObject: FormGroup) {
     let newExercise = new Exercise();
     newExercise.name = formGroupObject.get('name').value;
-    newExercise.type = formGroupObject.get('type').value;
+    newExercise.category = formGroupObject.get('category').value;
     newExercise.reps = formGroupObject.get('reps').value;
     newExercise.duration = formGroupObject.get('duration').value;
     newExercise.description = formGroupObject.get('description').value;
