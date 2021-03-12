@@ -16,12 +16,14 @@ export class CreateTrainingComponent implements OnInit {
   currentTraining: Training;
   trainingExercises: Exercise[];
   availableExercises: Exercise[] = [];
+  category:String = "chest";
+  exerciseCategories = ["ABS","BACK","CARDIO","CHEST","LEGS","SHOULDERS","STRETCHING"];
 
 
   constructor(private router: Router, private trainingsService: TrainingsService,private fb: FormBuilder, private exerciseService: ExerciseService) { 
     this.createTrainingFormGroup =  this.fb.group({
       name: new FormControl('', Validators.required),
-      type: ['', Validators.required],
+      category: ['', Validators.required],
       description: ['', Validators.required],
       exercisesFormArray: this.fb.array([
          this.fb.control('')
@@ -32,11 +34,15 @@ export class CreateTrainingComponent implements OnInit {
   } 
 
   ngOnInit(): void {
-    this.exerciseService.getAllExercises().subscribe(data => {
-      this.availableExercises = data;
-    })
+  
   }
 
+  updateAvailableWorkouts(value) {
+    console.log("category: " + this.category);
+     this.exerciseService.getExercisesByCategory(value).subscribe(exercisesByCategory => {
+       this.availableExercises = exercisesByCategory;
+     });
+  }
   saveTraining() {
     this.currentTraining = Training.mapFormGroupObjectToTraining(this.createTrainingFormGroup as FormGroup);
     console.log(this.createTrainingFormGroup.value);

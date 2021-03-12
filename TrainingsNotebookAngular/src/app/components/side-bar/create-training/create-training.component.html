@@ -9,8 +9,14 @@
                         <div class="form-row">
                             <input type="text" formControlName="name" class="training-name form-control"
                                 style="margin-top: 5px" placeholder="Training Name">
-                            <input type="text" formControlName="type" class="training-type form-control"
-                                style="margin-top: 5px" placeholder="Type">
+                            <!-- <input type="text" formControlName="category" class="training-type form-control"
+                                style="margin-top: 5px" placeholder="Type" [ngModel]="category" (ngModelChange)="updateAvailableWorkouts($event)"> -->
+                                    <select [ngModel]="category" (ngModelChange)="updateAvailableWorkouts($event)" formControlName="category" style="margin-left: 5px" placeholder="category">
+                                        <option *ngFor="let category of exerciseCategories" [ngValue]="category">
+                                            {{category}}
+                                        </option>
+                                    </select>
+                               
                         </div>
                         <div class="form-row">
                             <textarea type="text" formControlName="description" class="form-control"
