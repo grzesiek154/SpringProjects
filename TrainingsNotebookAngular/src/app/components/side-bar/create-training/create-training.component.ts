@@ -16,32 +16,45 @@ export class CreateTrainingComponent implements OnInit {
   currentTraining: Training;
   trainingExercises: Exercise[];
   availableExercises: Exercise[] = [];
-  category:String = "chest";
-  exerciseCategories = ["ABS","BACK","CARDIO","CHEST","LEGS","SHOULDERS","STRETCHING"];
+  exerciseCategories = ["ABS", "BACK", "CARDIO", "CHEST", "LEGS", "SHOULDERS", "STRETCHING"];
 
 
-  constructor(private router: Router, private trainingsService: TrainingsService,private fb: FormBuilder, private exerciseService: ExerciseService) { 
-    this.createTrainingFormGroup =  this.fb.group({
-      name: new FormControl('', Validators.required),
+  constructor(private router: Router, private trainingsService: TrainingsService, private fb: FormBuilder, private exerciseService: ExerciseService) {
+    this.createTrainingFormGroup = this.fb.group({
+      name: ['', Validators.required],
       category: ['', Validators.required],
       description: ['', Validators.required],
       exercisesFormArray: this.fb.array([
-         this.fb.control('')
+        this.fb.group({
+          exercise: ['', Validators.required],
+          category: ['', Validators.required] 
+        })
+        // this.fb.control(''),
+        // this.fb.control('')
       ])
     });
     this.clearTraining();
-    
-  } 
+
+  }
 
   ngOnInit(): void {
-  
+    this.onChanges();
+  }
+
+  onChanges(): void {
+    this.createTrainingFormGroup.get('exercisesFormArray').valueChanges.subscribe(exerciseForm => {
+      //this.updateAvailableWorkouts(category);
+      const exercise = exerciseForm as FormGroup;
+      exerciseForm.forEach(element => {
+        console.log(element.category);
+      });
+    })
   }
 
   updateAvailableWorkouts(value) {
-    console.log("category: " + this.category);
-     this.exerciseService.getExercisesByCategory(value).subscribe(exercisesByCategory => {
-       this.availableExercises = exercisesByCategory;
-     });
+    this.exerciseService.getExercisesByCategory(value).subscribe(exercisesByCategory => {
+      this.availableExercises = exercisesByCategory;
+    });
   }
   saveTraining() {
     this.currentTraining = Training.mapFormGroupObjectToTraining(this.createTrainingFormGroup as FormGroup);
@@ -59,7 +72,11 @@ export class CreateTrainingComponent implements OnInit {
   }
 
   addExercise() {
-    this.exercisesFormArray.push(this.fb.control(''));
+    const exerciseAndCategoryForm = this.fb.group({
+      exercise: ['', Validators.required],
+      category: ['', Validators.required] 
+    });
+    this.exercisesFormArray.push(exerciseAndCategoryForm);
   }
   get exercisesFormArray() {
     return this.createTrainingFormGroup.get('exercisesFormArray') as FormArray;

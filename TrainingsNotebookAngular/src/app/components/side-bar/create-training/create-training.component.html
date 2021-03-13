@@ -9,14 +9,12 @@
                         <div class="form-row">
                             <input type="text" formControlName="name" class="training-name form-control"
                                 style="margin-top: 5px" placeholder="Training Name">
-                            <!-- <input type="text" formControlName="category" class="training-type form-control"
-                                style="margin-top: 5px" placeholder="Type" [ngModel]="category" (ngModelChange)="updateAvailableWorkouts($event)"> -->
-                                    <select [ngModel]="category" (ngModelChange)="updateAvailableWorkouts($event)" formControlName="category" style="margin-left: 5px" placeholder="category">
-                                        <option *ngFor="let category of exerciseCategories" [ngValue]="category">
-                                            {{category}}
-                                        </option>
-                                    </select>
-                               
+                            <!-- <select formControlName="category" class="form-control" style="margin-left: 5px" placeholder="category">
+                            <option *ngFor="let category of exerciseCategories" [ngValue]="category">
+                                {{category}}
+                            </option>
+                        </select> -->
+
                         </div>
                         <div class="form-row">
                             <textarea type="text" formControlName="description" class="form-control"
@@ -25,12 +23,19 @@
                         <div class="form-row">
                             <div class="form-array" formArrayName="exercisesFormArray">
                                 <div *ngFor="let exerciseForm of exercisesFormArray.controls; let i = index;">
-                                    <select type="text" [formControlName]="i" class="exercise-select form-control"
+                                    <div [formGroup]="exerciseForm">
+                                    <select type="text" formControlName="exercise" class="exercise-select form-control"
                                         style="margin-left: 5px" placeholder="Exercises">
                                         <option *ngFor="let exercise of availableExercises" [ngValue]="exercise">
                                             {{exercise.name}}
                                         </option>
                                     </select>
+                                    <select formControlName="category" class="form-control" style="margin-left: 5px" placeholder="category">
+                                        <option *ngFor="let category of exerciseCategories" [ngValue]="category">
+                                            {{category}}
+                                        </option>
+                                    </select>
+                                </div>
                                 </div>
                             </div>
                         </div>
