@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
-
+@Component
 public class MockData implements CommandLineRunner {
 
     Workout workout1 = Workout.builder()

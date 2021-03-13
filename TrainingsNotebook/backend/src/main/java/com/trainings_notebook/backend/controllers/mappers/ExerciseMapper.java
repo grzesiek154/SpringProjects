@@ -30,13 +30,12 @@ public class ExerciseMapper {
 };
     public ExerciseDTO convertToDTO(Exercise exercise) {
         ExerciseDTO exerciseDTO = modelMapper.map(exercise, ExerciseDTO.class);
-        exerciseDTO.setCategory(exercise.getCategory().toString());
+        exerciseDTO.setCategory(exercise.getCategory().toString().toUpperCase());
         exerciseDTO.setWorkout(workoutMapper.convertToDTO(exercise.getWorkout()));
         return exerciseDTO;
     }
 
     public Exercise convertToEntity(ExerciseDTO exerciseDTO) {
-        modelMapper.typeMap(ExerciseDTO.class, Exercise.class).addMapping(ExerciseDTO::getCategory,Exercise::setCategory);
         modelMapper.addConverter(toEnum);
         Exercise exercise = modelMapper.map(exerciseDTO, Exercise.class);
         exercise.setWorkout(workoutMapper.convertToEntity(exerciseDTO.getWorkout()));
