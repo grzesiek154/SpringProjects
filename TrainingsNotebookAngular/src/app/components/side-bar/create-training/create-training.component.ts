@@ -16,6 +16,7 @@ export class CreateTrainingComponent implements OnInit {
   currentTraining: Training;
   trainingExercises: Exercise[];
   availableExercises: Exercise[] = [];
+  exercisesMap = new Map();
   exerciseCategories = ["ABS", "BACK", "CARDIO", "CHEST", "LEGS", "SHOULDERS", "STRETCHING"];
 
 
@@ -29,32 +30,37 @@ export class CreateTrainingComponent implements OnInit {
           exercise: ['', Validators.required],
           category: ['', Validators.required] 
         })
-        // this.fb.control(''),
-        // this.fb.control('')
       ])
     });
     this.clearTraining();
+  
 
   }
 
   ngOnInit(): void {
-    this.onChanges();
+    // this.addExercisesToMap();
+    // this.onChanges();
   }
 
   onChanges(): void {
-    this.createTrainingFormGroup.get('exercisesFormArray').valueChanges.subscribe(exerciseForm => {
-      //this.updateAvailableWorkouts(category);
-      const exercise = exerciseForm as FormGroup;
+    this.createTrainingFormGroup.get('exercisesFormArray').valueChanges.subscribe(exerciseForm => {    
       exerciseForm.forEach(element => {
         console.log(element.category);
+        //this.updateAvailableWorkouts(element.category);
+      
       });
     })
   }
 
-  updateAvailableWorkouts(value) {
-    this.exerciseService.getExercisesByCategory(value).subscribe(exercisesByCategory => {
-      this.availableExercises = exercisesByCategory;
-    });
+  addExercisesToMap() {  
+    this.exerciseCategories.forEach(category => {
+      this.exerciseService.getExercisesByCategory(category).subscribe(exercisesByCategory => {
+       this.exercisesMap.set(category, exercisesByCategory);
+       console.log(category, exercisesByCategory);
+      });
+    })
+  
+   
   }
   saveTraining() {
     this.currentTraining = Training.mapFormGroupObjectToTraining(this.createTrainingFormGroup as FormGroup);

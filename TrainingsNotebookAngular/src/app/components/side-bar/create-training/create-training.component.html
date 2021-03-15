@@ -24,18 +24,24 @@
                             <div class="form-array" formArrayName="exercisesFormArray">
                                 <div *ngFor="let exerciseForm of exercisesFormArray.controls; let i = index;">
                                     <div [formGroup]="exerciseForm">
-                                    <select type="text" formControlName="exercise" class="exercise-select form-control"
-                                        style="margin-left: 5px" placeholder="Exercises">
-                                        <option *ngFor="let exercise of availableExercises" [ngValue]="exercise">
-                                            {{exercise.name}}
-                                        </option>
-                                    </select>
-                                    <select formControlName="category" class="form-control" style="margin-left: 5px" placeholder="category">
-                                        <option *ngFor="let category of exerciseCategories" [ngValue]="category">
-                                            {{category}}
-                                        </option>
-                                    </select>
-                                </div>
+                                        <!-- <div *ngFor="let item of exerciseMap | keyvalue"> -->
+                                            <select type="text" formControlName="exercise"
+                                                class="exercise-select form-control" style="margin-left: 5px"
+                                                placeholder="Exercises">
+                                                <option *ngFor="let exercise of availableExercises"
+                                                    [ngValue]="exercise">
+                                                    {{exercise.name}}
+                                                </option>
+                                            </select>
+                                            <select formControlName="category" class="form-control"
+                                                style="margin-left: 5px" placeholder="category">
+                                                <option *ngFor="let category of exerciseCategories"
+                                                    [ngValue]="category">
+                                                    {{category}}
+                                                </option>
+                                            </select>
+                                        <!-- </div> -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
