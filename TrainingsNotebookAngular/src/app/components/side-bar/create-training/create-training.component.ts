@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { of } from 'rxjs';
 import { Exercise } from 'src/app/models/Exercise';
 import { Training } from 'src/app/models/Training';
 import { ExerciseService } from 'src/app/services/exercise.service';
@@ -17,6 +18,7 @@ export class CreateTrainingComponent implements OnInit {
   trainingExercises: Exercise[];
   availableExercises: Exercise[] = [];
   exercisesMap = new Map();
+  exercisesByCategory = [];
   exerciseCategories = ["ABS", "BACK", "CARDIO", "CHEST", "LEGS", "SHOULDERS", "STRETCHING"];
 
 
@@ -33,13 +35,14 @@ export class CreateTrainingComponent implements OnInit {
       ])
     });
     this.clearTraining();
-  
-
+    this.addExercisesToMap();
+    console.log("exerciseObersrable: " + this.exerciseObersrable);
+    console.log("exercisesMap size: " + this.exercisesMap.size);
   }
 
   ngOnInit(): void {
-    // this.addExercisesToMap();
-    // this.onChanges();
+ 
+    this.onChanges();
   }
 
   onChanges(): void {
@@ -52,6 +55,7 @@ export class CreateTrainingComponent implements OnInit {
     })
   }
 
+
   addExercisesToMap() {  
     this.exerciseCategories.forEach(category => {
       this.exerciseService.getExercisesByCategory(category).subscribe(exercisesByCategory => {
@@ -59,8 +63,8 @@ export class CreateTrainingComponent implements OnInit {
        console.log(category, exercisesByCategory);
       });
     })
-  
-   
+    // this.exercisesMap.set(category, exercisesByCategory);
+    // console.log(category, exercisesByCategory);
   }
   saveTraining() {
     this.currentTraining = Training.mapFormGroupObjectToTraining(this.createTrainingFormGroup as FormGroup);

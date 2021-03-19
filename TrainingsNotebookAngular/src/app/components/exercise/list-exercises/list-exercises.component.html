@@ -6,7 +6,7 @@
           <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>Type</th>
+            <th>Category</th>
             <th *ngIf="exercise.reps != null && exercise.reps > 0">Reps</th>
             <th *ngIf="exercise.duration != null && exercise.duration > 0">Duration</th>
             <th>Description</th>
@@ -15,7 +15,7 @@
             <tr>
               <td>{{exercise.id}}</td>
               <td>{{exercise.name}}</td>
-              <td>{{exercise.type}}</td>
+              <td>{{exercise.category}}</td>
               <td *ngIf="exercise.reps != null && exercise.reps > 0">{{exercise.reps}}</td>
               <td *ngIf="exercise.duration != null && exercise.duration > 0">{{exercise.duration}}</td>
               <td>{{exercise.description}}</td>
