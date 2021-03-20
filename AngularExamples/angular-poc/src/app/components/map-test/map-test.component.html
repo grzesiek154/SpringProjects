@@ -1,0 +1,12 @@
+<div>
+  <select class="form-control"
+  style="margin-left: 5px">
+  <option *ngFor="let keyValue of mapKeys"
+      [ngValue]="keyValue" (click)="updateValueKey(keyValue)">
+      {{keyValue}}
+  </option>
+  </select>
+  <ul>
+    <li *ngFor="let value of exampleMap.get(keyValue)">{{value}}</li>
+  </ul>
+</div>
