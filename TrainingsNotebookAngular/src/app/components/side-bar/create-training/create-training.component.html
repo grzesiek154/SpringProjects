@@ -21,25 +21,8 @@
                         </div>
                         <div class="form-row">
                             <div class="form-array" formArrayName="exercisesFormArray">
-                                <div *ngFor="let exerciseForm of exercisesFormArray.controls; let i = index;">
-                                    <div [formGroup]="exerciseForm">
-                                            <select formControlName="category" class="form-control"
-                                            style="margin-left: 5px" placeholder="category">
-                                            <option *ngFor="let category of exerciseCategories"
-                                                [ngValue]="category">
-                                                {{category}}
-                                            </option>
-                                        </select>
-                                            <select type="text" formControlName="exercise"
-                                                class="exercise-select form-control" style="margin-left: 5px"
-                                                placeholder="Exercises">
-                                                <option *ngFor="let exercise of exercisesMap.get(category)"
-                                                    [ngValue]="exercise">
-                                                    {{exercise.name}}
-                                                </option>
-                                            </select>
-                                    </div>
-                                </div>
+                                    <template #trainingExerciseContainer></template>
+                                    <app-training-exercise (newExerciseFormEvetnt)="addExercise($event) "></app-training-exercise>                              
                             </div>
                         </div>
                     </div>
@@ -52,7 +35,7 @@
                                 <button class="btn btn-warning" (click)="backToMainPage()">Discard</button>
                             </div>
                             <div class="row">
-                                <button type="button" class="btn btn-info" (click)="addExercise()">Add Exercise</button>
+                                <button type="button" class="btn btn-info" (click)="createTrainingExerciseComponent()">Add Exercise</button>
                                 <button (click)="printAll()" class="btn btn-warning">Print All</button>
                             </div>
                         </div>

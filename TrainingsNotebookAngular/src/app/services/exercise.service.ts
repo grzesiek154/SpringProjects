@@ -36,6 +36,7 @@ export class ExerciseService {
     return this.http.get<Exercise>(this.BASE_URL + "/" + id);
   }
   getExercisesByCategory(category: string): Observable<Exercise[]> {
+    console.log("category from service: " + category);
     return this.http.get<Exercise[]>(this.BASE_URL+"/category/"+ category, httpOptions);
   }
 }

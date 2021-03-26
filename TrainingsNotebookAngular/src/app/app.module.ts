@@ -16,6 +16,8 @@ import { WorkoutSidebarComponent } from './components/workout/workout-sidebar/wo
 import { ListTrainingsComponent } from './components/training/list-trainings/list-trainings.component';
 import { ListExercisesComponent } from './components/exercise/list-exercises/list-exercises.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TrainingExerciseComponent } from './components/training/training-exercise/training-exercise.component';
+
 
 
 
@@ -31,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     ListWorkoutsComponent,
     WorkoutSidebarComponent,
     ListTrainingsComponent,
-    ListExercisesComponent
+    ListExercisesComponent,
+    TrainingExerciseComponent
 
   ],
   imports: [

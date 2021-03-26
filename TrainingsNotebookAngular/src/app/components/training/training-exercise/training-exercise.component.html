@@ -1,0 +1,17 @@
+<div [formGroup]="exerciseForm">
+  <select formControlName="category" class="form-control"
+  style="margin-left: 5px" placeholder="category" (change)="updateCategory($event)">
+  <option *ngFor="let category of exerciseCategories"
+      [ngValue]="category">
+      {{category}}
+  </option>
+</select>
+  <select type="text" formControlName="exercise"
+      class="exercise-select form-control" style="margin-left: 5px"
+      placeholder="Exercises">
+      <option *ngFor="let exercise of exercisesByCategory"
+          [ngValue]="exercise">
+          {{exercise.name}}
+      </option>
+  </select>
+</div>
