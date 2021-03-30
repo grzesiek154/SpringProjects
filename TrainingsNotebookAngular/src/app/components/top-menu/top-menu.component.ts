@@ -24,4 +24,8 @@ export class TopMenuComponent implements OnInit {
   goToCreateWorkout() {
     this.router.navigateByUrl('/create-workout');
   }
+
+  goToCalendar() {
+    this.router.navigateByUrl('/trainings-calendar');
+  }
 }

@@ -7,6 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ListWorkoutsComponent } from './components/workout/list-workouts/list-workouts.component';
 import { ListExercisesComponent } from './components/exercise/list-exercises/list-exercises.component';
 import { ListTrainingsComponent } from './components/training/list-trainings/list-trainings.component';
+import { TrainingsCalendarComponent } from './components/trainings-calendar/trainings-calendar.component';
 
 
 
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'list-workouts', component: ListWorkoutsComponent},
   { path: 'list-exercises', component: ListExercisesComponent},
   { path: 'edit-exercise/:id', component: CreateExerciseComponent},
-  { path: 'list-trainings', component: ListTrainingsComponent}
+  { path: 'list-trainings', component: ListTrainingsComponent},
+  { path: 'trainings-calendar', component: TrainingsCalendarComponent}
 
 ];
 
