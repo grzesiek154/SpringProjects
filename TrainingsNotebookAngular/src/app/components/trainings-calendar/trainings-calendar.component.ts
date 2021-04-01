@@ -85,7 +85,15 @@ export class TrainingsCalendarComponent implements OnInit {
       end: addDays(new Date(), 1),
       title: 'A 3 day event',
       color: colors.red,
-      actions: this.actions,
+      actions: [
+        {
+          label: '<i class="fas fa-fw fa-trash-alt"></i>',
+          onClick: ({ event }: { event: CalendarEvent }): void => {
+            this.events = this.events.filter((iEvent) => iEvent !== event);
+            console.log('Event deleted', event);
+          },
+        },
+      ],
       allDay: true,
       resizable: {
         beforeStart: true,
@@ -125,7 +133,6 @@ export class TrainingsCalendarComponent implements OnInit {
   constructor(private modal: NgbModal) {}
 
   ngOnInit(): void {
-    
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -179,8 +186,6 @@ export class TrainingsCalendarComponent implements OnInit {
       },
     ];
   }
-
-  addNewTrainingList
 
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter((event) => event !== eventToDelete);
