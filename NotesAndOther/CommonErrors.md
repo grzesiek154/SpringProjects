@@ -41,3 +41,13 @@ https://stackoverflow.com/questions/13370221/persistentobjectexception-detached-
 
 
 
+Spring security - This application has no explicit mapping for /error, so you are seeing this as a fallback.
+
+After login wit credentials login: user, pwd: ![image-20210402091003794](C:\Users\gmalarski\AppData\Roaming\Typora\typora-user-images\image-20210402091003794.png)
+
+still content is not displayed, try to add in application.properties : 
+
+```properties
+server.session.tracking-modes=cookie
+```
+
