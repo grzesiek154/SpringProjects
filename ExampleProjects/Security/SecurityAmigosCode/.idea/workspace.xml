@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff5beb78-5f4f-4f58-8b4d-cda846f69d15" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../SecurityPOC/src/main/java/com/example/security/angular/SecurityPOC/UiApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../RedditClone/spring-reddit-clone" beforeDir="false" afterPath="$PROJECT_DIR$/../../RedditClone/spring-reddit-clone" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gs-testing-web" beforeDir="false" afterPath="$PROJECT_DIR$/../../gs-testing-web" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../spring5-mvc-rest" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring5-mvc-rest" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +33,7 @@
       <option name="presentableId" value="Default" />
       <updated>1617342173426</updated>
       <workItem from="1617342174531" duration="185000" />
+      <workItem from="1617465979226" duration="104000" />
     </task>
     <servers />
   </component>

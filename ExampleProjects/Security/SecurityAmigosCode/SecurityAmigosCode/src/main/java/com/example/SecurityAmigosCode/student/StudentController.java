@@ -25,4 +25,6 @@ public class StudentController {
                 .orElseThrow(() -> new IllegalStateException("Student: " + studentId+ "does not exist"));
 
     }
+
+
 }
