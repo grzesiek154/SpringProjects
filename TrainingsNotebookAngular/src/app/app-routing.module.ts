@@ -7,19 +7,29 @@ import { HomeComponent } from './components/home/home.component';
 import { ListWorkoutsComponent } from './components/workout/list-workouts/list-workouts.component';
 import { ListExercisesComponent } from './components/exercise/list-exercises/list-exercises.component';
 import { ListTrainingsComponent } from './components/training/list-trainings/list-trainings.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { SignupComponent } from './components/auth/signup/signup.component';
+import { AuthGuard } from './services/auth.guard';
+import { MainPageComponent } from './components/main-page/main-page.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'create-training', component: CreateTrainingComponent },
-  { path: 'create-exercise', component: CreateExerciseComponent },
-  { path: 'create-workout', component: CreateWorkoutComponent },
-  { path: 'edit-workout/:id', component: CreateWorkoutComponent },
-  { path: 'list-workouts', component: ListWorkoutsComponent},
-  { path: 'list-exercises', component: ListExercisesComponent},
-  { path: 'edit-exercise/:id', component: CreateExerciseComponent},
-  { path: 'list-trainings', component: ListTrainingsComponent}
+  { path: '', component: MainPageComponent},
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+  { path: 'user-profile/:name', component: UserProfileComponent, canActivate: [AuthGuard] },
+  { path: 'create-training', component: CreateTrainingComponent, canActivate: [AuthGuard]},
+  { path: 'create-exercise', component: CreateExerciseComponent, canActivate: [AuthGuard]},
+  { path: 'create-workout', component: CreateWorkoutComponent, canActivate: [AuthGuard]},
+  { path: 'edit-workout/:id', component: CreateWorkoutComponent, canActivate: [AuthGuard]},
+  { path: 'list-workouts', component: ListWorkoutsComponent, canActivate: [AuthGuard]},
+  { path: 'list-exercises', component: ListExercisesComponent, canActivate: [AuthGuard]},
+  { path: 'edit-exercise/:id', component: CreateExerciseComponent, canActivate: [AuthGuard]},
+  { path: 'list-trainings', component: ListTrainingsComponent, canActivate: [AuthGuard]},
+
+  { path: 'sign-up', component: SignupComponent },
+  { path: 'login', component: LoginComponent }
 
 ];
 

@@ -228,3 +228,112 @@ public class MyConfiguration {
 # 4.Database initialization
 
 https://docs.spring.io/spring-boot/docs/2.1.0.M1/reference/html/howto-database-initialization.html
+
+
+
+# 5. @Transactional
+
+The `@Transactional` annotation is simply metadata that can be consumed by some runtime infrastructure that is `@Transactional`-aware and that can use the metadata to configure the appropriate beans with transactional behavior.
+
+The `@Transactional` annotation is metadata that specifies that an interface, class, or method must have transactional semantics; for example, "*start a brand new read-only transaction when this method is invoked, suspending any existing transaction*". The default `@Transactional` settings are as follows:
+
+- Propagation setting is `PROPAGATION_REQUIRED.`
+- Isolation level is `ISOLATION_DEFAULT.`
+- Transaction is read/write.
+- Transaction timeout defaults to the default timeout of the underlying transaction system, or to none if timeouts are not supported.
+- Any `RuntimeException` triggers rollback, and any checked `Exception` does not.
+
+### JPA and Transaction Management
+
+It's important to notice that JPA on itself does not provide any type of declarative transaction management. When using JPA outside of a dependency injection container, transactions need to be handled programatically by the developer:
+
+```java
+UserTransaction utx = entityManager.getTransaction(); 
+
+try { 
+    utx.begin(); 
+    businessLogic();
+    utx.commit(); 
+} catch(Exception ex) { 
+    utx.rollback(); 
+    throw ex; 
+} 
+```
+
+This way of managing transactions makes the scope of the transaction very clear in the code, but it has several disavantages:
+
+- it's repetitive and error prone
+- any error can have a very high impact
+- errors are hard to debug and reproduce
+- this decreases the readability of the code base
+- What if this method calls another transactional method?
+
+### Using Spring @Transactional
+
+With Spring `@Transactional`, the above code gets reduced to simply this:
+
+```java
+@Transactional
+public void businessLogic() {
+... use entity manager inside a transaction ...
+}
+```
+
+This is much more convenient and readable, and is currently the recommended way to handle transactions in Spring.
+
+By using `@Transactional`, many important aspects such as transaction propagation are handled automatically. In this case if another transactional method is called by `businessLogic()`, that method will have the option of joining the ongoing transaction.
+
+One potential downside is that this powerful mechanism hides what is going on under the hood, making it hard to debug when things don't work.
+
+### What does `@Transactional` mean?
+
+One of the key points about `@Transactional` is that there are two separate concepts to consider, each with it's own scope and life cycle:
+
+- the persistence context
+- the database transaction
+
+The transactional annotation itself defines the scope of a single database transaction. The database transaction happens inside the scope of a*persistence context*.
+
+The persistence context is in JPA the `EntityManager`, implemented internally using an Hibernate `Session` (when using Hibernate as the persistence provider).
+
+The persistence context is just a synchronizer object that tracks the state of a limited set of Java objects and makes sure that changes on those objects are eventually persisted back into the database.
+
+This is a very different notion than the one of a database transaction. One Entity Manager **can be used across several database transactions**, and it actually often is.
+
+# 6. @PostConstruct and  *@PreDestroy*
+
+## @PostConstruct
+
+There are frequent situations when application requires to run custom code  while starting up. There are several ways how to do it in Spring Boot,  one of my favorites is to create *@Component* class  with method annotated with @PostConstruct . This simple component class  is scanned during Spring Boot application start and method annotated by  @PostConstruct is run just after all services initialized. Such startup  init component can inject / autowire custom managed services and use  them for initialization. This way we can, for example, inject [Spring Data](http://projects.spring.io/spring-data/) repository and do some data initialization in our application.
+
+The following code example is minimum class skeleton for our startup init class. We  can have several @Component classes in our application with  @PostConstruct annotation available. All these are going to be run  during Spring Boot start up process.
+
+```java
+@Component
+public class StartUpInit {  @Autowired
+  CustomServiceExample customServiceExample;  @PostConstruct
+  public void init(){
+     // init code goes here
+  }
+}
+```
+
+##  *@PreDestroy*
+
+A method annotated with *@PreDestroy* runs only once, just before Spring removes our bean from the application context.
+
+Same as with *@PostConstruct*, the methods annotated with *@PreDestroy* can have any access level but can't be static.
+
+```java
+@Component
+public class UserRepository {
+
+    private DbConnection dbConnection;
+    @PreDestroy
+    public void preDestroy() {
+        dbConnection.close();
+    }
+}
+```
+
+The purpose of this method should be to release resources or perform  any other cleanup tasks before the bean gets destroyed, for example  closing a database connection.

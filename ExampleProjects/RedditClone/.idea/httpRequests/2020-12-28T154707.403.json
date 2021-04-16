@@ -1,7 +1,0 @@
-{
-  "timestamp": "2020-12-28T14:47:07.941+00:00",
-  "status": 403,
-  "error": "Forbidden",
-  "message": "",
-  "path": "/api/subreddit"
-}

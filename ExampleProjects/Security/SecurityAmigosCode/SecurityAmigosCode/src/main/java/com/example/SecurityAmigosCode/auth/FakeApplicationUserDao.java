@@ -1,6 +1,5 @@
 package com.example.SecurityAmigosCode.auth;
 
-import com.example.SecurityAmigosCode.security.AppUserRole;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,9 +31,9 @@ public class FakeApplicationUserDao implements AppUserDao {
     private List<AppUser> getAppUsers() {
         List<AppUser> appUsers = Lists.newArrayList(
                 new AppUser(
-                        STUDENT.getGrantedAuthorities(),
                         "annasmith",
                         passwordEncoder.encode("password"),
+                        STUDENT.getGrantedAuthorities(),
                         true,
                         true,
                         true,
@@ -42,9 +41,9 @@ public class FakeApplicationUserDao implements AppUserDao {
 
                 ),
                 new AppUser(
-                        ADMIN.getGrantedAuthorities(),
                         "linda",
                         passwordEncoder.encode("password"),
+                        ADMIN.getGrantedAuthorities(),
                         true,
                         true,
                         true,
@@ -52,9 +51,9 @@ public class FakeApplicationUserDao implements AppUserDao {
 
                 ),
                 new AppUser(
-                        ADMINTRAINEE.getGrantedAuthorities(),
                         "tom",
                         passwordEncoder.encode("password"),
+                        ADMINTRAINEE.getGrantedAuthorities(),
                         true,
                         true,
                         true,

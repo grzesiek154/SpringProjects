@@ -17,6 +17,12 @@ import { ListTrainingsComponent } from './components/training/list-trainings/lis
 import { ListExercisesComponent } from './components/exercise/list-exercises/list-exercises.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TrainingExerciseComponent } from './components/training/training-exercise/training-exercise.component';
+import { SignupComponent } from './components/auth/signup/signup.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
+import { ToastrModule } from 'ngx-toastr';
+import { NgxWebstorageModule } from 'ngx-webstorage';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 
 
@@ -34,7 +40,11 @@ import { TrainingExerciseComponent } from './components/training/training-exerci
     WorkoutSidebarComponent,
     ListTrainingsComponent,
     ListExercisesComponent,
-    TrainingExerciseComponent
+    TrainingExerciseComponent,
+    SignupComponent,
+    LoginComponent,
+    MainPageComponent,
+    UserProfileComponent
 
   ],
   imports: [
@@ -43,7 +53,9 @@ import { TrainingExerciseComponent } from './components/training/training-exerci
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot(),
+    NgxWebstorageModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

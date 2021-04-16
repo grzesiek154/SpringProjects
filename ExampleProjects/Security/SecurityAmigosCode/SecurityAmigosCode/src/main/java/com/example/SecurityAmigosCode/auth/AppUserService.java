@@ -1,5 +1,6 @@
 package com.example.SecurityAmigosCode.auth;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,7 +11,7 @@ public class AppUserService implements UserDetailsService {
 
     private final AppUserDao appUserDao;
 
-    public AppUserService(AppUserDao appUserDao) {
+    public AppUserService(@Qualifier("fake") AppUserDao appUserDao) {
         this.appUserDao = appUserDao;
     }
 

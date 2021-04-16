@@ -1,7 +1,0 @@
-{
-  "timestamp": "2020-12-28T13:25:04.559+00:00",
-  "status": 400,
-  "error": "Bad Request",
-  "message": "",
-  "path": "/api/auth/signup"
-}
