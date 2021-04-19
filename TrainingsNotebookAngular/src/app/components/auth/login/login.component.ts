@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   loginRequestPayload: LoginRequestPayload;
-  registerSuccessMessage: string;
+  registerSuccessMessage: string = "";
   isError: boolean;
 
   constructor(private authService: AuthService, private activatedRoute: ActivatedRoute, private router: Router, private toastr: ToastrService) { 
@@ -48,7 +48,7 @@ login() {
 
   this.authService.login(this.loginRequestPayload).subscribe(data => {
     this.isError = false;
-    this.router.navigateByUrl('/list-trainings');
+    this.router.navigateByUrl('/home');
     this.toastr.success('Login Successful');
   }, error => {
     this.isError = true;

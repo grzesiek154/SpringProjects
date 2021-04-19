@@ -40,6 +40,6 @@ export class TopMenuComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.isLoggedIn = false;
-    this.router.navigateByUrl('/main-page')
+    this.router.navigateByUrl('')
   }
 }

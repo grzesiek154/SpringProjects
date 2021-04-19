@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'list-trainings', component: ListTrainingsComponent, canActivate: [AuthGuard]},
 
   { path: 'sign-up', component: SignupComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
 
 ];
 
