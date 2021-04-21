@@ -15,7 +15,7 @@ import { ListWorkoutsComponent } from './components/workout/list-workouts/list-w
 import { WorkoutSidebarComponent } from './components/workout/workout-sidebar/workout-sidebar.component';
 import { ListTrainingsComponent } from './components/training/list-trainings/list-trainings.component';
 import { ListExercisesComponent } from './components/exercise/list-exercises/list-exercises.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TrainingExerciseComponent } from './components/training/training-exercise/training-exercise.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { LoginComponent } from './components/auth/login/login.component';
@@ -23,6 +23,8 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { TokenInterceptor } from './services/token-interceptor';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -55,9 +57,16 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     BrowserAnimationsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-    NgxWebstorageModule.forRoot()
+    NgxWebstorageModule.forRoot(),
+    NgbModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -17,9 +17,12 @@ export class AuthService {
   @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
   @Output() username: EventEmitter<string> = new EventEmitter();
 
-  refreshTokenPayload = {
+  refreshTokenPayload() {
+    let payload = {
     refreshToken: this.getRefreshToken(),
     username: this.getUserName()
+  }
+  return payload;
   }
 
   constructor(private http: HttpClient, private localStorage: LocalStorageService) { }
@@ -31,7 +34,7 @@ export class AuthService {
   login(loginRequestPayload: LoginRequestPayload):Observable<boolean> {
     return this.http.post<LoginResponse>('http://localhost:8080/api/auth/login', loginRequestPayload).pipe(map(data => {
       this.localStorage.store('authenticationToken', data.authenticationToken);
-      this.localStorage.store('username', data.refreshToken);
+      this.localStorage.store('username', data.username);
       this.localStorage.store('refreshToken', data.refreshToken);
       this.localStorage.store('expiresAt', data.expiresAt);
       return true;
@@ -44,7 +47,7 @@ export class AuthService {
 
   refreshToken() {
     return this.http.post<LoginResponse>('http://localhost:8080/api/auth/refresh/token',
-    this.refreshTokenPayload)
+    this.refreshTokenPayload())
       .pipe(tap(response => {
         this.localStorage.clear('authenticationToken');
         this.localStorage.clear('expiresAt');
@@ -55,7 +58,11 @@ export class AuthService {
   }
 
   logout() {
-    this.http.post('http://localhost:8080/api/auth/logout', this.refreshTokenPayload, {responseType: 'text'})
+    let myRefreshTokenPayload = {
+      refreshToken: this.getRefreshToken(),
+      username: this.getUserName()
+    }
+    this.http.post('http://localhost:8080/api/auth/logout', this.refreshTokenPayload(), {responseType: 'text'})
     .subscribe(data => {
       console.log(data);
     }, error => {
