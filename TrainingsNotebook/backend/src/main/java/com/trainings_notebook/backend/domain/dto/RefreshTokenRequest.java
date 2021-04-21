@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RefreshTokenRequest {
-    @NotBlank
+    @NotBlank(message = "Refresh Token cannot be null")
     private String refreshToken;
     private String username;
 }
