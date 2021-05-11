@@ -12,6 +12,9 @@ import { SignupComponent } from './components/auth/signup/signup.component';
 import { AuthGuard } from './services/auth.guard';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { BlogHomeComponent } from './components/blog/blog-home/blog-home.component';
+import { CreatePostComponent } from './components/blog/post/create-post/create-post.component';
+import { ViewPostComponent } from './components/blog/post/view-post/view-post.component';
 
 
 
@@ -27,6 +30,10 @@ const routes: Routes = [
   { path: 'list-exercises', component: ListExercisesComponent, canActivate: [AuthGuard]},
   { path: 'edit-exercise/:id', component: CreateExerciseComponent, canActivate: [AuthGuard]},
   { path: 'list-trainings', component: ListTrainingsComponent, canActivate: [AuthGuard]},
+  { path: 'blog', component: BlogHomeComponent},
+  { path: 'create-post', component: CreatePostComponent},
+  { path: 'edit-post/:id', component: CreatePostComponent},
+  { path: 'view-post/:id', component: ViewPostComponent},
 
   { path: 'sign-up', component: SignupComponent },
   { path: 'login', component: LoginComponent },

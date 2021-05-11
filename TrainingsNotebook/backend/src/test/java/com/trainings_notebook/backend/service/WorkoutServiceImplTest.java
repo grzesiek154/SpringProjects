@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -42,7 +43,7 @@ class WorkoutServiceImplTest {
         when(workoutRepository.findAll()).thenReturn(testSet);
 
         //when
-        Set<Workout> workoutSet = workoutService.findAll();
+        Collection<Workout> workoutSet = workoutService.findAll();
 
         //then
         assertEquals(4, workoutSet.size());

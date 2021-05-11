@@ -1,0 +1,31 @@
+<app-top-menu></app-top-menu>
+
+<div class="container-fluid blog-main">
+  <div class="row">
+    <div class="create-post col col-md-3">
+      <button class="create-post-btn btn btn-info" (click)="goToCreatePost()">Create Post</button>
+  </div>
+    <hr />
+    <div class="col col-md-6">
+      <div class="row post" *ngFor="let post of posts">
+        <div>
+          <span><a [routerLink]="['/view-post', post.id]">
+            <h1>Title: {{post.postName}}</h1>
+            <h2>Posted by: {{post.userName}}</h2>
+            <h3>Post content:</h3>
+            <div><p class="post-content" [innerHtml]="post.content"></p></div>
+            <!-- <div><p class="post-content">
+             {{ post.content | limitCharatchers: 100 }}
+            </p></div> -->
+          </a>
+          </span>
+          <button class="btn btn-warning" (click)="removePost(post.id)">Remove</button>
+          <button class="btn btn-info" (click)="editPost(post.id)">Edit Post</button>
+        </div>
+      </div>
+    </div>
+    <div class="col col-md-3">
+
+    </div>
+  </div>
+</div>

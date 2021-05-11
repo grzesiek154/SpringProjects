@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.*;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -44,7 +45,7 @@ class TrainingServiceImplTest {
     void findAll() {
         when(trainingRepository.findAll()).thenReturn(trainingSet);
 
-        Set<Training> trainings = trainingService.findAll();
+        Collection<Training> trainings = trainingService.findAll();
         assertEquals(4, trainings.size());
     }
 

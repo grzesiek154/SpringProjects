@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import static org.mockito.Mockito.*;
@@ -47,7 +48,7 @@ class ExerciseServiceImplTest {
     void findAll() {
         when(exerciseRepository.findAll()).thenReturn(testSet);
         //When
-        Set<Exercise> exerciseSet = exerciseService.findAll();
+        Collection<Exercise> exerciseSet = exerciseService.findAll();
         //then
         assertEquals(5, exerciseSet.size());
     }

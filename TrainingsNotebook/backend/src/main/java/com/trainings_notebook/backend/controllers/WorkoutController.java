@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -31,7 +32,7 @@ public class WorkoutController {
 
     @GetMapping
     public ResponseEntity<Set<WorkoutDTO>> getAllWorkouts() {
-        Set<Workout> workouts = workoutService.findAll();
+        Collection<Workout> workouts = workoutService.findAll();
         Set<WorkoutDTO> workoutDTOSet = workouts.stream()
                 .map(workout -> workoutMapper.convertToDTO(workout))
                 .collect(Collectors.toSet());

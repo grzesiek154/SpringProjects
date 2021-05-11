@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -31,7 +32,7 @@ public class ExerciseController {
 
     @GetMapping
     public ResponseEntity<Set<ExerciseDTO>> getAllExercises() {
-        Set<Exercise> exercises = exerciseService.findAll();
+        Collection<Exercise> exercises = exerciseService.findAll();
         Set<ExerciseDTO> exerciseDTOSet = exercises.stream()
                 .map(exercise -> exerciseMapper.convertToDTO(exercise))
                 .collect(Collectors.toSet());
@@ -78,7 +79,7 @@ public class ExerciseController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<Exercise> updateWorkout(@RequestBody @Valid ExerciseDTO exerciseDTO, BindingResult bindingResult) {
+    public ResponseEntity<Exercise> updateExercise(@RequestBody @Valid ExerciseDTO exerciseDTO, BindingResult bindingResult) {
         Exercise exercise = exerciseMapper.convertToEntity(exerciseDTO);
         if(bindingResult.hasErrors() || (exercise == null)) {
             throw new ApiRequestException("Cannot add new workout, check your request.");

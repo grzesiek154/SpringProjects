@@ -2,17 +2,27 @@ package com.trainings_notebook.backend;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.time.Instant;
+import java.util.regex.Pattern;
 
 public class TestClass {
     public static void main(String[] args) {
-        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-        DecimalFormat decimalFormat = new DecimalFormat("0.000", symbols);
-        Double testDouble = 0.0d;
-        double test2 = 0.055;
+        String dateNow = Instant.now().toString();
+        Long dateNow2 = Instant.now().toEpochMilli();
+
+        Pattern dataPattern = Pattern.compile("^\\d{4}-\\d{2}-\\d{2}$");
+        StringBuilder sb = new StringBuilder(dateNow);
+        String newDateFormat = sb.replace(10,11," ").delete(19, dateNow.length()).toString();
 
 
-        System.out.println(decimalFormat.format(test2));
-        System.out.println(decimalFormat.format(testDouble));
-        System.out.println("test: " + (10 * 0.055000000000000000277555756156289135105907917022705078125));
+        System.out.println(dateNow);
+        System.out.println(newDateFormat);
+        System.out.println(dateNow2);
+    }
+
+
+
+    public interface DataMatcher {
+        boolean matches(String date);
     }
 }

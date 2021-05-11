@@ -4,6 +4,7 @@ import com.trainings_notebook.backend.security.JWTAuthenticationFilter;
 import com.trainings_notebook.backend.service.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -27,16 +28,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.cors().and()
+//                .csrf().disable()
+//                .authorizeRequests()
+//                .antMatchers("/api/auth/**")
+//                .permitAll()
+////                .antMatchers(HttpMethod.GET, "/api/posts/")
+////                .permitAll()
+////                .antMatchers(HttpMethod.GET, "/api/posts/**")
+////                .permitAll()
+////                .antMatchers(HttpMethod.POST,"/api/posts/")
+////                .permitAll()
+//                .antMatchers("/v2/api-docs",
+//                        "/configuration/ui",
+//                        "/swagger-resources/**",
+//                        "/configuration/security",
+//                        "/swagger-ui.html",
+//                        "/webjars/**")
+//                .permitAll()
+//                .anyRequest()
+//                .authenticated();
+//        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+//    }
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and()
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/api/auth/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated();
-        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        http.cors().and().csrf().disable().authorizeRequests().antMatchers("/").permitAll();
     }
 
     @Override

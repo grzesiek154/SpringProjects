@@ -25,6 +25,12 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { TokenInterceptor } from './services/token-interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BlogHomeComponent } from './components/blog/blog-home/blog-home.component';
+import { CreatePostComponent } from './components/blog/post/create-post/create-post.component';
+import { ViewPostComponent } from './components/blog/post/view-post/view-post.component';
+import { EditorModule } from '@tinymce/tinymce-angular';
+import { LimitCharatchersPipe } from './pipes/limit-charatchers.pipe';
+import { DateTransformPipe } from './pipes/date-transform.pipe';
 
 
 
@@ -46,7 +52,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SignupComponent,
     LoginComponent,
     MainPageComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    BlogHomeComponent,
+    CreatePostComponent,
+    ViewPostComponent,
+    LimitCharatchersPipe,
+    DateTransformPipe
 
   ],
   imports: [
@@ -58,7 +69,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     ToastrModule.forRoot(),
     NgxWebstorageModule.forRoot(),
-    NgbModule
+    NgbModule,
+    EditorModule
   ],
   providers: [
     {

@@ -1,0 +1,40 @@
+<app-top-menu></app-top-menu>
+<div class="container">
+  <div class="row">
+    <button class="btn btn-info" (click)="backToAllPosts()">Back to posts</button>
+  </div>
+  <div class="row">
+    <hr />
+    <div class="col-md-9">
+      <div class="row post">
+        <div class="col-md-11">
+          <div *ngIf="post$ | async as post">
+            <span>
+              <h1>Title: {{post.postName}}</h1>
+              <h2>Posted by: {{post.userName}}</h2>
+              <h3>Post content:</h3>
+              <div>
+                <p class="post-content" [innerHtml]="post.content"></p>
+              </div>
+            </span>
+          </div>
+          <div class="post-comment">
+            <form [formGroup]="commentForm" (ngSubmit)="postComment()">
+              <div class="form-group">
+                <textarea class="form-control" [formControlName]="'text'" placeholder="Your Thoughts?"></textarea>
+              </div>
+              <button type="submit" class="login float-right">Comment</button>
+            </form>
+          </div>
+          <div *ngIf="comments">
+            <div *ngFor="let comment of comments" class="comments">
+              <h3>User Name: {{comment.userName}}</h3>
+              <h3>Added: {{comment.createdDate | dateTransform}}</h3>
+              <p class="coment-content" [innerHtml]="comment.text"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

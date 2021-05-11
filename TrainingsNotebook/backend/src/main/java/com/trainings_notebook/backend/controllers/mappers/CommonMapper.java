@@ -5,13 +5,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CommonMapper {
+public class CommonMapper<T, S> {
 
     private final ModelMapper modelMapper;
 
     public CommonMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
-
 
 }
