@@ -108,7 +108,6 @@ export class CreateExerciseComponent implements OnInit {
     return this.createExerciseFormGroup.controls.exercisesForms as FormArray;
   }
 
-
   private clearExercise() {
     this.currentExercise = new Exercise();
   }

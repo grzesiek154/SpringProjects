@@ -14,7 +14,7 @@ export class ListTrainingsComponent implements OnInit {
   constructor(private trainingService: TrainingsService, private roter: Router) { }
 
   ngOnInit(): void {
-    this.trainings = this.trainingService.getAll();
+    this.trainingService.getAll().subscribe(trainings => this.trainings = trainings);
   }
 
   goToCreateTraining() {

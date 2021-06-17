@@ -44,7 +44,7 @@ public class Exercise {
     @ManyToMany(mappedBy = "trainingExercises")
     private List<Training> trainings;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "workout_id")
     @JsonBackReference
     private Workout workout;

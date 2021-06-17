@@ -31,6 +31,14 @@ import { ViewPostComponent } from './components/blog/post/view-post/view-post.co
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { LimitCharatchersPipe } from './pipes/limit-charatchers.pipe';
 import { DateTransformPipe } from './pipes/date-transform.pipe';
+import { CalendarHomeComponent } from './components/calendar/calendar-home/calendar-home.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CalendarMonthComponent } from './components/calendar/calendar-month/calendar-month.component';
+import { CalendarMainComponent } from './components/calendar/calendar-main/calendar-main.component';
+import { CalendarDayComponent } from './components/calendar/calendar-day/calendar-day.component';
+import { PlaceholderDirective } from './directives/placeholder.directive';
+import { AddTrainingComponent } from './components/calendar/add-training/add-training.component';
+
 
 
 
@@ -57,7 +65,13 @@ import { DateTransformPipe } from './pipes/date-transform.pipe';
     CreatePostComponent,
     ViewPostComponent,
     LimitCharatchersPipe,
-    DateTransformPipe
+    DateTransformPipe,
+    CalendarHomeComponent,
+    CalendarMonthComponent,
+    CalendarMainComponent,
+    CalendarDayComponent,
+    PlaceholderDirective,
+    AddTrainingComponent
 
   ],
   imports: [
@@ -70,7 +84,8 @@ import { DateTransformPipe } from './pipes/date-transform.pipe';
     ToastrModule.forRoot(),
     NgxWebstorageModule.forRoot(),
     NgbModule,
-    EditorModule
+    EditorModule,
+    FontAwesomeModule
   ],
   providers: [
     {

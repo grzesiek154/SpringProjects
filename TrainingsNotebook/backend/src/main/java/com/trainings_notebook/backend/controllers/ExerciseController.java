@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -55,16 +56,16 @@ public class ExerciseController {
     }
 
     @GetMapping("/category/{category}")
-    public ResponseEntity<Set<ExerciseDTO>> getExercisesByCategory(@PathVariable String category) {
-        Set<Exercise> exercisesByCategory = this.exerciseService.findByCategory(ExerciseCategories.valueOf(category.toUpperCase()));
-        Set<ExerciseDTO> exercisesByCategoryDTO = exercisesByCategory.stream()
+    public ResponseEntity<List<ExerciseDTO>> getExercisesByCategory(@PathVariable String category) {
+        List<Exercise> exercisesByCategory = this.exerciseService.findByCategory(ExerciseCategories.valueOf(category.toUpperCase()));
+        List<ExerciseDTO> exercisesByCategoryDTO = exercisesByCategory.stream()
                 .map(exercise -> exerciseMapper.convertToDTO(exercise))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
 
         if(exercisesByCategoryDTO == null) {
             throw new ApiRequestException("Exercises with category: " + category +" not found.", HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity(exercisesByCategory, HttpStatus.OK);
+        return new ResponseEntity(exercisesByCategoryDTO, HttpStatus.OK);
     }
 
 

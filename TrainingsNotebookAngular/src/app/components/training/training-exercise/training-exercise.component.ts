@@ -12,7 +12,7 @@ export class TrainingExerciseComponent implements OnInit {
   exerciseForm: FormGroup;
   exercisesByCategory = [];
   exerciseCategories = ["ABS", "BACK", "CARDIO", "CHEST", "LEGS", "SHOULDERS", "STRETCHING"];
-  @Input() category: string = this.exerciseCategories[0];
+  category: string = this.exerciseCategories[0];
   @Output() newExerciseFormEvetnt = new EventEmitter();
 
   constructor(private fb: FormBuilder, private exerciseService: ExerciseService) { 
@@ -23,10 +23,12 @@ export class TrainingExerciseComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.newExerciseFormEvetnt.emit(this.exerciseForm);
+    
   }
 
-
+  saveExerciseToTraining() {
+    this.newExerciseFormEvetnt.emit(this.exerciseForm.get('exercise'));
+  }
   updateCategory(e) {
     let categoryEvent: string = e.target.value;
     categoryEvent = categoryEvent.slice(3, categoryEvent.length);

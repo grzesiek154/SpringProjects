@@ -25,7 +25,7 @@ export class WorkoutService {
   postWorkout(workout: Workout): Observable<Workout> {
     return this.http.post<Workout>(this.BASE_URL, workout, httpOptions);
   }
-  updateWorkout(workout): Observable<Workout> {
+  updateWorkout(workout: Workout): Observable<Workout> {
     return this.http.post<Workout>(this.BASE_URL + "/update", workout, httpOptions);
   }
 

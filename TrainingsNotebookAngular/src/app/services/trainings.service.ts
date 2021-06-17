@@ -1,7 +1,17 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Exercise } from '../models/Exercise';
 import { Training } from '../models/Training';
 import { Workout } from '../models/Workout';
+
+
+const httpOptions = {
+  headers: new HttpHeaders({ 
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin':  '*'
+})
+}
 
 @Injectable({
   providedIn: 'root'
@@ -10,60 +20,36 @@ export class TrainingsService {
 
   trainings: Training[] = [];
   trainingExercises: Exercise[] = [];
+  private BASE_URL = "http://localhost:8080/api/v1/trainings";
   
-
-  constructor() { 
-    let exercise1 = new Exercise();
-    exercise1.name = "10 pull ups"
-    exercise1.category = "strength exercise";
-    exercise1.reps = 10
-
-    let exercise2 = new Exercise();
-    exercise2.name = "100 push ups"
-    exercise2.category = "strength exercise";
-    exercise2.reps = 100
-    
-    this.trainingExercises.push(exercise1);
-    this.trainingExercises.push(exercise2);
-
-    let training1 = new Training()
-    training1.name = "cardio training";
-    training1.category = "cardio"
-    training1.description = "test cardio training";
-    training1.exercises = this.trainingExercises;
-    this.createTraining(training1);
-
+  
+  constructor(private http: HttpClient) {
     this.getAllExercises();
   }
 
-  createTraining(training: Training) {
-    this.trainings.push(training);
-    console.log("Training " + training.name + " created.")
+  addTraining(training: Training):Observable<Training> {
+    return this.http.post<Training>(this.BASE_URL,training, httpOptions);
+  }
+  getAll(): Observable<Training[]> {
+    return this.http.get<Training[]>(this.BASE_URL, httpOptions);
   }
 
-  // updateTraining(training: Training) {
-  //   console.log("Training " + training.name + " created.")
-  // }
-
-  deleteTraining(training: Training) {
-    console.log("Training " + training.name + " created.");
-    const index:number  = this.trainings.indexOf(training);
-    this.trainings.splice(index);
+  getTrainingById(id: number): Observable<Training> {
+    return this.http.get<Training>(this.BASE_URL + "/" + id, httpOptions);
   }
 
-  // private getTrainingById(id: number){
-  //   const trainingFounded = this.trainings.filter(training =>  training.id = id);
-  //   return trainingFounded;
-  // }
+  getTrainingsByCategory(category: string): Observable<Training[]> {
+    return this.http.get<Training[]>(this.BASE_URL + "/category/" + category, httpOptions);
+  }
 
-  private getAllTrainings(){
-    this.trainings.forEach(training => {
-      console.log("Training: " + training.name);
-    })
+  getTrainingsByCalendarDay(calendarDayId: number): Observable<Training[]> {
+    return this.http.get<Training[]>(this.BASE_URL + "calendarDay/" + calendarDayId, httpOptions);
   }
-  getAll() {
-    return this.trainings;
+
+  deleteTraining(trainingId: number):Observable<void> {
+    return this.http.delete<void>(this.BASE_URL + "/" + trainingId, httpOptions);
   }
+
   getAllExercises() {
     this.trainingExercises.forEach(exercise => {
       console.log("exercise: " + exercise.name);

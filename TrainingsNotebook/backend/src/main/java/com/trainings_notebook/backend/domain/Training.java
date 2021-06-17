@@ -2,10 +2,7 @@ package com.trainings_notebook.backend.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -13,7 +10,8 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -31,7 +29,6 @@ public class Training {
     private String name;
 
     @Column(name = "category")
-    @NotNull
     @Enumerated(EnumType.STRING)
     private TrainingCategories category;
 
@@ -48,5 +45,8 @@ public class Training {
     )
     private List<Exercise> trainingExercises;
 
+
+    @ManyToMany(mappedBy = "trainings")
+    private List<CalendarDay> calendarDays;
 
 }

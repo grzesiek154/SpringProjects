@@ -10,11 +10,6 @@
                         <div class="form-row">
                             <input type="text" formControlName="name" class="training-name form-control"
                                 style="margin-top: 5px" placeholder="Training Name">
-                            <!-- <select formControlName="category" class="form-control" style="margin-left: 5px" placeholder="category">
-                            <option *ngFor="let category of exerciseCategories" [ngValue]="category">
-                                {{category}}
-                            </option>
-                        </select> -->
                         </div>
                         <div class="form-row">
                             <textarea type="text" formControlName="description" class="form-control"
@@ -33,7 +28,7 @@
                                 <button type="submit" class="btn btn-success"
                                     [disabled]="createTrainingFormGroup.invalid">Save
                                     Training</button>
-                                <button class="btn btn-warning" (click)="backToMainPage()">Discard</button>
+                                <button class="btn btn-warning" (click)="backToTrainingsList()">Discard</button>
                             </div>
                             <div class="row">
                                 <button type="button" class="btn btn-info" (click)="createTrainingExerciseComponent()">Add Exercise</button>

@@ -15,6 +15,10 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { BlogHomeComponent } from './components/blog/blog-home/blog-home.component';
 import { CreatePostComponent } from './components/blog/post/create-post/create-post.component';
 import { ViewPostComponent } from './components/blog/post/view-post/view-post.component';
+import { CalendarHomeComponent } from './components/calendar/calendar-home/calendar-home.component';
+import { CalendarMonthComponent } from './components/calendar/calendar-month/calendar-month.component';
+import { CalendarMainComponent } from './components/calendar/calendar-main/calendar-main.component';
+import { AddTrainingComponent } from './components/calendar/add-training/add-training.component';
 
 
 
@@ -22,18 +26,21 @@ const routes: Routes = [
   { path: '', component: MainPageComponent},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'user-profile/:name', component: UserProfileComponent, canActivate: [AuthGuard] },
-  { path: 'create-training', component: CreateTrainingComponent, canActivate: [AuthGuard]},
-  { path: 'create-exercise', component: CreateExerciseComponent, canActivate: [AuthGuard]},
+  { path: 'create-training', component: CreateTrainingComponent},
+  { path: 'create-exercise', component: CreateExerciseComponent},
   { path: 'create-workout', component: CreateWorkoutComponent, canActivate: [AuthGuard]},
   { path: 'edit-workout/:id', component: CreateWorkoutComponent, canActivate: [AuthGuard]},
   { path: 'list-workouts', component: ListWorkoutsComponent, canActivate: [AuthGuard]},
-  { path: 'list-exercises', component: ListExercisesComponent, canActivate: [AuthGuard]},
-  { path: 'edit-exercise/:id', component: CreateExerciseComponent, canActivate: [AuthGuard]},
-  { path: 'list-trainings', component: ListTrainingsComponent, canActivate: [AuthGuard]},
+  { path: 'list-exercises', component: ListExercisesComponent},
+  { path: 'edit-exercise/:id', component: CreateExerciseComponent},
+  { path: 'list-trainings', component: ListTrainingsComponent},
   { path: 'blog', component: BlogHomeComponent},
   { path: 'create-post', component: CreatePostComponent},
   { path: 'edit-post/:id', component: CreatePostComponent},
   { path: 'view-post/:id', component: ViewPostComponent},
+  { path: 'calendar', component: CalendarMainComponent},
+  { path: 'calendar-month', component: CalendarMonthComponent },
+  { path: 'add-training', component: AddTrainingComponent},
 
   { path: 'sign-up', component: SignupComponent },
   { path: 'login', component: LoginComponent },

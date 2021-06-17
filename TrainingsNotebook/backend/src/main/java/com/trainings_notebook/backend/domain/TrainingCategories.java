@@ -5,5 +5,6 @@ public enum TrainingCategories {
     ENDURANCE,
     STRENGTH,
     MOBILITY,
-    CROSSFIT
+    CROSSFIT,
+    TEMP
 }

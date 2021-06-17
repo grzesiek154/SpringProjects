@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -54,13 +55,8 @@ public class ExerciseServiceImpl implements ExerciseService {
     }
 
     @Override
-    public Set<Exercise> findByCategory(ExerciseCategories category) {
+    public List<Exercise> findByCategory(ExerciseCategories category) {
         return exerciseRepository.findByCategory(category);
     }
 
-//    private Exercise convertToExerciseEntity(ExerciseDTO exerciseDTO) {
-//        Exercise exercise = modelMapper.map(exerciseDTO, Exercise.class);
-//
-//        if()
-//    }
 }

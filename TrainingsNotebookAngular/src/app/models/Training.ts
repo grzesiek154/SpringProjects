@@ -7,7 +7,7 @@ export class Training {
     name: string;
     category: string;
     description: string;
-    exercises: Exercise[];
+    exercises: Exercise[] = [];
     isAvailable: boolean;
     
 
@@ -16,7 +16,12 @@ export class Training {
         newTraining.name = formGroupObject.get('name').value;
         newTraining.category = formGroupObject.get('category').value;
         newTraining.description = formGroupObject.get('description').value;
+        // console.log(formGroupObject.get('exercisesFormArray').value);
+        // formGroupObject.get('exercisesFormArray').value.forEach(exercise => {
+        //  newTraining.exercises.push(Exercise.mapFormGroupObjectToExercise(exercise));
+        // });
         newTraining.exercises = formGroupObject.get('exercisesFormArray').value;
+        
         return newTraining;
     }
 

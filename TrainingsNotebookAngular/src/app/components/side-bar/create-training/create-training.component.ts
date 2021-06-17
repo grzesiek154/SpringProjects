@@ -19,36 +19,38 @@ export class CreateTrainingComponent implements OnInit {
   constructor(private router: Router, private trainingsService: TrainingsService, private fb: FormBuilder, private resolver: ComponentFactoryResolver) {
     this.createTrainingFormGroup = this.fb.group({
       name: ['', Validators.required],
-      category: ['', Validators.required],
-      description: ['', Validators.required],
+      category: [''],
+      description: [''],
       exercisesFormArray: this.fb.array([])
     });
-    this.clearTraining();
+    
   }
 
   ngOnInit(): void {
- 
+    this.clearTraining();
   }
+
   saveTraining() {
     this.currentTraining = Training.mapFormGroupObjectToTraining(this.createTrainingFormGroup as FormGroup);
-    console.log(this.createTrainingFormGroup.value);
-    this.trainingsService.createTraining(this.currentTraining);
-    this.backToMainPage();
+    this.trainingsService.addTraining(this.currentTraining).subscribe(() => {
+      this.backToTrainingsList();
+    });  
   }
 
   clearTraining() {
     this.currentTraining = new Training();
   }
 
-  backToMainPage() {
-    this.router.navigateByUrl("/");
+  backToTrainingsList() {
+    this.router.navigateByUrl("/list-trainings");
   }
   createTrainingExerciseComponent() {
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(TrainingExerciseComponent);
     this.componentRef = this.container.createComponent(factory);
   }
-  addExercise($event) {
-    this.exercisesFormArray.push($event);
+  addExercise(exercise: FormGroup) {
+    this.exercisesFormArray.push(exercise) ;
+    console.log(exercise);
   }
   get exercisesFormArray() {
     return this.createTrainingFormGroup.get('exercisesFormArray') as FormArray;

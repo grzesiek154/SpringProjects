@@ -46,7 +46,6 @@ export class ViewPostComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCommentsForPost();
-  
   }
 
   backToAllPosts() {
