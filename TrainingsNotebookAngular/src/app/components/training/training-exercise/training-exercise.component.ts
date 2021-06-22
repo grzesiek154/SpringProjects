@@ -1,6 +1,7 @@
 import { Component, OnInit, Output,EventEmitter, Input} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ExerciseService } from 'src/app/services/exercise.service';
+import { TrainingsService } from 'src/app/services/trainings.service';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class TrainingExerciseComponent implements OnInit {
   category: string = this.exerciseCategories[0];
   @Output() newExerciseFormEvetnt = new EventEmitter();
 
-  constructor(private fb: FormBuilder, private exerciseService: ExerciseService) { 
+  constructor(private fb: FormBuilder, private exerciseService: ExerciseService, private trainingsService: TrainingsService) {
+
     this.exerciseForm = this.fb.group({
       exercise: ['', Validators.required],
       category: ['', Validators.required] 
@@ -23,11 +25,14 @@ export class TrainingExerciseComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    
+  
   }
 
   saveExerciseToTraining() {
-    this.newExerciseFormEvetnt.emit(this.exerciseForm.get('exercise'));
+    //this.newExerciseFormEvetnt.emit(this.exerciseForm.get('exercise'));
+    this.trainingsService.announceNewExercise(this.exerciseForm.get('exercise') as FormControl);
+    this.exerciseForm.get('exercise').disable({ onlySelf: true });
+    this.exerciseForm.get('category').disable({ onlySelf: true });
   }
   updateCategory(e) {
     let categoryEvent: string = e.target.value;

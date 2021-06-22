@@ -1,6 +1,7 @@
 import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Exercise } from 'src/app/models/Exercise';
 import { Training } from 'src/app/models/Training';
 import { TrainingsService } from 'src/app/services/trainings.service';
 import { TrainingExerciseComponent } from '../../training/training-exercise/training-exercise.component';
@@ -27,6 +28,11 @@ export class CreateTrainingComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.trainingsService.currentExerciseFormControl$.subscribe(exerciseFormControl => {
+     if(exerciseFormControl != null && exerciseFormControl.name == null) {
+      this.exercisesFormArray.push(new FormControl(exerciseFormControl));
+     }
+    })
     this.clearTraining();
   }
 
@@ -48,9 +54,12 @@ export class CreateTrainingComponent implements OnInit {
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(TrainingExerciseComponent);
     this.componentRef = this.container.createComponent(factory);
   }
-  addExercise(exercise: FormGroup) {
-    this.exercisesFormArray.push(exercise) ;
-    console.log(exercise);
+  addExercise() {
+    this.trainingsService.currentExerciseFormControl$.subscribe(exerciseFormControl =>{
+      console.log("exerciseFormControl: " + exerciseFormControl);
+    })
+    // this.exercisesFormArray.push(exercise) ;
+    // console.log(exercise);
   }
   get exercisesFormArray() {
     return this.createTrainingFormGroup.get('exercisesFormArray') as FormArray;

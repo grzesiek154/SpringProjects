@@ -337,3 +337,40 @@ public class UserRepository {
 ```
 
 The purpose of this method should be to release resources or perform  any other cleanup tasks before the bean gets destroyed, for example  closing a database connection.
+
+# Eager vs Lazy
+
+## JOIN is the big deal
+
+Take it in easy way :
+
+assume we have a class called `User` and another class called an `Address` and suppose each **user** have one or more **addresses** that mean relationship (one-to-many) here if you execute :
+
+**`FetchType.LAZY`** execute sql command like without `join` :
+
+```sql
+SELECT * FROM users 
+```
+
+**`FetchType.EAGER`** execute sql command like within `join` :
+
+```sql
+SELECT * FROM users u join address a on a.user_id = u.user_id
+```
+
+**Note** : the above queries just for clarify image for you but Hibernate framework in realty execute similar queries of above quires .
+
+**Which Fetch Types is Better?**
+
+- Since Eager fetching loads ALL relationships automatically, It's a big performance hog
+- Lazy fetching doesn't load any relationships unless told to, which leads to better performance
+- Eager fetching makes for easier programming, since less code is required
+- Lazy loading could lead to bugs (exceptions) If the entire system Isn't properly tested
+- All things considered, you should still prefer Lazy loading over Eager, as it's more performant
+
+If you are using *Spring Boot Framework* so going to **`application.properties`** file and add the below command to know what exactly going on .
+
+```java
+logging.level.org.hibernate.SQL=DEBUG
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE
+```

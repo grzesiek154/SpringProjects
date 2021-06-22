@@ -1,4 +1,4 @@
-<div [formGroup]="exerciseForm">
+<form [formGroup]="exerciseForm" (ngSubmit)="saveExerciseToTraining()">
   <select formControlName="category" class="form-control"
   style="margin-left: 5px" placeholder="category" (change)="updateCategory($event)">
   <option *ngFor="let category of exerciseCategories"
@@ -14,4 +14,5 @@
           {{exercise.name}}
       </option>
   </select>
-</div>
+  <button class="btn btn-success" >Save Exercise</button>
+</form>
