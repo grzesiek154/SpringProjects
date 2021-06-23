@@ -14,7 +14,7 @@ export class TrainingExerciseComponent implements OnInit {
   exercisesByCategory = [];
   exerciseCategories = ["ABS", "BACK", "CARDIO", "CHEST", "LEGS", "SHOULDERS", "STRETCHING"];
   category: string = this.exerciseCategories[0];
-  @Output() newExerciseFormEvetnt = new EventEmitter();
+
 
   constructor(private fb: FormBuilder, private exerciseService: ExerciseService, private trainingsService: TrainingsService) {
 
@@ -29,7 +29,6 @@ export class TrainingExerciseComponent implements OnInit {
   }
 
   saveExerciseToTraining() {
-    //this.newExerciseFormEvetnt.emit(this.exerciseForm.get('exercise'));
     this.trainingsService.announceNewExercise(this.exerciseForm.get('exercise') as FormControl);
     this.exerciseForm.get('exercise').disable({ onlySelf: true });
     this.exerciseForm.get('category').disable({ onlySelf: true });

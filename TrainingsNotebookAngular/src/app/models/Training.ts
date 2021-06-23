@@ -12,17 +12,17 @@ export class Training {
     
 
     static mapFormGroupObjectToTraining(formGroupObject: FormGroup) {
+        if(formGroupObject != null) {
         let newTraining = new Training();
         newTraining.name = formGroupObject.get('name').value;
         newTraining.category = formGroupObject.get('category').value;
         newTraining.description = formGroupObject.get('description').value;
-        // console.log(formGroupObject.get('exercisesFormArray').value);
-        // formGroupObject.get('exercisesFormArray').value.forEach(exercise => {
-        //  newTraining.exercises.push(Exercise.mapFormGroupObjectToExercise(exercise));
-        // });
-        newTraining.exercises = formGroupObject.get('exercisesFormArray').value;
+        formGroupObject.get('exercisesFormArray').value.forEach(exerciseControl => {
+            newTraining.exercises.push(exerciseControl.value);
+        })
         
         return newTraining;
+        }
     }
 
 }

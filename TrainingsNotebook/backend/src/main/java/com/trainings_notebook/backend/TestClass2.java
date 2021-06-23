@@ -3,6 +3,8 @@ package com.trainings_notebook.backend;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 
 
@@ -11,10 +13,12 @@ public class TestClass2 {
 
 
     public static void main(String[] args) {
-    BigDecimal bigDecimal1 = new BigDecimal(3.5);
-    BigDecimal bigDecimal2 = new BigDecimal(15);
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
-        System.out.println(bigDecimal2.compareTo(bigDecimal1));
+        String date = simpleDateFormat.format(Date.from(Instant.now()));
+        System.out.println(date);
+
 
     }
 }

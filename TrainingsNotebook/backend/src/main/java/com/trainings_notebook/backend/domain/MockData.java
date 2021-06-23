@@ -1,18 +1,30 @@
 package com.trainings_notebook.backend.domain;
 
-import com.trainings_notebook.backend.repositories.CalendarDayRepository;
-import com.trainings_notebook.backend.repositories.ExerciseRepository;
-import com.trainings_notebook.backend.repositories.TrainingRepository;
-import com.trainings_notebook.backend.repositories.WorkoutRepository;
+import com.trainings_notebook.backend.repositories.*;
+import io.swagger.models.auth.In;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Component
 public class MockData implements CommandLineRunner {
+
+    String pattern = "yyyy-MM-dd";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+    User janek123 = new User.UserBuilder()
+            .username("janek123")
+            .email("janek123@gmail.com")
+            .created(Instant.now())
+            .password("asdzxc")
+            .enabled(true)
+            .build();
+
 
     Workout workout1 = Workout.builder()
             .name("Pull ups")
@@ -105,7 +117,7 @@ public class MockData implements CommandLineRunner {
             .build();
 
     CalendarDay calendarDay = CalendarDay.builder()
-            .date(Instant.now())
+            .date(simpleDateFormat.format(Date.from(Instant.now())))
             .trainings(List.of(training1))
             .build();
 
@@ -114,12 +126,14 @@ public class MockData implements CommandLineRunner {
     private ExerciseRepository exerciseRepository;
     private final TrainingRepository trainingRepository;
     private final CalendarDayRepository calendarDayRepository;
+    private final UserRepository userRepository;
 
-    public MockData(WorkoutRepository workoutRepository, ExerciseRepository exerciseRepository, TrainingRepository trainingRepository, CalendarDayRepository calendarDayRepository) {
+    public MockData(WorkoutRepository workoutRepository, ExerciseRepository exerciseRepository, TrainingRepository trainingRepository, CalendarDayRepository calendarDayRepository, UserRepository userRepository) {
         this.workoutRepository = workoutRepository;
         this.exerciseRepository = exerciseRepository;
         this.trainingRepository = trainingRepository;
         this.calendarDayRepository = calendarDayRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -130,5 +144,6 @@ public class MockData implements CommandLineRunner {
 
         trainingRepository.save(training1);
         calendarDayRepository.save(calendarDay);
+        userRepository.save(janek123);
     }
 }

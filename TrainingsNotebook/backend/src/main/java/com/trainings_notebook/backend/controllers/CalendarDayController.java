@@ -3,13 +3,15 @@ package com.trainings_notebook.backend.controllers;
 import com.trainings_notebook.backend.domain.dto.CalendarDayDTO;
 import com.trainings_notebook.backend.exceptions.ApiRequestException;
 import com.trainings_notebook.backend.service.CalendarDayService;
-import com.trainings_notebook.backend.service.CalendarDayServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -17,7 +19,7 @@ import java.util.stream.Collectors;
 @RequestMapping(CalendarDayController.BASE_URL)
 public class CalendarDayController {
 
-    public static final String BASE_URL = "/api/calendarDays";
+    public static final String BASE_URL = "/api/v1/calendarDays";
     private final CalendarDayService calendarDayService;
 
     public CalendarDayController(CalendarDayService calendarDayService) {
@@ -40,6 +42,7 @@ public class CalendarDayController {
         return new ResponseEntity(savedCalendarDay, HttpStatus.CREATED);
     }
 
+
     @GetMapping("/{calendarDayId}")
     public ResponseEntity<CalendarDayDTO> getCalendarDayById(@PathVariable Long calendarDayId) {
         CalendarDayDTO calendarDayDTO = calendarDayService.findById(calendarDayId);
@@ -50,6 +53,16 @@ public class CalendarDayController {
         return new ResponseEntity(calendarDayDTO,HttpStatus.OK);
     }
 
+    @GetMapping("/trainingsInDay/{date}")
+    public ResponseEntity<Integer> getAmountOfTrainingsInADay(@PathVariable String date) {
+        CalendarDayDTO calendarDayDTO = calendarDayService.findByDate(date);
+        Integer numberOfTrainings = calendarDayDTO.getTrainings().size();
+
+        if(calendarDayDTO == null) {
+            throw new ApiRequestException("Calendar day with date: " + date + " not found.", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(numberOfTrainings,HttpStatus.OK);
+    }
 
     @DeleteMapping("/{calendarDayId}")
     public ResponseEntity<Void> deleteCalendarDay(@PathVariable Long calendarDayId) {

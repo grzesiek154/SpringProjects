@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface CalendarDayService extends CrudService<CalendarDayDTO, Long> {
 
-    CalendarDayDTO findByDate(Instant date);
+    CalendarDayDTO findByDate(String date);
 
 }

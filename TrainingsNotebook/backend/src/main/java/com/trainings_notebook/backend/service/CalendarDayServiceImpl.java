@@ -7,12 +7,11 @@ import com.trainings_notebook.backend.exceptions.SpringNotebookException;
 import com.trainings_notebook.backend.repositories.CalendarDayRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -42,7 +41,11 @@ public class CalendarDayServiceImpl implements CalendarDayService{
 
     @Override
     public CalendarDayDTO save(CalendarDayDTO calendarDayDTO) {
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         CalendarDay calendarDay = calendarDayMapper.convertToEntity(calendarDayDTO);
+
+        calendarDay.setDate(simpleDateFormat.format(calendarDay.getDate()));
         calendarDayRepository.save(calendarDay);
         return calendarDayDTO;
     }
@@ -60,8 +63,8 @@ public class CalendarDayServiceImpl implements CalendarDayService{
     }
 
     @Override
-    public CalendarDayDTO findByDate(Instant date) {
-        CalendarDayDTO calendarDayDTO = calendarDayMapper.convertToDTO(calendarDayRepository.findByDate(date));
-        return calendarDayDTO;
+    public CalendarDayDTO findByDate(String date) {
+       CalendarDay calendarDay = calendarDayRepository.findByDate(date);
+       return calendarDayMapper.convertToDTO(calendarDay);
     }
 }

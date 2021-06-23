@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -20,7 +21,7 @@ public class CalendarDay {
 
     @Column(name = "date")
     @NotNull
-    private Instant date;
+    private String date;
 
     @JsonIgnore
     @ManyToMany

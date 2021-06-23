@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -14,7 +15,7 @@ import java.util.List;
 public class CalendarDayDTO {
 
     private Long id;
-    private Instant date;
+    private String date;
     //private List<TrainingDTO> trainingsId;
     private List<TrainingDTO> trainings;
 }

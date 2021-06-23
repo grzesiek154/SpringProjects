@@ -27,8 +27,7 @@ public class CalendarDayMapper {
 
     public CalendarDayDTO convertToDTO(CalendarDay calendarDay) {
         CalendarDayDTO calendarDayDTO = modelMapper.map(calendarDay, CalendarDayDTO.class);
-//        List<Long> trainingsId = new ArrayList<>();
-//        calendarDay.getTrainings().forEach(training -> trainingsId.add(training.getId()));
+
         List<TrainingDTO> trainingDTOS = calendarDay.getTrainings().stream().map(training -> trainingMapper.convertToDTO(training)).collect(Collectors.toList());
         calendarDayDTO.setTrainings(trainingDTOS);
 
@@ -37,8 +36,7 @@ public class CalendarDayMapper {
 
     public CalendarDay convertToEntity(CalendarDayDTO calendarDayDTO) {
         CalendarDay calendarDay = modelMapper.map(calendarDayDTO, CalendarDay.class);
-//        List<Training> trainings = calendarDayDTO.getTrainingsId().stream().map(id ->
-//            trainingService.findById(id)).collect(Collectors.toList());
+
         List<Training> trainings = calendarDayDTO.getTrainings().stream().map(trainingDTO -> trainingMapper.convertToEntity(trainingDTO)).collect(Collectors.toList());
         calendarDay.setTrainings(trainings);
 
