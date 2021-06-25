@@ -18,6 +18,7 @@ import { ViewPostComponent } from './components/blog/post/view-post/view-post.co
 import { CalendarMonthComponent } from './components/calendar/calendar-month/calendar-month.component';
 import { CalendarMainComponent } from './components/calendar/calendar-main/calendar-main.component';
 import { AddTrainingComponent } from './components/calendar/add-training/add-training.component';
+import { ListDayTrainingsComponent } from './components/calendar/list-day-trainings/list-day-trainings.component';
 
 
 
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: 'view-post/:id', component: ViewPostComponent},
   { path: 'calendar', component: CalendarMainComponent},
   { path: 'add-training', component: AddTrainingComponent},
+  { path: 'calendar-day-trainings', component: ListDayTrainingsComponent},
 
   { path: 'sign-up', component: SignupComponent },
   { path: 'login', component: LoginComponent },

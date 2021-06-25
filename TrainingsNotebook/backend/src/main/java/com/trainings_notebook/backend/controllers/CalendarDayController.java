@@ -1,6 +1,7 @@
 package com.trainings_notebook.backend.controllers;
 
 import com.trainings_notebook.backend.domain.dto.CalendarDayDTO;
+import com.trainings_notebook.backend.domain.dto.TrainingDTO;
 import com.trainings_notebook.backend.exceptions.ApiRequestException;
 import com.trainings_notebook.backend.service.CalendarDayService;
 import org.springframework.http.HttpStatus;
@@ -53,7 +54,7 @@ public class CalendarDayController {
         return new ResponseEntity(calendarDayDTO,HttpStatus.OK);
     }
 
-    @GetMapping("/trainingsInDay/{date}")
+    @GetMapping("/numberOfTrainingsInDay/{date}")
     public ResponseEntity<Integer> getAmountOfTrainingsInADay(@PathVariable String date) {
         CalendarDayDTO calendarDayDTO = calendarDayService.findByDate(date);
         Integer numberOfTrainings = calendarDayDTO.getTrainings().size();
@@ -62,6 +63,16 @@ public class CalendarDayController {
             throw new ApiRequestException("Calendar day with date: " + date + " not found.", HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity(numberOfTrainings,HttpStatus.OK);
+    }
+
+    @GetMapping("/trainingsInDay/{date}")
+    public ResponseEntity<List<TrainingDTO>> getTrainingsInADay(@PathVariable String date) {
+        List<TrainingDTO> trainingsInDay = calendarDayService.getTrainingsInDay(date);
+
+        if(trainingsInDay == null) {
+            throw new ApiRequestException("Calendar day with date: " + date + " not found.", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(trainingsInDay,HttpStatus.OK);
     }
 
     @DeleteMapping("/{calendarDayId}")

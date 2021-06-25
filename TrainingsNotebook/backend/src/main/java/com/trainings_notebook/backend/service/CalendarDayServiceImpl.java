@@ -1,8 +1,11 @@
 package com.trainings_notebook.backend.service;
 
 import com.trainings_notebook.backend.controllers.mappers.CalendarDayMapper;
+import com.trainings_notebook.backend.controllers.mappers.TrainingMapper;
 import com.trainings_notebook.backend.domain.CalendarDay;
+import com.trainings_notebook.backend.domain.Training;
 import com.trainings_notebook.backend.domain.dto.CalendarDayDTO;
+import com.trainings_notebook.backend.domain.dto.TrainingDTO;
 import com.trainings_notebook.backend.exceptions.SpringNotebookException;
 import com.trainings_notebook.backend.repositories.CalendarDayRepository;
 import lombok.AllArgsConstructor;
@@ -12,9 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -24,6 +26,7 @@ public class CalendarDayServiceImpl implements CalendarDayService{
 
     private CalendarDayMapper calendarDayMapper;
     private CalendarDayRepository calendarDayRepository;
+    private TrainingMapper trainingMapper;
 
     @Override
     public Set<CalendarDayDTO> findAll() {
@@ -41,13 +44,31 @@ public class CalendarDayServiceImpl implements CalendarDayService{
 
     @Override
     public CalendarDayDTO save(CalendarDayDTO calendarDayDTO) {
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String newDateFormat = calendarDayDTO.getDate().substring(0, 10);
         CalendarDay calendarDay = calendarDayMapper.convertToEntity(calendarDayDTO);
+        CalendarDay dayByDate = calendarDayRepository.findByDate(newDateFormat);
 
-        calendarDay.setDate(simpleDateFormat.format(calendarDay.getDate()));
-        calendarDayRepository.save(calendarDay);
+        if(dayByDate != null) {
+           List<Training> trainings = dayByDate.getTrainings();
+           calendarDay.getTrainings().forEach(trainings::add);
+        } else {
+            calendarDay.setDate(newDateFormat);
+            calendarDayRepository.save(calendarDay);
+        }
         return calendarDayDTO;
+    }
+
+    @Override
+    public List<TrainingDTO> getTrainingsInDay(String date) {
+        String newDateFormat = date.substring(0, 10);
+        CalendarDay calendarDay = calendarDayRepository.findByDate(newDateFormat);
+        List<TrainingDTO> trainingsInDay;
+        if(calendarDay != null) {
+           trainingsInDay = calendarDay.getTrainings().stream().map(training -> trainingMapper.convertToDTO(training)).collect(Collectors.toList());
+        } else {
+           trainingsInDay = new ArrayList<>();
+        }
+        return trainingsInDay;
     }
 
     @Override

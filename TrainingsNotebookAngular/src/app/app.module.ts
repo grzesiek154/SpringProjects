@@ -37,6 +37,7 @@ import { CalendarMainComponent } from './components/calendar/calendar-main/calen
 import { CalendarDayComponent } from './components/calendar/calendar-day/calendar-day.component';
 import { PlaceholderDirective } from './directives/placeholder.directive';
 import { AddTrainingComponent } from './components/calendar/add-training/add-training.component';
+import { ListDayTrainingsComponent } from './components/calendar/list-day-trainings/list-day-trainings.component';
 
 
 
@@ -69,7 +70,8 @@ import { AddTrainingComponent } from './components/calendar/add-training/add-tra
     CalendarMainComponent,
     CalendarDayComponent,
     PlaceholderDirective,
-    AddTrainingComponent
+    AddTrainingComponent,
+    ListDayTrainingsComponent
 
   ],
   imports: [
