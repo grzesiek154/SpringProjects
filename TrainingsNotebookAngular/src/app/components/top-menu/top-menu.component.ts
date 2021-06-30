@@ -19,19 +19,21 @@ export class TopMenuComponent implements OnInit {
     this.authService.username.subscribe((data: string) => this.username = data);
     this.isLoggedIn = this.authService.isLoggedIn();
     this.username = this.authService.getUserName();
+
+    console.log("isLoggedIn: " + this.isLoggedIn)
   }
 
-  goToCreateTraining() {
-    this.router.navigateByUrl('/create-training');
-  }
+  // goToListTrainings() {
+  //   this.router.navigateByUrl('/list-trainings');
+  // }
 
-  goToCreateExercise() {
-    this.router.navigateByUrl('/create-exercise');
-  }
+  // goToListExercises() {
+  //   this.router.navigateByUrl('/list-exercises');
+  // }
 
-  goToCreateWorkout() {
-    this.router.navigateByUrl('/create-workout');
-  }
+  // goToListWorkouts() {
+  //   this.router.navigateByUrl('/list-workouts');
+  // }
 
   goToUserProfile() {
     this.router.navigateByUrl('/user-profile/' + this.username);

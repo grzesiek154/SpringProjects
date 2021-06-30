@@ -1,13 +1,15 @@
 package com.trainings_notebook.backend.domain;
 
 import com.trainings_notebook.backend.repositories.*;
-import io.swagger.models.auth.In;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -17,13 +19,13 @@ public class MockData implements CommandLineRunner {
     String pattern = "yyyy-MM-dd";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
-    User janek123 = new User.UserBuilder()
-            .username("janek123")
-            .email("janek123@gmail.com")
-            .created(Instant.now())
-            .password("asdzxc")
-            .enabled(true)
-            .build();
+//    User janek123 = new User.UserBuilder()
+//            .username("user")
+//            .email("user123@gmail.com")
+//            .created(Instant.now())
+//            .password("password")
+//            .enabled(true)
+//            .build();
 
 
     Workout workout1 = Workout.builder()
@@ -112,7 +114,6 @@ public class MockData implements CommandLineRunner {
     Training training1 = Training.builder()
             .name("Strenght training")
             .category(TrainingCategories.STRENGTH)
-            .date(LocalDateTime.now())
             .trainingExercises(trainingsExerciseList)
             .build();
 
@@ -122,28 +123,57 @@ public class MockData implements CommandLineRunner {
             .build();
 
 
+
     private WorkoutRepository workoutRepository;
     private ExerciseRepository exerciseRepository;
     private final TrainingRepository trainingRepository;
     private final CalendarDayRepository calendarDayRepository;
     private final UserRepository userRepository;
+    private final PostRepository postRepository;
 
-    public MockData(WorkoutRepository workoutRepository, ExerciseRepository exerciseRepository, TrainingRepository trainingRepository, CalendarDayRepository calendarDayRepository, UserRepository userRepository) {
+    public MockData(WorkoutRepository workoutRepository, ExerciseRepository exerciseRepository, TrainingRepository trainingRepository, CalendarDayRepository calendarDayRepository, UserRepository userRepository, PostRepository postRepository) throws FileNotFoundException {
         this.workoutRepository = workoutRepository;
         this.exerciseRepository = exerciseRepository;
         this.trainingRepository = trainingRepository;
         this.calendarDayRepository = calendarDayRepository;
         this.userRepository = userRepository;
+        this.postRepository = postRepository;
     }
+
+
+    private String getPostContent(String fileName)  {
+
+        BufferedReader br;
+        String content = "";
+
+            try {
+                br = new BufferedReader(new FileReader(fileName));
+                while (br.readLine() != null) {
+                    content += br.readLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        return  content;
+    }
+
+    Post post = Post.builder()
+            .postName("10 Outdoor Family Activities for Fitness")
+            .content(getPostContent("src/main/java/com/trainings_notebook/backend/domain/MockDataContent/post1.txt"))
+            .build();
 
     @Override
     public void run(String... args) throws Exception {
 
+
+
         workoutRepository.saveAll(List.of(workout1,workout2,workout3,deadLift,benchPress,running,squats,handstandPushUp));
         exerciseRepository.saveAll(List.of(exercise1,exercise2,deadLiftExercise,benchPressExercise,runningExercise,squatsExercise, handstandPushUpExercise));
+        postRepository.save(post);
 
         trainingRepository.save(training1);
         calendarDayRepository.save(calendarDay);
-        userRepository.save(janek123);
+        //userRepository.save(janek123);
     }
 }

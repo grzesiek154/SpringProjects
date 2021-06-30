@@ -50,6 +50,7 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   private editWorkout(editedWorkout: Workout) {
+    this.workoutsForms.removeAt(0);
     this.currentWorkoutForm.patchValue({
       name: editedWorkout.name,
       description: editedWorkout.description

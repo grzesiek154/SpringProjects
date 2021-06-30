@@ -36,4 +36,8 @@ export class WorkoutService {
   getWorkoutById(id: number): Observable<Workout> { 
     return this.http.get<Workout>(this.BASE_URL + "/" + id);
   }
+
+  deleteWorkoutById(id: number): Observable<void> {
+    return this.http.delete<void>(this.BASE_URL + "/" + id, httpOptions);
+  }
 }

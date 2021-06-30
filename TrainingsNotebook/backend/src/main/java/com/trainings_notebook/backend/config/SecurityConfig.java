@@ -28,36 +28,36 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.cors().and()
-//                .csrf().disable()
-//                .authorizeRequests()
-//                .antMatchers("/api/auth/**")
-//                .permitAll()
-////                .antMatchers(HttpMethod.GET, "/api/posts/")
-////                .permitAll()
-////                .antMatchers(HttpMethod.GET, "/api/posts/**")
-////                .permitAll()
-////                .antMatchers(HttpMethod.POST,"/api/posts/")
-////                .permitAll()
-//                .antMatchers("/v2/api-docs",
-//                        "/configuration/ui",
-//                        "/swagger-resources/**",
-//                        "/configuration/security",
-//                        "/swagger-ui.html",
-//                        "/webjars/**")
-//                .permitAll()
-//                .anyRequest()
-//                .authenticated();
-//        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-//    }
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().authorizeRequests().antMatchers("/").permitAll();
+        http.cors().and()
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/api/auth/**")
+                .permitAll()
+                .antMatchers(HttpMethod.GET, "/api/posts/")
+                .permitAll()
+                .antMatchers(HttpMethod.GET, "/api/posts/**")
+                .permitAll()
+                .antMatchers(HttpMethod.POST,"/api/posts/")
+                .permitAll()
+                .antMatchers("/v2/api-docs",
+                        "/configuration/ui",
+                        "/swagger-resources/**",
+                        "/configuration/security",
+                        "/swagger-ui.html",
+                        "/webjars/**")
+                .permitAll()
+                .anyRequest()
+                .authenticated();
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
+
+
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.cors().and().csrf().disable().authorizeRequests().antMatchers("/").permitAll();
+//    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

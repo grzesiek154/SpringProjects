@@ -2,18 +2,11 @@
   border: 1px solid red !important;
 } */
 
+/* .training-name {
+  width: 30%;
+} */
+
 .training-name {
-  width: 30%;
+  width: 40%;
 }
 
-.training-type {
-  width: 30%;
-}
-
-.exercise-select {
-  width: 60%;
-}
-
-.form-array {
-  width: 100%;
-}

@@ -1,32 +1,42 @@
 <app-top-menu></app-top-menu>
-<div class="contaner">
+<body>
+  <div class="contaner">
   <div class="row">
-    <div class="col-sm-4"></div>
-    <div class="col-sm-4">
-        <table class="table table-bordered" *ngFor="let exercise of exercises">
+    <div class="col-sm-8">
+        <table class="table table-bordered">
+          <thead class="thead-dark">
           <tr>
             <th>Id</th>
             <th>Name</th>
             <th>Category</th>
-            <th *ngIf="exercise.reps != null && exercise.reps > 0">Reps</th>
-            <th *ngIf="exercise.duration != null && exercise.duration > 0">Duration</th>
+            <th>Reps</th>
+            <th>Duration</th>
             <th>Description</th>
             <th>Workout</th>
+            <th>Action</th>
           </tr>
+          </thead>
+          <tbody *ngFor="let exercise of exercises">
             <tr>
               <td>{{exercise.id}}</td>
               <td>{{exercise.name}}</td>
               <td>{{exercise.category}}</td>
-              <td *ngIf="exercise.reps != null && exercise.reps > 0">{{exercise.reps}}</td>
-              <td *ngIf="exercise.duration != null && exercise.duration > 0">{{exercise.duration}}</td>
+              <td>{{exercise.reps}}</td>
+              <td>{{exercise.duration}}</td>
               <td>{{exercise.description}}</td>
               <td>{{exercise.workout.name}}</td>
+              <td>
+                <button class="btn btn-dark" (click)="editButton(exercise.id)">Edit</button>
+                &nbsp;
+                <button class="btn btn-dark" (click)="removeExercise(exercise.id)">Remove</button>
+              </td>
             </tr>
-            <button class="btn btn-dark" (click)="editButton(exercise.id)">Edit Exercise</button>
+          </tbody>
         </table>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-2">
       <button class="btn btn-info" (click)="goToCreateExercise()">Add new</button>
     </div>
   </div>
 </div>
+</body>

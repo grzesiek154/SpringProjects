@@ -1,41 +1,43 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" routerLink="/home">Trainings Notebook</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <!-- <div *ngIf="isLoggedIn" class="collapse navbar-collapse" id="navbarNav"> -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/create-training">Trainings</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/create-exercise">Exercises</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/create-workout">Workouts</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/blog">Blog</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/calendar">Calendar</a>
-      </li>
-    </ul>
-  </div>
-  <div class="flex-grow-1 float-right">
-    <div *ngIf="isLoggedIn" ngbDropdown class="float-right">
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <div  *ngIf="isLoggedIn" class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/list-trainings">Trainings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/list-exercises">Exercises</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/list-workouts">Workouts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/blog">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/calendar">Calendar</a>
+        </li>
+      </ul>
+    </div>
+    <div class="flex-grow-1 float-right">
+      <div *ngIf="isLoggedIn" ngbDropdown class="float-right">
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <button (click)="goToUserProfile()" ngbDropdownItem>Profile</button>
-            <button (click)="logout()" ngbDropdownItem>Logout</button>
+          <!-- <button (click)="goToUserProfile()" ngbDropdownItem>Profile</button> -->
+          <button (click)="logout()" ngbDropdownItem>Logout</button>
         </div>
         <button class="userdetails" id="dropdownBasic1" ngbDropdownToggle>
-            {{username}}
+          {{username}}
         </button>
-    </div>            
-    <div *ngIf="!isLoggedIn">
+      </div>
+      <div *ngIf="!isLoggedIn">
         <a routerLink="/sign-up" class="float-right sign-up mr-2">Sign up</a>
         <a routerLink="/login" class="float-right login mr-2">Login</a>
+      </div>
     </div>
-</div>
+  </div>
 </nav>

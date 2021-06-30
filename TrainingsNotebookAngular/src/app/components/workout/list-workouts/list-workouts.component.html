@@ -1,24 +1,35 @@
 <app-top-menu></app-top-menu>
+<body>
 <div class="contaner">
   <div class="row">
-    <div class="col-sm-4"></div>
-    <div class="col-sm-4">
-        <table class="table table-bordered" *ngFor="let workout of workouts">
+    <div class="col-sm-6">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
           <tr>
             <th>id</th>
             <th>Name</th>
             <th>Description</th>
+            <th>Action</th>
           </tr>
-            <tr>
-              <td>{{workout.id}}</td>
-              <td>{{workout.name}}{{workout._name}}</td>
-              <td>{{workout.description}} {{workout._description}}</td>
-            </tr>
-            <button class="btn btn-dark" (click)="editButton(workout.id)">Edit Workout</button>
-        </table>
+        </thead>
+        <tbody *ngFor="let workout of workouts">
+          <tr>
+            <td>{{workout.id}}</td>
+            <td>{{workout.name}}{{workout._name}}</td>
+            <td>{{workout.description}} {{workout._description}}</td>
+            <td>
+              <button class="btn btn-dark" (click)="editButton(workout.id)">Edit</button>
+              &nbsp;
+              <button class="btn btn-dark" (click)="removeWorkout(workout.id)">Remove</button>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
     </div>
     <div class="col-sm-4">
       <button class="btn btn-info" (click)="goToCreateWorkout()">Add new</button>
     </div>
   </div>
 </div>
+</body>

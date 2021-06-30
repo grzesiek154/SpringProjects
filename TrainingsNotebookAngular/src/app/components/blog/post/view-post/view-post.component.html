@@ -1,5 +1,6 @@
 <app-top-menu></app-top-menu>
-<div class="container">
+<body>
+  <div class="container">
   <div class="row">
     <button class="btn btn-info" (click)="backToAllPosts()">Back to posts</button>
   </div>
@@ -8,7 +9,7 @@
     <div class="col-md-9">
       <div class="row post">
         <div class="col-md-11">
-          <div *ngIf="post$ | async as post">
+          <div class="view-post-content" *ngIf="post$ | async as post">
             <span>
               <h1>Title: {{post.postName}}</h1>
               <h2>Posted by: {{post.userName}}</h2>
@@ -38,3 +39,4 @@
     </div>
   </div>
 </div>
+</body>

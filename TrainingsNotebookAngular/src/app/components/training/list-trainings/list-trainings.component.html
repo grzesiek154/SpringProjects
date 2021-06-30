@@ -1,9 +1,9 @@
 <app-top-menu></app-top-menu>
 <div class="contaner">
   <div class="row">
-    <div class="col-sm-4"></div>
-    <div class="col-sm-4">
-        <table class="table" *ngFor="let training of trainings">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-6">
+        <table class="table">
           <thead class="thead-dark">
           <tr>
             <th>Name</th>
@@ -11,6 +11,7 @@
             <th>Description</th>
           </tr>
         </thead>
+        <tbody *ngFor="let training of trainings">
             <tr>
               <td>{{training.name}}</td>
               <td>{{training.type}}</td>
@@ -22,12 +23,13 @@
               </tr>
             </thead>
             <tr>
-              <td *ngFor="let exercise of training.exercises"><span>{{exercise.name}}</span></td>
+              <td *ngFor="let exercise of training.exercises">
+                <ul>
+                  <li>{{exercise.name}}</li>
+                </ul>
+              </td>
             </tr>
-            <!-- <span>Exercises:</span>
-            <ul class="list-group" *ngFor="let exercise of training.exercises">
-              <li class="list-group-item">{{exercise.name}}</li>
-            </ul> -->
+          </tbody>
         </table>
     </div>
     <div class="col-sm-4">

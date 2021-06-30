@@ -5,21 +5,12 @@
         <form class="form-inline" [formGroup]="createTrainingFormGroup" (ngSubmit)="saveTraining()">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-8">
-                        <div class="form-row">
-                            <input type="text" formControlName="name" class="training-name form-control"
-                                style="margin-top: 5px" placeholder="Training Name">
-                        </div>
+                    <div class="col-sm-10">
+                        <input type="text" formControlName="name" class="training-name form-control"
+                            style="margin-top: 5px" placeholder="Training Name">
                         <div class="form-row">
                             <textarea type="text" formControlName="description" class="form-control"
-                                style="width: 60%; margin-top: 5px" placeholder="Description"></textarea>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-array" formArrayName="exercisesFormArray">
-                                    <template #trainingExerciseContainer></template>
-                                    <app-training-exercise></app-training-exercise>                              
-                            </div>
+                                style="width: 40%; margin-top: 5px" placeholder="Description"></textarea>
                         </div>
                     </div>
                     <div class="col col-sm-2">
@@ -31,9 +22,18 @@
                                 <button class="btn btn-warning" (click)="backToTrainingsList()">Discard</button>
                             </div>
                             <div class="row">
-                                <button type="button" class="btn btn-info" (click)="createTrainingExerciseComponent()">Add Exercise</button>
+                                <button type="button" class="btn btn-info"
+                                    (click)="createTrainingExerciseComponent()">Add Exercise</button>
                                 <button (click)="printAll()" class="btn btn-warning">Print All</button>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-10">
+                        <div class="form-array" formArrayName="exercisesFormArray">
+                            <template #trainingExerciseContainer></template>
+                            <app-training-exercise></app-training-exercise>
                         </div>
                     </div>
                 </div>

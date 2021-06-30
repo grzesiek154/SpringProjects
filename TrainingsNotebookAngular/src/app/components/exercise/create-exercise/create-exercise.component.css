@@ -1,0 +1,12 @@
+body {
+  background-image: url("../../../img/exercises.jpg");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: auto; /* Resize the background image to cover the entire container */
+}
+
+table {
+  background-color: white;
+  opacity: 0.8;
+}
+

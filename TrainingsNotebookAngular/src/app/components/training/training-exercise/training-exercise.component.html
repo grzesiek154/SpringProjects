@@ -1,18 +1,23 @@
 <form [formGroup]="exerciseForm" (ngSubmit)="saveExerciseToTraining()">
-  <select formControlName="category" class="form-control"
-  style="margin-left: 5px" placeholder="category" (change)="updateCategory($event)">
-  <option *ngFor="let category of exerciseCategories"
-      [ngValue]="category">
-      {{category}}
-  </option>
-</select>
-  <select type="text" formControlName="exercise"
-      class="exercise-select form-control" style="margin-left: 5px"
-      placeholder="Exercises">
-      <option *ngFor="let exercise of exercisesByCategory"
-          [ngValue]="exercise">
-          {{exercise.name}}
-      </option>
-  </select>
-  <button class="btn btn-success" >Save Exercise</button>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <select formControlName="category" class="form-control" style="margin-left: 5px" placeholder="category"
+          (change)="updateCategory($event)">
+          <option *ngFor="let category of exerciseCategories" [ngValue]="category">
+            {{category}}
+          </option>
+        </select>
+  
+        <select type="text" formControlName="exercise" class="exercise-select form-control" style="margin-left: 5px"
+          placeholder="Exercises">
+          <option *ngFor="let exercise of exercisesByCategory" [ngValue]="exercise">
+            {{exercise.name}}
+          </option>
+        </select>
+        <button class="btn btn-success">Save</button>
+      </div>
+          
+    </div>
+  </div>
 </form>

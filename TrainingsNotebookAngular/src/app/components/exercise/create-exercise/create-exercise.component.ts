@@ -18,6 +18,7 @@ export class CreateExerciseComponent implements OnInit {
   currentExercise: Exercise = new Exercise();
   availableWorkouts: Workout[];
   updateId: number;
+  exerciseCategories = ["ABS", "BACK", "CARDIO", "CHEST", "LEGS", "SHOULDERS", "STRETCHING"];
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private exerciseService: ExerciseService, private workoutService: WorkoutService, private fb: FormBuilder) {
     
@@ -59,6 +60,7 @@ export class CreateExerciseComponent implements OnInit {
   }
 
   getExercise(id: number) {
+    this.exercisesForms.removeAt(0);
     this.exerciseService.getExerciseById(id).subscribe(
       exercise => {
         this.updateId = exercise.id;

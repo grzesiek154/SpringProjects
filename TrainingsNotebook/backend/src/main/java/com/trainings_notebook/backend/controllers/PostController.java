@@ -1,6 +1,5 @@
 package com.trainings_notebook.backend.controllers;
 
-import com.trainings_notebook.backend.domain.Post;
 import com.trainings_notebook.backend.domain.dto.PostDTO;
 import com.trainings_notebook.backend.exceptions.ApiRequestException;
 import com.trainings_notebook.backend.service.PostServiceImpl;
@@ -25,7 +24,7 @@ public class PostController {
         if(bindingResult.hasErrors()) {
             throw new ApiRequestException("Cannot add new Post, check your request");
         }
-        postDTO.setUserName("janek123");
+
         postServiceImpl.save(postDTO);
         return new ResponseEntity(HttpStatus.CREATED);
     }
@@ -38,7 +37,6 @@ public class PostController {
         }
         postToUpdate.setPostName(postDTO.getPostName());
         postToUpdate.setContent(postDTO.getContent());
-        postDTO.setUserName("janek123");
         postServiceImpl.save(postToUpdate);
         return new ResponseEntity(HttpStatus.CREATED);
     }

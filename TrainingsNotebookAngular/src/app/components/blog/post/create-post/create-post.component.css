@@ -1,3 +1,9 @@
+body {
+  background-image: url("../../../../img/blog.jpg");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
 .btnCreatePost,
 .btnCreateSubreddit {
   margin-top: 5px;
