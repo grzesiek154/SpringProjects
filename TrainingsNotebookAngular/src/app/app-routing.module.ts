@@ -23,7 +23,7 @@ import { ListDayTrainingsComponent } from './components/calendar/list-day-traini
 
 
 const routes: Routes = [
-  { path: '', component: MainPageComponent},
+  { path: '', component: HomeComponent},
   { path: 'home', component: HomeComponent},
   { path: 'user-profile/:name', component: UserProfileComponent,  canActivate: [AuthGuard]},
   { path: 'create-training', component: CreateTrainingComponent, canActivate: [AuthGuard]},

@@ -1,5 +1,6 @@
 <app-top-menu></app-top-menu>
-<div class="container-fluid">
+<body>
+  <div class="container-fluid">
     <div class="row">
       <div class="col-sm-4"></div>
       <div class="col-sm-6">
@@ -16,8 +17,8 @@
               </div>
               <div class="form-row">
                 <button class="btn btn-warning" (click)="removeWorkout(i)">Remove Workout</button>
-                <button class="btn btn-success" [disabled]="workout.invalid" (click)="saveWorkout(i)">Save Workout</button>
-                <button class="btn btn-success" [disabled]="workout.invalid" (click)="updateWorkout(i)">Update Workout</button>
+                <button *ngIf="!isEdited" class="btn btn-success" [disabled]="workout.invalid" (click)="saveWorkout(i)">Save Workout</button>
+                <button *ngIf="isEdited" class="btn btn-success" [disabled]="workout.invalid" (click)="updateWorkout(i)">Update Workout</button>
               </div>
               </div>
             </div>
@@ -28,9 +29,10 @@
         </form>
       </div>
       <div class="col-sm-2">
-        <button class="btn btn-warning" (click)="addWorkoutForm()">Add Workout</button>
+        <button *ngIf="!isEdited" class="btn btn-warning" (click)="addWorkoutForm()">Add Workout</button>
         <button class="btn btn-info" (click)="printAll()">Print All Workouts</button>
       </div>
     </div>
   </div>
+</body>
   

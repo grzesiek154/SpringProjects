@@ -1,52 +1,50 @@
 <app-top-menu></app-top-menu>
+
 <body>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-10">
-      <form class="form-inline" [formGroup]="createExerciseFormGroup">
-        <div formArrayName="exercisesForms">
-          <div *ngFor="let exercise of exercisesForms.controls;
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-10">
+        <form class="form-inline" [formGroup]="createExerciseFormGroup">
+          <div formArrayName="exercisesForms">
+            <div *ngFor="let exercise of exercisesForms.controls;
        let i = index" class="form-group">
-            <div [formGroupName]="i">
-              <div class="form-row">
-              <input type="text" formControlName="name" class="form-control" style="margin-left: 5px"
-                placeholder="Exercise Name">
-                <select formControlName="category" class="form-control"
-                style="margin-left: 5px" placeholder="category">
-                <option *ngFor="let category of exerciseCategories"
-                    [ngValue]="category">
-                    {{category}}
-                </option>
-              </select>
-              <input type="number" formControlName="reps" class="form-control" style="margin-left: 5px" size=4
-                placeholder="Reps">
-              <input type="number" formControlName="duration" class="form-control" style="margin-left: 5px" size=4
-                placeholder="Time">
-              <input type="text" formControlName="description" class="form-control" style="margin-left: 5px"
-                placeholder="Description">
-              <select type="text" formControlName="workout" class="form-control" style="margin-left: 5px"
-                placeholder="Workouts">
-                <option *ngFor="let workout of availableWorkouts" [ngValue]="workout"
-                  [class.selected]="workout === selectedWorkout">{{workout.name}}</option>
-              </select>
-            </div>
-            <div class="form-row">
-              <button class="btn btn-warning" (click)="removeExercise(i)">Remove</button>
-              <button class="btn btn-success" [disabled]="exercise.invalid" (click)="saveExercise(i)">Save</button>
-              <button class="btn btn-success" [disabled]="exercise.invalid" (click)="updateExercise(i)">Update</button>
-            </div>
+              <div [formGroupName]="i">
+                <div class="form-row">
+                  <input type="text" formControlName="name" class="form-control" style="margin-left: 5px"
+                    placeholder="Exercise Name">
+                  <select formControlName="category" class="form-control" style="margin-left: 5px"
+                    placeholder="category">
+                    <option *ngFor="let category of exerciseCategories" [ngValue]="category">
+                      {{category}}
+                    </option>
+                  </select>
+                  <input type="number" formControlName="reps" class="form-control" style="margin-left: 5px" size=4
+                    placeholder="Reps">
+                  <input type="number" formControlName="duration" class="form-control" style="margin-left: 5px" size=4
+                    placeholder="Time">
+                  <input type="text" formControlName="description" class="form-control" style="margin-left: 5px"
+                    placeholder="Description">
+                  <select type="text" formControlName="workout" class="form-control" style="margin-left: 5px"
+                    placeholder="Workouts">
+                    <option *ngFor="let workout of availableWorkouts" [ngValue]="workout"
+                      [class.selected]="workout === selectedWorkout">{{workout.name}}</option>
+                  </select>
+                </div>
+                <div class="form-row">
+                  <button class="btn btn-warning" (click)="removeExercise(i)">Remove</button>
+                  <button *ngIf="!isEdited" class="btn btn-success" [disabled]="exercise.invalid" (click)="saveExercise(i)">Save</button>
+                  <button *ngIf="isEdited" class="btn btn-success" [disabled]="exercise.invalid"
+                    (click)="updateExercise(i)">Update</button>
+                </div>
+              </div>
             </div>
           </div>
-          <!-- <div class="row">
-        <button class="btn btn-info">Add Exercise</button>
-      </div> -->
-        </div>
-      </form>
-    </div>
-    <div class="col-sm-2">
-      <button class="btn btn-warning" (click)="addExerciseForm()">Add Exercise</button>
-      <button class="btn btn-info" (click)="printAll()">Print All Exercises</button>
+        </form>
+      </div>
+      <div class="col-sm-2">
+        <button *ngIf="!isEdited" class="btn btn-warning" (click)="addExerciseForm()">Add Exercise</button>
+        <button class="btn btn-info" (click)="printAll()">Print All Exercises</button>
+      </div>
     </div>
   </div>
-</div>
 </body>

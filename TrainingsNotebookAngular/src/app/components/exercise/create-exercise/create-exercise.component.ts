@@ -18,6 +18,7 @@ export class CreateExerciseComponent implements OnInit {
   currentExercise: Exercise = new Exercise();
   availableWorkouts: Workout[];
   updateId: number;
+  isEdited: boolean = false;
   exerciseCategories = ["ABS", "BACK", "CARDIO", "CHEST", "LEGS", "SHOULDERS", "STRETCHING"];
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private exerciseService: ExerciseService, private workoutService: WorkoutService, private fb: FormBuilder) {
@@ -36,6 +37,7 @@ export class CreateExerciseComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(params => {
       const exerciseId = +params.get('id'); // + means casting to number
       if (exerciseId) {
+        this.isEdited = true;
         this.getExercise(exerciseId);
       }
     })
@@ -99,7 +101,7 @@ export class CreateExerciseComponent implements OnInit {
     return this.fb.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
-      description: ['', Validators.required],
+      description: [''],
       reps: 0,
       duration: 0,
       workout: ['', Validators.required]

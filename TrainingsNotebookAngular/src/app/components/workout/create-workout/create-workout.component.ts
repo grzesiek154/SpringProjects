@@ -17,6 +17,7 @@ export class CreateWorkoutComponent implements OnInit {
   currentWorkout: Workout = new Workout();
   currentWorkoutForm: FormGroup;
   updateId: number;
+  isEdited: boolean = false;
 
 
   constructor(private workoutService: WorkoutService, private fb: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute) {
@@ -32,6 +33,7 @@ export class CreateWorkoutComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(params => {
       const workoutId = +params.get('id'); // + means casting to number
       if (workoutId) {
+        this.isEdited = true;
         this.getWorkout(workoutId);
       }
     })

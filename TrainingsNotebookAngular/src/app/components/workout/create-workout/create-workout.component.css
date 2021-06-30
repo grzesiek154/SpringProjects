@@ -1,0 +1,6 @@
+body {
+  background-image: url("../../../img/workouts.jpg");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}

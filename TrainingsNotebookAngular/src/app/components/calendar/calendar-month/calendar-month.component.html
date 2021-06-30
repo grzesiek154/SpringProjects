@@ -1,0 +1,30 @@
+<app-top-menu></app-top-menu>
+
+<template #calendarDayComponent></template>
+<div class="container-fluid col-sm-10 col-md-10 col-log-10 mt-5">
+  <div class="card">
+    <h3 class="card-header">{{currentMonth + 1}}/{{currentYear}}</h3>
+    <table class="table table-bordered table-responsive-sm">
+      <!-- <thead>
+        <tr>
+          <th>Sun</th>
+          <th>Mon</th>
+          <th>Tue</th>
+          <th>Wed</th>
+          <th>Thu</th>
+          <th>Fri</th>
+          <th>Sat</th>
+        </tr>
+      </thead> -->
+
+      <tbody>
+        <tr>
+          <ng-template appPlaceholder></ng-template>
+    
+        </tr>
+      </tbody>
+    </table>
+    
+  </div>
+</div> 
+  

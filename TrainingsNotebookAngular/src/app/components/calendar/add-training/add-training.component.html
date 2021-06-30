@@ -1,0 +1,26 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-sm-12 training-select">
+      
+      <form class="form-inline" [formGroup]="addTrainingFormGroup" (ngSubmit)="saveCalendarDay()">
+        <div class="container" formArrayName="selectedTrainings">
+          <h1 class="calendar-heder">Select your training for: {{selectedDate}}</h1>
+          <div class="row" *ngFor="let selectedTraining of selectedTrainings.controls; let i = index">
+            <div class="col-sm-6">
+              <select class="form-control " [formControlName]="i" placeholder="Select Training">
+                <option *ngFor="let training of availableTrainings" [ngValue]="training">{{training.name}}</option>
+              </select>
+              <button type="button" class="btn btn-success" (click)="saveTrainingInCalendar(i)" [disabled]="selectedTraining.invalid">Save</button>
+            </div>
+          </div> 
+          <button class="float-sm-right" *ngIf="isValid" type="submit" class="btn btn-info">Submit</button> 
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center">
+    <button class="btn btn-info" (click)="addTraining()">Add Training</button>
+    <button class="btn btn-info" (click)="backToCalendarMonth()">Back</button>
+  </div>
+</div>

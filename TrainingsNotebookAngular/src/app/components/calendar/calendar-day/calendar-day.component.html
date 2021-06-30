@@ -1,0 +1,9 @@
+
+
+<td [ngClass]="isDisplayButton ? 'selected-day' : ''" class="calendar-day">
+  <button class="btn btn-info" (click)="goToCreateTraining()"><i class="bi bi-calendar-plus-fill"></i></button>
+  <button class="btn btn-warning"><i class="bi bi-calendar-x-fill"></i></button>
+  <div class="current-day">{{day}}</div>
+  <button *ngIf="isDisplayButton" class="btn btn-primary" (click)="goToCalendarDayTrainings()">Display</button> 
+</td>
+

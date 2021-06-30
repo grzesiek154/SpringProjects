@@ -1,0 +1,15 @@
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+.calendar-day {
+height: 15vh;
+width: 10vw;
+}
+.current-day {
+  
+  padding-left: 3rem;
+  font-size: large;
+}
+
+.selected-day {
+  background-color: rgb(178, 240, 178);
+}
