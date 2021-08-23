@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { CreateTrainingComponent } from './components/side-bar/create-training/create-training.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateExerciseComponent } from './components/exercise/create-exercise/create-exercise.component';
 import { CreateWorkoutComponent } from './components/workout/create-workout/create-workout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,22 +15,12 @@ import { ListWorkoutsComponent } from './components/workout/list-workouts/list-w
 import { WorkoutSidebarComponent } from './components/workout/workout-sidebar/workout-sidebar.component';
 import { ListTrainingsComponent } from './components/training/list-trainings/list-trainings.component';
 import { ListExercisesComponent } from './components/exercise/list-exercises/list-exercises.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { TrainingExerciseComponent } from './components/training/training-exercise/training-exercise.component';
-import { SignupComponent } from './components/auth/signup/signup.component';
-import { LoginComponent } from './components/auth/login/login.component';
-import { MainPageComponent } from './components/main-page/main-page.component';
-import { ToastrModule } from 'ngx-toastr';
-import { NgxWebstorageModule } from 'ngx-webstorage';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { TokenInterceptor } from './services/token-interceptor';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { TrainingsCalendarComponent } from './components/trainings-calendar/trainings-calendar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { BlogHomeComponent } from './components/blog/blog-home/blog-home.component';
-import { CreatePostComponent } from './components/blog/post/create-post/create-post.component';
-import { ViewPostComponent } from './components/blog/post/view-post/view-post.component';
-import { EditorModule } from '@tinymce/tinymce-angular';
-import { LimitCharatchersPipe } from './pipes/limit-charatchers.pipe';
-import { DateTransformPipe } from './pipes/date-transform.pipe';
 
 
 
@@ -49,36 +39,21 @@ import { DateTransformPipe } from './pipes/date-transform.pipe';
     ListTrainingsComponent,
     ListExercisesComponent,
     TrainingExerciseComponent,
-    SignupComponent,
-    LoginComponent,
-    MainPageComponent,
-    UserProfileComponent,
-    BlogHomeComponent,
-    CreatePostComponent,
-    ViewPostComponent,
-    LimitCharatchersPipe,
-    DateTransformPipe
+    TrainingsCalendarComponent
 
   ],
   imports: [
     MatSliderModule,
     ReactiveFormsModule,
+    FormsModule,
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ToastrModule.forRoot(),
-    NgxWebstorageModule.forRoot(),
-    NgbModule,
-    EditorModule
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    NgbModule
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

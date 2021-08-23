@@ -10,7 +10,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { Calendar1Component } from './components/calendar1/calendar1.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TemplateFormComponent } from './components/template-form/template-form.component';
+import { AddTrainingComponent } from './components/add-training/add-training.component';
+
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { TemplateFormComponent } from './components/template-form/template-form.
     AlertComponent,
     DynamicComponentAppComponent,
     Calendar1Component,
-    TemplateFormComponent
+    AddTrainingComponent
   ],
   imports: [
     BrowserModule,
